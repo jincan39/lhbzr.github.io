@@ -34,7 +34,13 @@
       display: block;
     }
 
-    a {
+    .badge {
+      left: 0;
+      position: absolute;
+      top: 0;
+    }
+
+    .soundcloud-link {
       bottom: 20px;
       color: #FFF;
       display: block;
@@ -47,7 +53,7 @@
       width: 100%;
     }
 
-    img {
+    .soundcloud-img {
       display: inline-block;
       margin-right: 15px;
       margin-top: -4px;
@@ -69,6 +75,11 @@
   <meta name="twitter:image" content="../../dist/img/share/twitter.jpg">
 </head>
 <body>
+  <!-- Chrome Experiments -->
+  <a href="https://www.chromeexperiments.com/experiment/triangles" target="_blank" class="badge">
+    <img src="https://www.chromeexperiments.com/img/badges/b4.png" alt="See my Experiment on ChromeExperiments.com">
+  </a>
+
   <!-- GSAP -->
   <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenLite.min.js"></script>
 

@@ -7,8 +7,8 @@
       mouseY = 0;
 
   function int(min, max) {
-   return Math.floor(Math.random() * (max - min + 1) + min);
- };
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  };
 
   var audio,
       audioContext,
@@ -37,17 +37,18 @@
 
     request.onreadystatechange = function() {
       if (request.readyState === 4 && request.status === 200) {
-          var information = JSON.parse(request.responseText);
+        var information = JSON.parse(request.responseText);
 
-          audio.src = information.stream_url + '?client_id=78c6552c14b382e23be3bce2fc411a82';
-          audio.play();
+        audio.src = information.stream_url + '?client_id=78c6552c14b382e23be3bce2fc411a82';
+        audio.play();
 
-          var music = document.createElement('a');
+        var music = document.createElement('a');
+        music.className = 'soundcloud-link';
 
-          music.setAttribute('href', information.permalink_url);
-          music.innerHTML = '<img src="https://developers.soundcloud.com/assets/logo_white.png">' + information.title + ' - ' + information.user.username;
+        music.setAttribute('href', information.permalink_url);
+        music.innerHTML = '<img src="https://developers.soundcloud.com/assets/logo_white.png" class="soundcloud-img">' + information.title + ' - ' + information.user.username;
 
-          document.body.appendChild(music);
+        document.body.appendChild(music);
       }
     };
 
@@ -246,13 +247,13 @@
   window.addEventListener('mousewheel', function(e) {
     var volume = Math.round(audio.volume * 100) / 100;
 
-      if (e.wheelDelta < 0 && volume - 0.05 >= 0) {
-          volume = Math.abs(volume - 0.05);
-      } else if (e.wheelDelta > 0 && volume + 0.05 <= 1) {
-          volume = Math.abs(volume + 0.05);
-      }
+    if (e.wheelDelta < 0 && volume - 0.05 >= 0) {
+      volume = Math.abs(volume - 0.05);
+    } else if (e.wheelDelta > 0 && volume + 0.05 <= 1) {
+      volume = Math.abs(volume + 0.05);
+    }
 
-      audio.volume = volume;
+    audio.volume = volume;
   });
 
   window.addEventListener('mousemove', function(e) {
