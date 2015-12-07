@@ -31,9 +31,10 @@ function Music() {
   // Songs.
   this.songs = [
     'https://soundcloud.com/leagueoflegends/dj-sona-kinetic-the-crystal',
-    'https://soundcloud.com/alpineband/gasoline-2',
+//    'https://soundcloud.com/alpineband/gasoline-2',
     'https://soundcloud.com/odesza/say_my_name',
-//    'https://soundcloud.com/c2cdjs/down-the-road',
+    'https://soundcloud.com/0data0/dont-sing-feat-benny-sings',
+    'https://soundcloud.com/c2cdjs/down-the-road',
     'https://soundcloud.com/madeon/pay-no-mind',
     'https://soundcloud.com/futureclassic/hayden-james-something-about-you-2',
     'https://soundcloud.com/kflay/5-am-w-something-a-la-mode',
