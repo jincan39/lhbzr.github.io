@@ -10,26 +10,19 @@ var RGBShiftShader = require('./shaders/rgbshift');
 module.exports = Scene;
 
 function Scene(music) {
-  // Canvas.
   this.canvas = document.querySelector('.canvas');
   this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
   this.camera.position.z = 275;
   this.camera.lookAt = new THREE.Vector3();
 
-
-  // Scene.
   this.scene = new THREE.Scene();
 
-
-  // Renderer.
   this.renderer = new THREE.WebGLRenderer({
     alpha: true,
     canvas: this.canvas
   });
   this.renderer.setSize(window.innerWidth, window.innerHeight);
 
-
-  // Geometries.
   this.circle = [];
   this.geometry = [];
   this.geometrySleeve = [];
@@ -39,32 +32,20 @@ function Scene(music) {
     new THREE.OctahedronGeometry(40, 0)
   ];
 
-
-  // Composer.
   this.composer = new EffectComposer(this.renderer);
 
-
-  // Mouse.
   this.mouse = {
     x: 0,
     y: 0
   };
 
-
-  // Music.
   this.music = music;
 
-
-  // Click.
   this.clicked = false;
 }
 
-
-// Values.
 Scene.GEOMETRY_LENGTH = 100;
 
-
-// Methods.
 Scene.prototype.createGeometry = function() {
   var number = int(0, this.geometryList.length - 1);
 
@@ -81,7 +62,6 @@ Scene.prototype.createGeometry = function() {
 
     this.geometry[i].position.y = 100;
 
-    // Surrogate Rings. [http://inmosystems.com/demos/surrogateRings/source/]
     this.geometrySleeve[i] = new THREE.Object3D();
     this.geometrySleeve[i].add(this.geometry[i]);
     this.geometrySleeve[i].rotation.z = i * (360 / Scene.GEOMETRY_LENGTH) * Math.PI / 180;
@@ -91,7 +71,6 @@ Scene.prototype.createGeometry = function() {
 
   this.scene.add(this.circle);
 };
-
 
 Scene.prototype.createLight = function() {
   var light;
@@ -106,7 +85,6 @@ Scene.prototype.createLight = function() {
 
   this.scene.add(light);
 };
-
 
 Scene.prototype.createShaders = function() {
   var effect;
@@ -124,11 +102,9 @@ Scene.prototype.createShaders = function() {
   this.effect = effect;
 };
 
-
 Scene.prototype.render = function() {
   requestAnimationFrame(this.render.bind(this));
 
-  // Shaders.
   if (this.clicked) {
     TweenLite.to(this.effect.uniforms['amount'], 1, {
       value: 0.005
@@ -139,8 +115,6 @@ Scene.prototype.render = function() {
     });
   }
 
-
-  // Movement.
   for (var i = 0; i < Scene.GEOMETRY_LENGTH; i++) {
     var value = 1;
 
@@ -173,13 +147,10 @@ Scene.prototype.render = function() {
 
   this.circle.rotation.z += 0.01;
 
-
-  // Render.
   this.renderer.render(this.scene, this.camera);
 
   this.composer.render();
 };
-
 
 Scene.prototype.resize = function() {
   this.camera.aspect = window.innerWidth / window.innerHeight;
@@ -188,12 +159,10 @@ Scene.prototype.resize = function() {
   this.renderer.setSize(window.innerWidth, window.innerHeight);
 };
 
-
 Scene.prototype.mousemove = function(e) {
   this.mouse.x = e.clientX - window.innerWidth / 2;
   this.mouse.y = e.clientY - window.innerHeight / 2;
 };
-
 
 Scene.prototype.click = function() {
   if (this.clicked) {

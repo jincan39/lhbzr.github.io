@@ -3,38 +3,32 @@ var get = require('./lib/get');
 module.exports = Music;
 
 function Music() {
-  // Audio.
   this.audio = new Audio();
   this.audio.crossOrigin = 'anonymous';
 
+
   if (window.AudioContext || window.webkitAudioContext) {
-    // Context.
     this.context = new (window.AudioContext || window.webkitAudioContext)();
 
-
-    // Analyser.
     this.analyser = this.context.createAnalyser();
     this.analyser.smoothingTimeConstant = 0.1;
     this.analyser.fftSize = 2048;
     this.analyser.connect(this.context.destination);
 
-    // Source.
     this.src = this.context.createMediaElementSource(this.audio);
     this.src.connect(this.context.destination);
     this.src.connect(this.analyser);
 
-
-    // Frequency.
     this.frequency = new Uint8Array(this.analyser.frequencyBinCount);
   }
 
-  // Songs.
   this.songs = [
     'https://soundcloud.com/leagueoflegends/dj-sona-kinetic-the-crystal',
 //    'https://soundcloud.com/alpineband/gasoline-2',
     'https://soundcloud.com/odesza/say_my_name',
-    'https://soundcloud.com/0data0/dont-sing-feat-benny-sings',
-    'https://soundcloud.com/c2cdjs/down-the-road',
+    'https://soundcloud.com/edbangerrecords/sebastian-embody',
+//    'https://soundcloud.com/0data0/dont-sing-feat-benny-sings',
+//    'https://soundcloud.com/c2cdjs/down-the-road',
     'https://soundcloud.com/madeon/pay-no-mind',
     'https://soundcloud.com/futureclassic/hayden-james-something-about-you-2',
     'https://soundcloud.com/kflay/5-am-w-something-a-la-mode',
@@ -44,18 +38,13 @@ function Music() {
     'https://soundcloud.com/rac/lana-del-rey-blue-jeans-rac'
   ];
 
-
-  // Playing.
   this.song = Math.floor(Math.random() * this.songs.length);
   this.songPrev = null;
   this.songNext = null;
 
-  // Start.
   this.load(this.song);
 };
 
-
-// Methods.
 Music.prototype.isPaused = function() {
   return this.audio.paused;
 };
@@ -71,7 +60,6 @@ Music.prototype.getFrequency = function() {
 
   return this.frequency;
 };
-
 
 Music.prototype.load = function(song) {
   var audio = this.audio;
@@ -100,7 +88,6 @@ Music.prototype.load = function(song) {
   this.songNext = (this.song < this.songs.length - 1) ? this.song + 1 : 0;
 };
 
-
 Music.prototype.next = function() {
   this.load(this.songNext);
 };
@@ -114,7 +101,6 @@ Music.prototype.prev = function() {
 Music.prototype.pause = function() {
   this.audio.pause();
 };
-
 
 Music.prototype.play = function() {
   this.audio.play();

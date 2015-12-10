@@ -2,10 +2,8 @@
 var int = require('./lib/int');
 
 module.exports = (function() {
-  // About.
   var about = document.querySelector('.about');
 
-  // Drag.
   Draggable.create(about, {
     bounds: document.body,
     edgeResistance: 1,
@@ -18,7 +16,6 @@ module.exports = (function() {
     }
   });
 
-  // Hover.
   about.addEventListener('mouseover', function() {
     TweenLite.to(about, .4, {
       background: 'rgba(255, 255, 255, 0)',
@@ -33,7 +30,6 @@ module.exports = (function() {
     });
   });
 
-  // Position.
   about.style.left = int(0, window.innerWidth - about.offsetWidth) + 'px';
   about.style.top = int(0, window.innerHeight - about.offsetHeight) + 'px';
 })();
@@ -64,24 +60,19 @@ module.exports = function(value, index, char) {
 };
 
 },{}],5:[function(require,module,exports){
-// Library.
 var get = require('./lib/get');
 
 
-// Classes.
 var Music = require('./music');
 var Scene = require('./scene');
 
 
-// About.
 var about = require('./about');
 
 
-// Menu.
 var menu = require('./menu');
 
 
-// Music.
 var music = new Music(),
     musicPrev = document.querySelector('.music-prev'),
     musicToggle = document.querySelector('.music-toggle'),
@@ -122,7 +113,6 @@ musicNext.addEventListener('click', function(e) {
 });
 
 
-// Scene.
 var scene = new Scene(music);
 
 scene.createGeometry();
@@ -131,7 +121,6 @@ scene.createShaders();
 scene.render();
 
 
-// Icons.
 get(
   'dist/img/sprites/sprites.svg',
   function (response) {
@@ -145,7 +134,6 @@ get(
 );
 
 
-// Window.
 window.addEventListener('resize', function() {
   scene.resize();
 }, false);
@@ -175,18 +163,14 @@ var int = require('./lib/int');
 var replace = require('./lib/replace');
 
 module.exports = (function() {
-  // Menu.
   var link = document.querySelectorAll('.menu-link'),
       linkOverInterval,
       linkOutInterval;
-
 
   for (var i = 0; i < link.length; i++) {
     var linkCurrent = link[i],
         linkCurrentParent = linkCurrent.parentNode;
 
-
-    // Drag.
     Draggable.create(linkCurrentParent, {
       bounds: document.body,
       dragClickables: true,
@@ -200,8 +184,6 @@ module.exports = (function() {
       }
     });
 
-
-    // Hover.
     linkCurrent.addEventListener('mouseover', function() {
       var link = this;
 
@@ -251,8 +233,6 @@ module.exports = (function() {
       });
     });
 
-
-    // Position.
     linkCurrentParent.style.left = int(0, window.innerWidth - linkCurrent.offsetWidth) + 'px';
     linkCurrentParent.style.top = int(0, window.innerHeight - linkCurrent.offsetHeight) + 'px';
   }
@@ -264,38 +244,32 @@ var get = require('./lib/get');
 module.exports = Music;
 
 function Music() {
-  // Audio.
   this.audio = new Audio();
   this.audio.crossOrigin = 'anonymous';
 
+
   if (window.AudioContext || window.webkitAudioContext) {
-    // Context.
     this.context = new (window.AudioContext || window.webkitAudioContext)();
 
-
-    // Analyser.
     this.analyser = this.context.createAnalyser();
     this.analyser.smoothingTimeConstant = 0.1;
     this.analyser.fftSize = 2048;
     this.analyser.connect(this.context.destination);
 
-    // Source.
     this.src = this.context.createMediaElementSource(this.audio);
     this.src.connect(this.context.destination);
     this.src.connect(this.analyser);
 
-
-    // Frequency.
     this.frequency = new Uint8Array(this.analyser.frequencyBinCount);
   }
 
-  // Songs.
   this.songs = [
     'https://soundcloud.com/leagueoflegends/dj-sona-kinetic-the-crystal',
 //    'https://soundcloud.com/alpineband/gasoline-2',
     'https://soundcloud.com/odesza/say_my_name',
-    'https://soundcloud.com/0data0/dont-sing-feat-benny-sings',
-    'https://soundcloud.com/c2cdjs/down-the-road',
+    'https://soundcloud.com/edbangerrecords/sebastian-embody',
+//    'https://soundcloud.com/0data0/dont-sing-feat-benny-sings',
+//    'https://soundcloud.com/c2cdjs/down-the-road',
     'https://soundcloud.com/madeon/pay-no-mind',
     'https://soundcloud.com/futureclassic/hayden-james-something-about-you-2',
     'https://soundcloud.com/kflay/5-am-w-something-a-la-mode',
@@ -305,18 +279,13 @@ function Music() {
     'https://soundcloud.com/rac/lana-del-rey-blue-jeans-rac'
   ];
 
-
-  // Playing.
   this.song = Math.floor(Math.random() * this.songs.length);
   this.songPrev = null;
   this.songNext = null;
 
-  // Start.
   this.load(this.song);
 };
 
-
-// Methods.
 Music.prototype.isPaused = function() {
   return this.audio.paused;
 };
@@ -332,7 +301,6 @@ Music.prototype.getFrequency = function() {
 
   return this.frequency;
 };
-
 
 Music.prototype.load = function(song) {
   var audio = this.audio;
@@ -361,7 +329,6 @@ Music.prototype.load = function(song) {
   this.songNext = (this.song < this.songs.length - 1) ? this.song + 1 : 0;
 };
 
-
 Music.prototype.next = function() {
   this.load(this.songNext);
 };
@@ -375,7 +342,6 @@ Music.prototype.prev = function() {
 Music.prototype.pause = function() {
   this.audio.pause();
 };
-
 
 Music.prototype.play = function() {
   this.audio.play();
@@ -735,26 +701,19 @@ var RGBShiftShader = require('./shaders/rgbshift');
 module.exports = Scene;
 
 function Scene(music) {
-  // Canvas.
   this.canvas = document.querySelector('.canvas');
   this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
   this.camera.position.z = 275;
   this.camera.lookAt = new THREE.Vector3();
 
-
-  // Scene.
   this.scene = new THREE.Scene();
 
-
-  // Renderer.
   this.renderer = new THREE.WebGLRenderer({
     alpha: true,
     canvas: this.canvas
   });
   this.renderer.setSize(window.innerWidth, window.innerHeight);
 
-
-  // Geometries.
   this.circle = [];
   this.geometry = [];
   this.geometrySleeve = [];
@@ -764,32 +723,20 @@ function Scene(music) {
     new THREE.OctahedronGeometry(40, 0)
   ];
 
-
-  // Composer.
   this.composer = new EffectComposer(this.renderer);
 
-
-  // Mouse.
   this.mouse = {
     x: 0,
     y: 0
   };
 
-
-  // Music.
   this.music = music;
 
-
-  // Click.
   this.clicked = false;
 }
 
-
-// Values.
 Scene.GEOMETRY_LENGTH = 100;
 
-
-// Methods.
 Scene.prototype.createGeometry = function() {
   var number = int(0, this.geometryList.length - 1);
 
@@ -806,7 +753,6 @@ Scene.prototype.createGeometry = function() {
 
     this.geometry[i].position.y = 100;
 
-    // Surrogate Rings. [http://inmosystems.com/demos/surrogateRings/source/]
     this.geometrySleeve[i] = new THREE.Object3D();
     this.geometrySleeve[i].add(this.geometry[i]);
     this.geometrySleeve[i].rotation.z = i * (360 / Scene.GEOMETRY_LENGTH) * Math.PI / 180;
@@ -816,7 +762,6 @@ Scene.prototype.createGeometry = function() {
 
   this.scene.add(this.circle);
 };
-
 
 Scene.prototype.createLight = function() {
   var light;
@@ -831,7 +776,6 @@ Scene.prototype.createLight = function() {
 
   this.scene.add(light);
 };
-
 
 Scene.prototype.createShaders = function() {
   var effect;
@@ -849,11 +793,9 @@ Scene.prototype.createShaders = function() {
   this.effect = effect;
 };
 
-
 Scene.prototype.render = function() {
   requestAnimationFrame(this.render.bind(this));
 
-  // Shaders.
   if (this.clicked) {
     TweenLite.to(this.effect.uniforms['amount'], 1, {
       value: 0.005
@@ -864,8 +806,6 @@ Scene.prototype.render = function() {
     });
   }
 
-
-  // Movement.
   for (var i = 0; i < Scene.GEOMETRY_LENGTH; i++) {
     var value = 1;
 
@@ -898,13 +838,10 @@ Scene.prototype.render = function() {
 
   this.circle.rotation.z += 0.01;
 
-
-  // Render.
   this.renderer.render(this.scene, this.camera);
 
   this.composer.render();
 };
-
 
 Scene.prototype.resize = function() {
   this.camera.aspect = window.innerWidth / window.innerHeight;
@@ -913,12 +850,10 @@ Scene.prototype.resize = function() {
   this.renderer.setSize(window.innerWidth, window.innerHeight);
 };
 
-
 Scene.prototype.mousemove = function(e) {
   this.mouse.x = e.clientX - window.innerWidth / 2;
   this.mouse.y = e.clientY - window.innerHeight / 2;
 };
-
 
 Scene.prototype.click = function() {
   if (this.clicked) {

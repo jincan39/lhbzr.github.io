@@ -1,21 +1,16 @@
-// Library.
 var get = require('./lib/get');
 
 
-// Classes.
 var Music = require('./music');
 var Scene = require('./scene');
 
 
-// About.
 var about = require('./about');
 
 
-// Menu.
 var menu = require('./menu');
 
 
-// Music.
 var music = new Music(),
     musicPrev = document.querySelector('.music-prev'),
     musicToggle = document.querySelector('.music-toggle'),
@@ -56,7 +51,6 @@ musicNext.addEventListener('click', function(e) {
 });
 
 
-// Scene.
 var scene = new Scene(music);
 
 scene.createGeometry();
@@ -65,7 +59,6 @@ scene.createShaders();
 scene.render();
 
 
-// Icons.
 get(
   'dist/img/sprites/sprites.svg',
   function (response) {
@@ -79,7 +72,6 @@ get(
 );
 
 
-// Window.
 window.addEventListener('resize', function() {
   scene.resize();
 }, false);

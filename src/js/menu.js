@@ -2,18 +2,14 @@ var int = require('./lib/int');
 var replace = require('./lib/replace');
 
 module.exports = (function() {
-  // Menu.
   var link = document.querySelectorAll('.menu-link'),
       linkOverInterval,
       linkOutInterval;
-
 
   for (var i = 0; i < link.length; i++) {
     var linkCurrent = link[i],
         linkCurrentParent = linkCurrent.parentNode;
 
-
-    // Drag.
     Draggable.create(linkCurrentParent, {
       bounds: document.body,
       dragClickables: true,
@@ -27,8 +23,6 @@ module.exports = (function() {
       }
     });
 
-
-    // Hover.
     linkCurrent.addEventListener('mouseover', function() {
       var link = this;
 
@@ -78,8 +72,6 @@ module.exports = (function() {
       });
     });
 
-
-    // Position.
     linkCurrentParent.style.left = int(0, window.innerWidth - linkCurrent.offsetWidth) + 'px';
     linkCurrentParent.style.top = int(0, window.innerHeight - linkCurrent.offsetHeight) + 'px';
   }
