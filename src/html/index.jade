@@ -1,0 +1,142 @@
+doctype html
+html
+  head
+    title LHBZR
+
+    meta(name='description' content='Front-End Developer based in São Paulo, Brazil.')
+
+    meta(charset='UTF-8')
+
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+
+    link(rel='shortcut icon' href='dist/img/favicon.ico')
+
+    link(rel='stylesheet' href='dist/css/main.css')
+
+
+    meta(property='og:url' content='http://lhbzr.com/')
+    meta(property='og:title' content='LHBZR')
+    meta(property='og:image' content='dist/img/share/facebook.jpg')
+    meta(property='og:description' content='Front End Developer based in São Paulo, Brazil.')
+
+    meta(name='twitter:card' content='summary_large_image')
+    meta(name='twitter:site' content='@lhbzr')
+    meta(name='twitter:title' content='LHBZR')
+    meta(name='twitter:description' content='Front End Developer based in São Paulo, Brazil.')
+    meta(name='twitter:image' content='dist/img/share/twitter.jpg')
+
+  body
+    canvas.canvas Your browser doesn't support the canvas element.
+
+
+    section.about
+      h1.about-title LHBZR
+
+      p.about-desc.
+        I'm <strong>Luis Henrique Bizarro</strong>,
+        born in <strong>18 September, 1995</strong>
+        based in <strong>São Paulo, Brazil</strong>.
+        <br>
+        <br>
+        I'm a <strong>Front End Developer</strong>
+        and a bachelor's degree student
+        in <strong>Information Systems</strong> focusing in
+        Creative Coding and Digital Experiences.
+
+
+    nav.menu
+      a.menu-item(href='http://www.dotcore.com.br/' target='_blank')
+        span.menu-link(data-text='Tumblr') Tumblr
+
+      a.menu-item(href='http://www.linkedin.com/in/lhbzr/' target='_blank')
+        span.menu-link(data-text='LinkedIn') LinkedIn
+
+      a.menu-item(href='http://www.github.com/lhbzr/' target='_blank')
+        span.menu-link(data-text='GitHub') GitHub
+
+      a.menu-item(href='http://www.codepen.io/lhbzr/' target='_blank')
+        span.menu-link(data-text='CodePen') CodePen
+
+      a.menu-item(href='http://www.behance.net/lhbzr/' target='_blank')
+        span.menu-link(data-text='Behance') Behance
+
+      a.menu-item(href='mailto:hello@lhbzr.com')
+        span.menu-link(data-text='Contact') Contact
+
+
+    .music
+      a.music-soundcloud(href='https://soundcloud.com/' target='_blank')
+        img(src='dist/img/logo/soundcloud.png')
+
+      a.music-title(href='#' target='_blank') Music
+
+      | by
+
+      a.music-user(href='#' target='_blank') User
+
+      .music-btns
+        button.music-btn.music-prev
+          svg.music-btn-icon(viewBox='0 0 48 48')
+            use(xmlns:xlink='http://www.w3.org/1999/xlink' xlink:href='#sprite-music-prev')
+
+        button.music-btn.music-toggle
+          svg.music-btn-icon.music-btn-icon-pause(viewBox='0 0 48 48')
+            use(xmlns:xlink='http://www.w3.org/1999/xlink' xlink:href='#sprite-music-pause')
+
+          svg.music-btn-icon.music-btn-icon-play(viewBox='0 0 48 48')
+            use(xmlns:xlink='http://www.w3.org/1999/xlink' xlink:href='#sprite-music-play')
+
+        button.music-btn.music-next
+          svg.music-btn-icon(viewBox='0 0 48 48')
+            use(xmlns:xlink='http://www.w3.org/1999/xlink' xlink:href='#sprite-music-next')
+
+
+    .share
+      h1.share-title Share
+
+      ul.share-list
+        li.share-item
+          a.share-link(href='https://www.facebook.com/sharer.php?u=http://lhbzr.com/&t=LHBZR' target='_blank')
+            svg.share-icon(viewBox='0 0 512 512')
+              use(xmlns:xlink='http://www.w3.org/1999/xlink' xlink:href='#sprite-share-facebook')
+
+        li.share-item
+          a.share-link(href='https://twitter.com/share?url=http://lhbzr.com/&text=LHBZR' target='_blank')
+            svg.share-icon(viewBox='0 0 512 512')
+              use(xmlns:xlink='http://www.w3.org/1999/xlink' xlink:href='#sprite-share-twitter')
+
+        li.share-item
+          a.share-link(href='https://plus.google.com/share?url=http://lhbzr.com/' target='_blank')
+            svg.share-icon(viewBox='0 0 512 512')
+              use(xmlns:xlink='http://www.w3.org/1999/xlink' xlink:href='#sprite-share-google')
+
+        li.share-item
+          a.share-link(href='https://www.linkedin.com/shareArticle?mini=true&url=http://lhbzr.com/&title=LHBZR' target='_blank')
+            svg.share-icon(viewBox='0 0 512 512')
+              use(xmlns:xlink='http://www.w3.org/1999/xlink' xlink:href='#sprite-share-linkedin')
+
+        li.share-item
+          a.share-link(href='https://www.tumblr.com/share/link?url=http://lhbzr.com/' target='_blank')
+            svg.share-icon(viewBox='0 0 512 512')
+              use(xmlns:xlink='http://www.w3.org/1999/xlink' xlink:href='#sprite-share-tumblr')
+
+
+    a.award(href='https://onepagelove.com/lhbzr/' target='_blank') LHBZR featured on One Page Love
+
+
+    script(src='//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js')
+    script(src='//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/utils/Draggable.min.js')
+    script(src='//cdnjs.cloudflare.com/ajax/libs/three.js/r73/three.min.js')
+    script(src='dist/js/main.js')
+
+
+    script.
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-68362223-1', 'auto');
+      ga('send', 'pageview');

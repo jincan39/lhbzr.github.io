@@ -1,22 +1,13 @@
-module.exports = function (grunt) {
-  'use strict';
+var pkg = require('../package.json');
 
-  grunt.config('watch', {
-    html: {
-      files: ['<%= src_html %>/**/*.html'],
-      tasks: ['html']
-    },
-    css: {
-      files: ['<%= src_css %>/**/*.scss'],
-      tasks: ['css']
-    },
-    js: {
-      files: ['<%= src_js %>/**/*.js'],
-      tasks: ['js']
-    },
-    svg: {
-      files: ['<%= src_img %>/sprites/*.svg'],
-      tasks: ['svg']
-    }
-  });
-};
+var gulp = require('gulp');
+
+gulp.task('watch', ['sync'], function() {
+  global.isWatching = true;
+
+  gulp.watch(pkg.folders.src + '/html/**', ['html']);
+  gulp.watch(pkg.folders.src + '/css/**', ['css']);
+  gulp.watch(pkg.folders.src + '/img/**', ['img']);
+  gulp.watch(pkg.folders.src + '/js/**', ['js']);
+  gulp.watch(pkg.folders.src + '/svg/**', ['svg']);
+});

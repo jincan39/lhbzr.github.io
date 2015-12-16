@@ -60,7 +60,7 @@ scene.render();
 
 
 get(
-  'dist/img/sprites/sprites.svg',
+  'dist/svg/svg.svg',
   function (response) {
     var wrapper = document.createElement('div');
 
