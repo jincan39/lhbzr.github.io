@@ -10,6 +10,8 @@
 * angle: shift angle in radians
 */
 
+var THREE = require('three');
+
 module.exports = THREE.RGBShiftShader = {
   uniforms: {
     "tDiffuse": { type: "t", value: null },

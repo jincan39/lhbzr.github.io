@@ -1,9 +1,8 @@
 var int = require('./lib/int');
 
-var EffectComposer = require('./processing/effectcomposer');
-var MaskPass = require('./processing/maskpass');
-var RenderPass = require('./processing/renderpass');
-var ShaderPass = require('./processing/shaderpass');
+var THREE = require('three');
+
+var EffectComposer = require('three-effectcomposer')(THREE);
 var CopyShader = require('./shaders/copyshader');
 var RGBShiftShader = require('./shaders/rgbshift');
 
@@ -89,9 +88,9 @@ Scene.prototype.createLight = function() {
 Scene.prototype.createShaders = function() {
   var effect;
 
-  this.composer.addPass(new RenderPass(this.scene, this.camera));
+  this.composer.addPass(new EffectComposer.RenderPass(this.scene, this.camera));
 
-  effect = new ShaderPass(RGBShiftShader);
+  effect = new EffectComposer.ShaderPass(RGBShiftShader);
   effect.uniforms['amount'].value = 0.05;
   effect.renderToScreen = true;
 

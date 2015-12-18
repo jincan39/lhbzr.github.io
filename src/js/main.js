@@ -1,3 +1,7 @@
+require('./plugins/TweenMax');
+require('./plugins/utils/Draggable');
+
+
 var get = require('./lib/get');
 
 

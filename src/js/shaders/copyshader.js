@@ -4,6 +4,8 @@
  * Full-screen textured quad shader
  */
 
+ var THREE = require('three');
+
 module.exports = THREE.CopyShader = {
   uniforms: {
     "tDiffuse": { type: "t", value: null },
