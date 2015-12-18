@@ -6,6 +6,5 @@ var gulp = require('gulp'),
 gulp.task('svg', function() {
   return gulp.src(pkg.folders.src + '/svg/*.svg')
              .pipe(svgstore())
-             .pipe(gulp.dest(pkg.folders.dist + '/svg'))
-             .pipe(browserSync.reload());
+             .pipe(gulp.dest(pkg.folders.dist + '/svg'));
 });
