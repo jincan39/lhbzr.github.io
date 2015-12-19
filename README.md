@@ -13,7 +13,7 @@ cd lhbzr
 npm install
 ```
 
-### Main Files.
+### Main Files
 ```sh
 lhbzr
 ├── .gitignore
