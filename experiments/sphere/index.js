@@ -10,7 +10,7 @@ const AudioContext = window.AudioContext || window.webkitAudioContext
 
 Soundcloud({
   client_id: '78c6552c14b382e23be3bce2fc411a82',
-  song: 'https://soundcloud.com/downtownrecords/justice-dvno',
+  song: 'https://soundcloud.com/madeon/pay-no-mind',
   dark: false,
   getFonts: false
 }, function(error, src, data, div) {
