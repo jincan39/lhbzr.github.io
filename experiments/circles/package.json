@@ -1,0 +1,10 @@
+{
+  "name": "circles",
+  "description": "Circles Experiment by Luis Henrique Bizarro.",
+  "devDependencies": {
+    "uglify-js": "^2.6.1"
+  },
+  "scripts": {
+    "build": " uglifyjs lib/sketch.min.js index.js -o bundle.js"
+  }
+}
