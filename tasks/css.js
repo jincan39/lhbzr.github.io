@@ -10,7 +10,7 @@ gulp.task('css', function() {
   return gulp.src(pkg.folders.src + '/css/main.scss')
              .pipe(sass())
              .pipe(autoprefixer('last 40 versions', 'ie >= 8', 'ff >= 3', 'safari >= 4', 'opera >= 12', 'chrome >= 4'))
-             .pipe(cmq())
+             //.pipe(cmq())
              .pipe(minify())
              .pipe(gulp.dest(pkg.folders.dist + '/css'));
 });

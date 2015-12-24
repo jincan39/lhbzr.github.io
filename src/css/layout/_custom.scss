@@ -1,0 +1,25 @@
+.body-border {
+  border: 1px solid #FFF;
+  bottom: 15px;
+  content: '';
+  display: block;
+  left: 15px;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  z-index: 1;
+}
+
+.body-dots {
+  background: repeating-radial-gradient(center center, rgba(255, 255, 255, .75), rgba(0, 0, 0, .2) 1px, transparent 1px, transparent 100%);
+  background-position: center;
+  background-size: 30px 30px;
+  bottom: 15px;
+  content: '';
+  display: block;
+  left: 15px;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  z-index: 1;
+}

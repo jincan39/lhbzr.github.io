@@ -76,6 +76,23 @@ get(
 );
 
 
+
+window.addEventListener('load', function() {
+  var loader = document.querySelector('.loader');
+
+  loader.parentNode.removeChild(loader);
+
+  var timeline = new TimelineMax();
+
+  timeline
+    .fromTo('.body-border', .5, { bottom: '50%', left: '50%', right: '50%', top: '50%' }, { bottom: 15, left: 15, right: 15, top: 15 })
+    .fromTo('.body-dots', .5, { autoAlpha: 0 }, { autoAlpha: 1 })
+    .fromTo('.about', .5, { autoAlpha: 0 }, { autoAlpha: 1 })
+    .fromTo('.music, .share', .5, { autoAlpha: 0 }, { autoAlpha: 1 })
+    .staggerFromTo('.menu-item', .25, { autoAlpha: 0 }, { autoAlpha: 1 }, .25)
+    .fromTo('.canvas', .5, { autoAlpha: 0 }, { autoAlpha: 1 });
+});
+
 window.addEventListener('resize', function() {
   scene.resize();
 }, false);

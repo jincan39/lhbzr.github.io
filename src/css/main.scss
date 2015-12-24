@@ -4,9 +4,11 @@
   'base/typography';
 
 @import
+  'layout/custom',
   'layout/menu',
   'layout/canvas',
   'layout/about',
   'layout/music',
   'layout/share',
-  'layout/award';
+  'layout/award',
+  'layout/loader';

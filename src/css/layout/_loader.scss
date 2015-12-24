@@ -1,0 +1,20 @@
+.loader {
+  background: #000;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 100;
+}
+
+.loader-progress {
+  background: #FFF;
+  display: block;
+  height: 6px;
+  left: 0;
+  margin-top: -3px;
+  position: absolute;
+  top: 50%;
+  width: 0;
+}

@@ -16,7 +16,6 @@ html
     link(rel='stylesheet' href='//cdn.jsdelivr.net/font-hack/2.015/css/hack.min.css')
     link(rel='stylesheet' href='dist/css/main.css')
 
-
     meta(property='og:url' content='http://lhbzr.com/')
     meta(property='og:title' content='LHBZR')
     meta(property='og:image' content='dist/img/share/facebook.jpg')
@@ -29,6 +28,12 @@ html
     meta(name='twitter:image:src' content='dist/img/share/twitter.jpg')
 
   body
+    .body-border
+    .body-dots
+  
+    .loader
+      .loader-progress
+  
     canvas.canvas Your browser doesn't support the canvas element.
 
 
@@ -57,13 +62,10 @@ html
       a.menu-item(href='http://www.github.com/lhbzr/' target='_blank')
         span.menu-link(data-text='GitHub') GitHub
 
-      a.menu-item(href='http://www.codepen.io/lhbzr/' target='_blank')
-        span.menu-link(data-text='CodePen') CodePen
-
       a.menu-item(href='http://www.behance.net/lhbzr/' target='_blank')
         span.menu-link(data-text='Behance') Behance
 
-      a.menu-item(href='mailto:hello@lhbzr.com')
+      a.menu-item(href='mailto:luis@dotcore.com.br')
         span.menu-link(data-text='Contact') Contact
 
 
@@ -71,7 +73,7 @@ html
       a.music-soundcloud(href='https://soundcloud.com/' target='_blank')
         img(src='dist/img/logo/soundcloud.png')
 
-      | #[a.music-title(href='#' target='_blank') Music] by #[a.music-user(href='#' target='_blank') User]
+      #[a.music-title(href='#' target='_blank') Music] by #[a.music-user(href='#' target='_blank') User]
 
       .music-btns
         button.music-btn.music-prev
