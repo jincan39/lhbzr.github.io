@@ -31,100 +31,22 @@ html
     .body-border
     .body-dots
   
-    .loader
-      .loader-progress
+    include ./includes/_loader
   
-    canvas.canvas Your browser doesn't support the canvas element.
+    include ./includes/_canvas
 
+    include ./includes/_about
 
-    section.about
-      h1.about-title LHBZR
+    include ./includes/_menu
 
-      p.about-desc.
-        I'm <strong>Luis Henrique Bizarro</strong>,
-        born in <strong>18 September, 1995</strong>
-        based in <strong>São Paulo, Brazil</strong>.
-        <br>
-        <br>
-        I'm a <strong>Front End Developer</strong>
-        and a bachelor's degree student
-        in <strong>Information Systems</strong> focusing in
-        Creative Coding and Digital Experiences.
+    include ./includes/_music
 
+    include ./includes/_share
 
-    nav.menu
-      a.menu-item(href='http://www.dotcore.com.br/' target='_blank')
-        span.menu-link(data-text='Tumblr') Tumblr
+    include ./includes/_award
 
-      a.menu-item(href='http://www.linkedin.com/in/lhbzr/' target='_blank')
-        span.menu-link(data-text='LinkedIn') LinkedIn
-
-      a.menu-item(href='http://www.github.com/lhbzr/' target='_blank')
-        span.menu-link(data-text='GitHub') GitHub
-
-      a.menu-item(href='http://www.behance.net/lhbzr/' target='_blank')
-        span.menu-link(data-text='Behance') Behance
-
-      a.menu-item(href='mailto:luis@dotcore.com.br')
-        span.menu-link(data-text='Contact') Contact
-
-
-    .music
-      a.music-soundcloud(href='https://soundcloud.com/' target='_blank')
-        img(src='dist/img/logo/soundcloud.png')
-
-      #[a.music-title(href='#' target='_blank') Music] by #[a.music-user(href='#' target='_blank') User]
-
-      .music-btns
-        button.music-btn.music-prev
-          svg.music-btn-icon(viewBox='0 0 48 48')
-            use(xmlns:xlink='http://www.w3.org/1999/xlink' xlink:href='#music-prev')
-
-        button.music-btn.music-toggle
-          svg.music-btn-icon.music-btn-icon-pause(viewBox='0 0 48 48')
-            use(xmlns:xlink='http://www.w3.org/1999/xlink' xlink:href='#music-pause')
-
-          svg.music-btn-icon.music-btn-icon-play(viewBox='0 0 48 48')
-            use(xmlns:xlink='http://www.w3.org/1999/xlink' xlink:href='#music-play')
-
-        button.music-btn.music-next
-          svg.music-btn-icon(viewBox='0 0 48 48')
-            use(xmlns:xlink='http://www.w3.org/1999/xlink' xlink:href='#music-next')
-
-
-    .share
-      h1.share-title Share
-
-      ul.share-list
-        li.share-item
-          a.share-link(href='https://www.facebook.com/sharer.php?u=http://lhbzr.com/&t=LHBZR' target='_blank')
-            svg.share-icon(viewBox='0 0 512 512')
-              use(xmlns:xlink='http://www.w3.org/1999/xlink' xlink:href='#share-facebook')
-
-        li.share-item
-          a.share-link(href='https://twitter.com/share?url=http://lhbzr.com/&text=LHBZR' target='_blank')
-            svg.share-icon(viewBox='0 0 512 512')
-              use(xmlns:xlink='http://www.w3.org/1999/xlink' xlink:href='#share-twitter')
-
-        li.share-item
-          a.share-link(href='https://plus.google.com/share?url=http://lhbzr.com/' target='_blank')
-            svg.share-icon(viewBox='0 0 512 512')
-              use(xmlns:xlink='http://www.w3.org/1999/xlink' xlink:href='#share-google')
-
-        li.share-item
-          a.share-link(href='https://www.linkedin.com/shareArticle?mini=true&url=http://lhbzr.com/&title=LHBZR' target='_blank')
-            svg.share-icon(viewBox='0 0 512 512')
-              use(xmlns:xlink='http://www.w3.org/1999/xlink' xlink:href='#share-linkedin')
-
-        li.share-item
-          a.share-link(href='https://www.tumblr.com/share/link?url=http://lhbzr.com/' target='_blank')
-            svg.share-icon(viewBox='0 0 512 512')
-              use(xmlns:xlink='http://www.w3.org/1999/xlink' xlink:href='#share-tumblr')
-
-
-    a.award(href='https://onepagelove.com/lhbzr/' target='_blank') LHBZR featured on One Page Love
-
-
+    script(src='//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TweenMax.min.js')
+    script(src='//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/utils/Draggable.min.js')
     script(src='dist/js/main.js')
     script.
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

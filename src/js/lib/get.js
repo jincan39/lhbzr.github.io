@@ -1,7 +1,7 @@
-module.exports = function(url, callback) {
-  var request = new XMLHttpRequest();
+export default function get(url, callback) {
+  const request = new XMLHttpRequest();
 
-  request.onreadystatechange = function() {
+  request.onreadystatechange = () => {
     if (request.readyState === 4 && request.status === 200) {
       callback(request);
     }
@@ -10,4 +10,4 @@ module.exports = function(url, callback) {
   request.open('GET', url, true);
 
   request.send();
-};
+}

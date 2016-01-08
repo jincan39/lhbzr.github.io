@@ -1,107 +1,102 @@
-var get = require('./lib/get');
+import get from './lib/get';
 
-module.exports = Music;
+export default class Music {
+  constructor() {
+    this.audio = new Audio();
+    this.audio.crossOrigin = 'anonymous';
 
-function Music() {
-  this.audio = new Audio();
-  this.audio.crossOrigin = 'anonymous';
+    if (window.AudioContext || window.webkitAudioContext) {
+      this.context = new (window.AudioContext || window.webkitAudioContext)();
 
+      this.analyser = this.context.createAnalyser();
+      this.analyser.smoothingTimeConstant = 0.1;
+      this.analyser.fftSize = 2048;
+      this.analyser.connect(this.context.destination);
 
-  if (window.AudioContext || window.webkitAudioContext) {
-    this.context = new (window.AudioContext || window.webkitAudioContext)();
+      this.src = this.context.createMediaElementSource(this.audio);
+      this.src.connect(this.context.destination);
+      this.src.connect(this.analyser);
 
-    this.analyser = this.context.createAnalyser();
-    this.analyser.smoothingTimeConstant = 0.1;
-    this.analyser.fftSize = 2048;
-    this.analyser.connect(this.context.destination);
+      this.frequency = new Uint8Array(this.analyser.frequencyBinCount);
+    }
 
-    this.src = this.context.createMediaElementSource(this.audio);
-    this.src.connect(this.context.destination);
-    this.src.connect(this.analyser);
+    this.songs = [
+      'https://soundcloud.com/leagueoflegends/dj-sona-kinetic-the-crystal',
+      'https://soundcloud.com/alpineband/gasoline-2',
+      'https://soundcloud.com/odesza/say_my_name',
+      'https://soundcloud.com/edbangerrecords/sebastian-embody',
+      'https://soundcloud.com/0data0/dont-sing-feat-benny-sings',
+      'https://soundcloud.com/c2cdjs/down-the-road',
+      'https://soundcloud.com/madeon/pay-no-mind',
+      'https://soundcloud.com/futureclassic/hayden-james-something-about-you-2',
+      'https://soundcloud.com/kflay/5-am-w-something-a-la-mode',
+      'https://soundcloud.com/majorlazer/major-lazer-dj-snake-lean-on-feat-mo',
+      'https://soundcloud.com/themagician/lykke-li-i-follow-rivers-the-magician-remix',
+      'https://soundcloud.com/prettylights/pretty-lights-finally-moving',
+      'https://soundcloud.com/rac/lana-del-rey-blue-jeans-rac'
+    ];
 
-    this.frequency = new Uint8Array(this.analyser.frequencyBinCount);
+    this.song = Math.floor(Math.random() * this.songs.length);
+    this.songPrev = null;
+    this.songNext = null;
+
+    this.load(this.song);
   }
 
-  this.songs = [
-    'https://soundcloud.com/leagueoflegends/dj-sona-kinetic-the-crystal',
-//    'https://soundcloud.com/alpineband/gasoline-2',
-    'https://soundcloud.com/odesza/say_my_name',
-    'https://soundcloud.com/edbangerrecords/sebastian-embody',
-//    'https://soundcloud.com/0data0/dont-sing-feat-benny-sings',
-//    'https://soundcloud.com/c2cdjs/down-the-road',
-    'https://soundcloud.com/madeon/pay-no-mind',
-    'https://soundcloud.com/futureclassic/hayden-james-something-about-you-2',
-    'https://soundcloud.com/kflay/5-am-w-something-a-la-mode',
-    'https://soundcloud.com/majorlazer/major-lazer-dj-snake-lean-on-feat-mo',
-    'https://soundcloud.com/themagician/lykke-li-i-follow-rivers-the-magician-remix',
-//    'https://soundcloud.com/prettylights/pretty-lights-finally-moving',
-    'https://soundcloud.com/rac/lana-del-rey-blue-jeans-rac'
-  ];
+  isPaused() {
+    return this.audio.paused;
+  }
 
-  this.song = Math.floor(Math.random() * this.songs.length);
-  this.songPrev = null;
-  this.songNext = null;
+  isPlaying() {
+    return !this.audio.paused;
+  }
 
-  this.load(this.song);
-};
+  getFrequency() {
+    this.analyser.getByteFrequencyData(this.frequency);
 
-Music.prototype.isPaused = function() {
-  return this.audio.paused;
-};
+    return this.frequency;
+  }
 
+  load(song) {
+    const audio = this.audio;
+    const songs = this.songs;
 
-Music.prototype.isPlaying = function() {
-  return !this.audio.paused;
-};
+    get(
+      '//api.soundcloud.com/resolve.json?url=' + songs[song] + '&client_id=78c6552c14b382e23be3bce2fc411a82',
+      (request) => {
+        const data = JSON.parse(request.responseText);
+        const title = document.querySelector('.music-title');
+        const user = document.querySelector('.music-user');
 
+        audio.src = data.stream_url + '?client_id=78c6552c14b382e23be3bce2fc411a82';
+        audio.play();
 
-Music.prototype.getFrequency = function() {
-  this.analyser.getByteFrequencyData(this.frequency);
+        title.setAttribute('href', data.permalink_url);
+        title.textContent = data.title;
 
-  return this.frequency;
-};
+        user.setAttribute('href', data.user.permalink_url);
+        user.textContent = data.user.username;
+      }
+    );
 
-Music.prototype.load = function(song) {
-  var audio = this.audio;
-  var songs = this.songs;
+    this.song = song;
+    this.songPrev = (this.song !== 0) ? this.song - 1 : this.songs.length - 1;
+    this.songNext = (this.song < this.songs.length - 1) ? this.song + 1 : 0;
+  }
 
-  get(
-    '//api.soundcloud.com/resolve.json?url=' + songs[song] + '&client_id=78c6552c14b382e23be3bce2fc411a82',
-    function(request) {
-      var data = JSON.parse(request.responseText);
-      var title = document.querySelector('.music-title');
-      var user = document.querySelector('.music-user');
+  next() {
+    this.load(this.songNext);
+  }
 
-      audio.src = data.stream_url + '?client_id=78c6552c14b382e23be3bce2fc411a82';
-      audio.play();
+  prev() {
+    this.load(this.songPrev);
+  }
 
-      title.setAttribute('href', data.permalink_url);
-      title.textContent = data.title;
+  pause() {
+    this.audio.pause();
+  }
 
-      user.setAttribute('href', data.user.permalink_url);
-      user.textContent = data.user.username;
-    }
-  );
-
-  this.song = song;
-  this.songPrev = (this.song != 0) ? this.song - 1 : this.songs.length - 1;
-  this.songNext = (this.song < this.songs.length - 1) ? this.song + 1 : 0;
-};
-
-Music.prototype.next = function() {
-  this.load(this.songNext);
-};
-
-
-Music.prototype.prev = function() {
-  this.load(this.songPrev);
-};
-
-
-Music.prototype.pause = function() {
-  this.audio.pause();
-};
-
-Music.prototype.play = function() {
-  this.audio.play();
-};
+  play() {
+    this.audio.play();
+  }
+}

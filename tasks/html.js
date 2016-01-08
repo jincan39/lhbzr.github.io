@@ -1,14 +1,11 @@
-var pkg = require('../package.json');
-
-var gulp = require('gulp'),
-    minify = require('gulp-minify-html'),
-    inline = require('gulp-minify-inline'),
+var pkg = require('../package.json'),
+    gulp = require('gulp'),
+    htmlmin = require('gulp-htmlmin'),
     jade = require('gulp-jade');
 
 gulp.task('html', function() {
-  return gulp.src(pkg.folders.src + '/html/*.jade')
-             .pipe(jade({ pretty: true }))
-             .pipe(minify())
-             .pipe(inline())
-             .pipe(gulp.dest(''));
+  gulp.src(pkg.folders.src + '/html/*.jade')
+      .pipe(jade({ pretty: true }))
+      .pipe(htmlmin({ collapseWhitespace: true, minifyJS: true }))
+      .pipe(gulp.dest(''));
 });

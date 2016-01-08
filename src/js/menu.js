@@ -1,78 +1,52 @@
-var int = require('./lib/int');
-var replace = require('./lib/replace');
+import int from './lib/int';
+import replace from './lib/replace';
 
-module.exports = (function() {
-  var link = document.querySelectorAll('.menu-link'),
-      linkOverInterval,
-      linkOutInterval;
+export default function createMenu() {
+  const links = document.querySelectorAll('.menu-link');
 
-  for (var i = 0; i < link.length; i++) {
-    var linkCurrent = link[i],
-        linkCurrentParent = linkCurrent.parentNode;
+  let linkHoverInterval;
+  let linkOutInterval;
 
-    Draggable.create(linkCurrentParent, {
+  Array.from(links).forEach((link) => {
+    const self = link;
+
+    self.style.left = int(0, window.innerWidth - link.offsetWidth) + 'px';
+    self.style.top = int(0, window.innerHeight - link.offsetHeight) + 'px';
+
+    Draggable.create(self, {
       bounds: document.body,
       dragClickables: true,
       edgeResistance: 1,
-      type: 'x, y',
-      onDrag: function(e) {
-        TweenLite.to(this.target, .1, {
-          x: this.x,
-          y: this.y
-        });
-      }
+      type: 'x, y'
     });
 
-    linkCurrent.addEventListener('mouseover', function() {
-      var link = this;
+    link.addEventListener('mouseover', () => {
+      linkHoverInterval = setInterval(() => {
+        const value = self.innerHTML.trim();
+        const index = int(0, value.length - 1);
+        const char = String.fromCharCode(int(65, 122));
 
-      linkOverInterval = setInterval(function() {
-        var linkValue = link.innerHTML.trim();
-
-        link.innerHTML = replace(
-          linkValue,
-          int(0, linkValue.length - 1),
-          String.fromCharCode(int(65, 122))
-        );
+        self.innerHTML = replace(value, index, char);
       }, 1);
-
-      TweenLite.to(link, .4, {
-        background: 'rgba(255, 255, 255, 1)',
-        color: 'rgb(0, 0, 0)'
-      });
     });
 
-    linkCurrent.addEventListener('mouseout', function() {
-      var link = this,
-          linkText = link.getAttribute('data-text');
+    link.addEventListener('mouseout', () => {
+      let index = 0;
+      const text = link.getAttribute('data-text');
 
-      clearInterval(linkOverInterval);
+      clearInterval(linkHoverInterval);
 
-      var i = 0;
+      linkOutInterval = setInterval(() => {
+        if (index < text.length) {
+          let value = self.innerHTML.trim();
 
-      var linkOutInterval = setInterval(function() {
-        if (i < linkText.length) {
-          var linKValue = link.innerHTML.trim();
-
-          link.innerHTML = replace(
-            linKValue,
-            i,
-            linkText[i]
-          );
+          self.innerHTML = replace(value, index, text[index]);
         } else {
           clearInterval(linkOutInterval);
         }
 
-        i++;
+        index++;
       }, 1);
-
-      TweenLite.to(link, .4, {
-        background: 'rgba(255, 255, 255, 0)',
-        color: 'rgb(255, 255, 255)'
-      });
     });
-
-    linkCurrentParent.style.left = int(0, window.innerWidth - linkCurrent.offsetWidth) + 'px';
-    linkCurrentParent.style.top = int(0, window.innerHeight - linkCurrent.offsetHeight) + 'px';
-  }
-})();
+  });
+}

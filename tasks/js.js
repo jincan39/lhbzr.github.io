@@ -1,7 +1,7 @@
-var pkg = require('../package.json');
-
-var gulp = require('gulp'),
+var pkg = require('../package.json'),
+    gulp = require('gulp'),
     browserify = require('browserify'),
+    babelify = require('babelify'),
     watchify = require('watchify'),
     uglify = require('gulp-uglify'),
     source = require('vinyl-source-stream'),
@@ -11,18 +11,21 @@ var gulp = require('gulp'),
 gulp.task('js', function() {
   var bundler = browserify({
     cache: {},
-    packageCache: {},
-    fullPaths: false,
+    debug: global.isWatching,
     entries: ['./' + pkg.folders.src + '/js/main.js'],
-    debug: global.isWatching
-  });
+    fullPaths: false,
+    packageCache: {}
+  }).transform(babelify.configure({
+    presets: ['es2015']
+  }));
 
   var bundle = function() {
-    return bundler.bundle()
-                  .pipe(source('main.js'))
-                  .pipe(buffer())
-                  .pipe(global.isWatching ? util.noop() : uglify())
-                  .pipe(gulp.dest('./' + pkg.folders.dist + '/js'))
+    bundler
+      .bundle()
+      .pipe(source('main.js'))
+      .pipe(buffer())
+      .pipe(global.isWatching ? util.noop() : uglify())
+      .pipe(gulp.dest('./' + pkg.folders.dist + '/js'));
   };
 
   if (global.isWatching) {

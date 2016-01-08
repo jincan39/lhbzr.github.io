@@ -1,3 +1,3 @@
-module.exports = function(min, max) {
+export default function int(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
-};
+}

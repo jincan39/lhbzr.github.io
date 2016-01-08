@@ -1,44 +1,34 @@
-require('./plugins/TweenMax');
-require('./plugins/utils/Draggable');
+import get from './lib/get';
 
+import Music from './music';
+import Scene from './scene';
 
-var get = require('./lib/get');
+import about from './about';
+import menu from './menu';
 
+about();
+menu();
 
-var Music = require('./music');
-var Scene = require('./scene');
+const music = new Music();
+const musicPrev = document.querySelector('.music-prev');
+const musicToggle = document.querySelector('.music-toggle');
+const musicNext = document.querySelector('.music-next');
 
-
-var about = require('./about');
-
-
-var menu = require('./menu');
-
-
-var music = new Music(),
-    musicPrev = document.querySelector('.music-prev'),
-    musicToggle = document.querySelector('.music-toggle'),
-    musicNext = document.querySelector('.music-next');
-
-music.audio.addEventListener('ended', function() {
-  music.load(music.songNext);
-});
-
-musicToggle.addEventListener('click', function(e) {
+musicToggle.addEventListener('click', (e) => {
   e.stopPropagation();
 
   if (music.isPaused()) {
-    this.classList.remove('is-paused');
+    musicToggle.classList.remove('is-paused');
 
     music.play();
   } else {
-    this.classList.add('is-paused');
+    musicToggle.classList.add('is-paused');
 
     music.pause();
   }
 });
 
-musicPrev.addEventListener('click', function(e) {
+musicPrev.addEventListener('click', (e) => {
   e.stopPropagation();
 
   musicToggle.classList.remove('is-paused');
@@ -46,7 +36,7 @@ musicPrev.addEventListener('click', function(e) {
   music.prev();
 });
 
-musicNext.addEventListener('click', function(e) {
+musicNext.addEventListener('click', (e) => {
   e.stopPropagation();
 
   musicToggle.classList.remove('is-paused');
@@ -55,7 +45,7 @@ musicNext.addEventListener('click', function(e) {
 });
 
 
-var scene = new Scene(music);
+const scene = new Scene(music);
 
 scene.createGeometry();
 scene.createLight();
@@ -63,50 +53,47 @@ scene.createShaders();
 scene.render();
 
 
-get(
-  'dist/svg/svg.svg',
-  function (response) {
-    var wrapper = document.createElement('div');
+get('dist/svg/svg.svg', (res) => {
+  const body = document.body;
+  const wrapper = document.createElement('div');
 
-    wrapper.style.display = 'none';
-    wrapper.innerHTML = response.responseText.replace(/\n/g, '');
+  wrapper.style.display = 'none';
+  wrapper.innerHTML = res.responseText.replace(/\n/g, '');
 
-    document.body.insertBefore(wrapper, document.body.childNodes[0]);
-  }
-);
+  body.insertBefore(wrapper, body.childNodes[0]);
+});
 
 
-
-window.addEventListener('load', function() {
-  var loader = document.querySelector('.loader');
+window.addEventListener('load', () => {
+  const loader = document.querySelector('.loader');
 
   loader.parentNode.removeChild(loader);
 
-  var timeline = new TimelineMax();
+  const timeline = new TimelineMax();
 
   timeline
-    .fromTo('.body-border', .5, { bottom: '50%', left: '50%', right: '50%', top: '50%' }, { bottom: 15, left: 15, right: 15, top: 15 })
-    .fromTo('.body-dots', .5, { autoAlpha: 0 }, { autoAlpha: 1 })
-    .fromTo('.about', .5, { autoAlpha: 0 }, { autoAlpha: 1 })
-    .fromTo('.music, .share', .5, { autoAlpha: 0 }, { autoAlpha: 1 })
-    .staggerFromTo('.menu-item', .25, { autoAlpha: 0 }, { autoAlpha: 1 }, .25)
-    .fromTo('.canvas', .5, { autoAlpha: 0 }, { autoAlpha: 1 });
+    .fromTo('.body-border', 0.5, { scale: 0 }, { scale: 1 })
+    .fromTo('.body-dots', 0.5, { autoAlpha: 0 }, { autoAlpha: 1 })
+    .fromTo('.about', 0.5, { autoAlpha: 0 }, { autoAlpha: 1 })
+    .fromTo('.music, .share', 0.5, { autoAlpha: 0 }, { autoAlpha: 1 })
+    .staggerFromTo('.menu-link', 0.25, { autoAlpha: 0 }, { autoAlpha: 1 }, 0.25)
+    .fromTo('.canvas', 0.5, { autoAlpha: 0 }, { autoAlpha: 1 });
 });
 
-window.addEventListener('resize', function() {
-  scene.resize();
+window.addEventListener('resize', (e) => {
+  scene.resize(e);
 }, false);
 
-window.addEventListener('click', function(e) {
+window.addEventListener('click', (e) => {
   scene.click(e);
 }, false);
 
-window.addEventListener('mousemove', function(e) {
+window.addEventListener('mousemove', (e) => {
   scene.mousemove(e);
 }, false);
 
-window.addEventListener('mousewheel', function(e) {
-  var volume = Math.round(music.audio.volume * 100) / 100;
+window.addEventListener('mousewheel', (e) => {
+  let volume = Math.round(music.audio.volume * 100) / 100;
 
   if (e.wheelDelta < 0 && volume - 0.05 >= 0) {
     volume = Math.abs(volume - 0.05);

@@ -1,6 +1,5 @@
-var pkg = require('../package.json');
-
-var gulp = require('gulp');
+var pkg = require('../package.json'),
+    gulp = require('gulp');
 
 gulp.task('watch', ['sync'], function() {
   global.isWatching = true;

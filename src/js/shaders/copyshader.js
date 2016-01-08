@@ -4,7 +4,7 @@
  * Full-screen textured quad shader
  */
 
- var THREE = require('three');
+import THREE from 'three';
 
 module.exports = THREE.CopyShader = {
   uniforms: {

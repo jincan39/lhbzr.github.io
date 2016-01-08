@@ -1,6 +1,5 @@
-var pkg = require('../package.json');
-
-var gulp = require('gulp'),
+var pkg = require('../package.json'),
+    gulp = require('gulp'),
     browser = require('browser-sync');
 
 gulp.task('sync', function() {

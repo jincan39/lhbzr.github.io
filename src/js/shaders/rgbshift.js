@@ -10,7 +10,7 @@
 * angle: shift angle in radians
 */
 
-var THREE = require('three');
+import THREE from 'three';
 
 module.exports = THREE.RGBShiftShader = {
   uniforms: {
