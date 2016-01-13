@@ -13,37 +13,26 @@ cd lhbzr
 npm install
 ```
 
-### Main Files
-```sh
-lhbzr
-├── .gitignore
-├── CNAME
-├── gulpfile.js
-├── package.json
-├── README.md
-│── src
-│   ├── css
-│   ├── html
-│   ├── img
-│   ├── js
-│   ├── svg
-└── tasks
-    ├── build.js
-    ├── css.js
-    ├── html.js
-    ├── img.js
-    ├── js.js
-    ├── svg.js
-    ├── sync.js
-    └── watch.js
-```
-
 ### Tasks
-- `gulp html`: Compile HTML Files with Jade.
-- `gulp css`: Compile CSS Files with SASS, Autoprefixer and Combine Media Queries.
-- `gulp js`: Compile JavaScript Files with Browserify and Uglify.
-- `gulp img`: Minify Image Files with Imagemin.
-- `gulp svg`: Compile SVG Files with SVGStore.
-- `gulp sync`: Start a Server with Browsersync.
-- `gulp watch`: Run `gulp sync` and watch file changes.
-- `gulp build`: Run `gulp html`, `gulp css`, `gulp js`, `gulp img` and `gulp svg`.
+```sh
+# Compile HTML files with Jade.
+gulp html
+
+# Compile CSS files with Stylus and Autoprefixer.
+gulp css
+
+# Compile JavaScript files with Babel, Browserify and Uglify.
+gulp js
+
+# Minify images with Imagemin.
+gulp img
+
+# Generate SVG sprites with SVGStore.
+gulp svg
+
+# Watch file changes and start Browsersync.
+gulp watch
+
+# Run everything and prepare production.
+gulp build
+```
