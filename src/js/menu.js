@@ -3,9 +3,7 @@ import replace from './lib/replace';
 
 export default function createMenu() {
   const links = document.querySelectorAll('.menu-link');
-
-  let linkHoverInterval;
-  let linkOutInterval;
+  let linkInterval;
 
   Array.from(links).forEach((link) => {
     const self = link;
@@ -21,32 +19,19 @@ export default function createMenu() {
     });
 
     link.addEventListener('mouseover', () => {
-      linkHoverInterval = setInterval(() => {
+      linkInterval = setInterval(() => {
         const value = self.innerHTML.trim();
         const index = int(0, value.length - 1);
         const char = String.fromCharCode(int(65, 122));
 
         self.innerHTML = replace(value, index, char);
-      }, 1);
+      }, 10);
     });
 
     link.addEventListener('mouseout', () => {
-      let index = 0;
-      const text = link.getAttribute('data-text');
+      clearInterval(linkInterval);
 
-      clearInterval(linkHoverInterval);
-
-      linkOutInterval = setInterval(() => {
-        if (index < text.length) {
-          let value = self.innerHTML.trim();
-
-          self.innerHTML = replace(value, index, text[index]);
-        } else {
-          clearInterval(linkOutInterval);
-        }
-
-        index++;
-      }, 1);
+      self.innerHTML = link.getAttribute('data-text');
     });
   });
 }
