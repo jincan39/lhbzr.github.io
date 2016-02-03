@@ -8,11 +8,19 @@
   z-index 100
 
 .loader-progress
+  animation loading 1s linear infinite alternate
   background #FFF
   display block
-  height 6px
-  left 0
-  margin-top -3px
+  height 1px
+  left 50%
   position absolute
   top 50%
+  transform translateX(-50%)
   width 0
+
+@keyframes loading
+  0%
+    width 0
+
+  100%
+    width 80%

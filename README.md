@@ -1,4 +1,6 @@
 ## LHBZR
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
+
 LHBZR is a experimental personal website made with Web Audio API via Soundcloud and Web Graphics Library using Three.js.
 
 ### Getting Started
