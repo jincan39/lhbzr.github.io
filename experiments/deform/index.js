@@ -8,15 +8,18 @@ const app = OrbitViewer({
   position: new THREE.Vector3(1, 1, -100)
 })
 
+const texture = THREE.TextureLoader('explosion.png')
+
+const uniforms = {
+  color: { type: 'c', value: new THREE.Color(0x454545) },
+  time: { type: 'f', value: 0 },
+  texture: { type: 't', value: texture }
+}
+
 const material = new THREE.ShaderMaterial({
   vertexShader: glslify('./shaders/vertexShader.glsl'),
   fragmentShader: glslify('./shaders/fragmentShader.glsl'),
-  uniforms: {
-    u_time: {
-      type: 'f',
-      value: 0
-    }
-  }
+  uniforms: uniforms
 })
 
 const mesh = new THREE.Mesh(
@@ -27,5 +30,5 @@ const mesh = new THREE.Mesh(
 app.scene.add(mesh)
 
 app.on('tick', () => {
-  material.uniforms.u_time.value += 0.01
+  material.uniforms.time.value += 0.005
 })
