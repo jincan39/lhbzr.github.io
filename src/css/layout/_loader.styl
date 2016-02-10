@@ -9,18 +9,20 @@
 
 .loader-progress
   animation loading 1s linear infinite alternate
-  background #FFF
+  border 1px solid #FFF
   display block
-  height 1px
+  height 50px
   left 50%
   position absolute
   top 50%
-  transform translateX(-50%)
-  width 0
+  transform translate(-50%, -50%)
+  width 50px
 
 @keyframes loading
   0%
-    width 0
+    height 25px
+    width 25px
 
   100%
-    width 80%
+    height 100px
+    width 100px
