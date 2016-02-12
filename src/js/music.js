@@ -21,6 +21,8 @@ export default class Music {
     }
 
     this.songs = [
+      'https://soundcloud.com/autografmusic/metaphysical',
+      'https://soundcloud.com/kleerup/let-me-in-sebastien-remix-feat-susanne-sundfor',
       'https://soundcloud.com/leagueoflegends/dj-sona-kinetic-the-crystal',
       'https://soundcloud.com/alpineband/gasoline-2',
       'https://soundcloud.com/odesza/say_my_name',
