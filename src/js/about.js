@@ -1,4 +1,4 @@
-import int from './lib/int'
+import randomInt from './lib/int'
 
 export default function crateAbout () {
   const about = document.querySelector('.about')
@@ -9,6 +9,6 @@ export default function crateAbout () {
     type: 'x, y'
   })
 
-  about.style.left = int(0, window.innerWidth - about.offsetWidth) + 'px'
-  about.style.top = int(0, window.innerHeight - about.offsetHeight) + 'px'
+  about.style.left = randomInt(0, window.innerWidth - about.offsetWidth) + 'px'
+  about.style.top = randomInt(0, window.innerHeight - about.offsetHeight) + 'px'
 }

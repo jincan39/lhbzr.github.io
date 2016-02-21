@@ -1,37 +1,41 @@
-import int from './lib/int'
-import replace from './lib/replace'
+import randomInt from './lib/int'
+import replaceString from './lib/replace'
 
 export default function createMenu () {
   const links = document.querySelectorAll('.menu-link')
-  let linkInterval
 
   Array.from(links).forEach((link) => {
-    const self = link
+    const _link = link
+    let interval
 
-    self.style.left = int(0, window.innerWidth - link.offsetWidth) + 'px'
-    self.style.top = int(0, window.innerHeight - link.offsetHeight) + 'px'
+    _link.style.left = randomInt(0, window.innerWidth - link.offsetWidth) + 'px'
+    _link.style.top = randomInt(0, window.innerHeight - link.offsetHeight) + 'px'
 
-    Draggable.create(self, {
+    Draggable.create(_link, {
       bounds: document.body,
       dragClickables: true,
       edgeResistance: 1,
       type: 'x, y'
     })
 
-    link.addEventListener('mouseover', () => {
-      linkInterval = setInterval(() => {
-        const value = self.innerHTML.trim()
-        const index = int(0, value.length - 1)
-        const char = String.fromCharCode(int(65, 122))
+    _link.addEventListener('mouseover', () => {
+      const text = _link.querySelector('.menu-text')
 
-        self.innerHTML = replace(value, index, char)
+      interval = setInterval(() => {
+        const value = text.innerHTML.trim()
+        const index = randomInt(0, value.length - 1)
+        const char = String.fromCharCode(randomInt(65, 122))
+
+        text.innerHTML = replaceString(value, index, char)
       }, 10)
     })
 
-    link.addEventListener('mouseout', () => {
-      clearInterval(linkInterval)
+    _link.addEventListener('mouseout', () => {
+      const text = _link.querySelector('.menu-text')
 
-      self.innerHTML = link.getAttribute('data-text')
+      clearInterval(interval)
+
+      text.innerHTML = _link.getAttribute('data-text')
     })
   })
 }

@@ -84,20 +84,6 @@ get('dist/svg/svg.svg', (res) => {
 /**
  * Window.
  */
-window.addEventListener('load', () => {
-  const loader = document.querySelector('.loader')
-
-  loader.parentNode.removeChild(loader)
-
-  const timeline = new TimelineMax()
-
-  timeline
-    .fromTo('.about', 1, { autoAlpha: 0 }, { autoAlpha: 1 })
-    .fromTo('.music, .share', 1, { autoAlpha: 0 }, { autoAlpha: 1 })
-    .staggerFromTo('.menu-link', 1, { autoAlpha: 0 }, { autoAlpha: 1 }, 0.25)
-    .fromTo('.canvas', 1, { autoAlpha: 0 }, { autoAlpha: 1 })
-})
-
 window.addEventListener('resize', (e) => {
   scene.resize(e)
 }, false)

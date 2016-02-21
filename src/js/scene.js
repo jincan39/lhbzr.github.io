@@ -1,4 +1,4 @@
-import int from './lib/int'
+import randomInt from './lib/int'
 
 import THREE from 'three'
 import THREEEffectComposer from 'three-effectcomposer'
@@ -21,9 +21,11 @@ export default class Scene {
       alpha: true,
       canvas: this.canvas
     })
+
     this.renderer.setSize(window.innerWidth, window.innerHeight)
 
     this.circle = new THREE.Object3D()
+
     this.geometry = []
     this.geometrySleeve = []
     this.geometryLength = 100
@@ -46,66 +48,70 @@ export default class Scene {
   }
 
   createGeometry () {
-    const number = int(0, this.geometryType.length - 1)
+    const _this = this
+    const number = randomInt(0, _this.geometryType.length - 1)
 
-    for (let i = 0; i < this.geometryLength; i++) {
-      this.geometry[i] = new THREE.Mesh(
-        this.geometryType[number],
+    for (let i = 0; i < _this.geometryLength; i++) {
+      _this.geometry[i] = new THREE.Mesh(
+        _this.geometryType[number],
         new THREE.MeshPhongMaterial({
           color: 0xFFFFFF,
           wireframe: true
         })
       )
 
-      this.geometry[i].position.y = 100
+      _this.geometry[i].position.y = 100
 
-      this.geometrySleeve[i] = new THREE.Object3D()
-      this.geometrySleeve[i].add(this.geometry[i])
-      this.geometrySleeve[i].rotation.z = i * (360 / this.geometryLength) * Math.PI / 180
+      _this.geometrySleeve[i] = new THREE.Object3D()
+      _this.geometrySleeve[i].add(_this.geometry[i])
+      _this.geometrySleeve[i].rotation.z = i * (360 / _this.geometryLength) * Math.PI / 180
 
-      this.circle.add(this.geometrySleeve[i])
+      _this.circle.add(_this.geometrySleeve[i])
     }
 
-    this.scene.add(this.circle)
+    _this.scene.add(_this.circle)
   }
 
   createLight () {
+    const _this = this
+
     const lightOne = new THREE.DirectionalLight(0xFFFFFF, 1)
     lightOne.position.set(1, 1, 1)
 
-    this.scene.add(lightOne)
+    _this.scene.add(lightOne)
 
     const lightTwo = new THREE.DirectionalLight(0xFFFFFF, 1)
     lightTwo.position.set(-1, -1, 1)
 
-    this.scene.add(lightTwo)
+    _this.scene.add(lightTwo)
   }
 
   createShaders () {
+    const _this = this
+
     const effect = new EffectComposer.ShaderPass(RGBShiftShader)
     effect.uniforms.amount.value = 0.05
     effect.renderToScreen = true
 
-    this.effect = effect
+    _this.effect = effect
 
-    this.composer.addPass(new EffectComposer.RenderPass(this.scene, this.camera))
+    _this.composer.addPass(new EffectComposer.RenderPass(_this.scene, _this.camera))
+    _this.composer.addPass(effect)
 
-    this.composer.addPass(effect)
-
-    this.renderer.render(this.scene, this.camera)
+    _this.renderer.render(_this.scene, _this.camera)
   }
 
   render () {
-    const that = this
-    const frequencies = this.music.getFrequency()
+    const _this = this
+    const frequencies = _this.music.getFrequency()
 
-    requestAnimationFrame(this.render.bind(this))
+    requestAnimationFrame(_this.render.bind(_this))
 
-    TweenLite.to(this.effect.uniforms.amount, 1, {
-      value: (this.clicked) ? 0.005 : (this.mouse.x / window.innerWidth)
+    TweenLite.to(_this.effect.uniforms.amount, 1, {
+      value: (_this.clicked) ? 0.005 : (_this.mouse.x / window.innerWidth)
     })
 
-    this.geometry.forEach((geometry, index) => {
+    _this.geometry.forEach((geometry, index) => {
       let value
 
       if (window.AudioContext || window.webkitAudioContext) {
@@ -114,58 +120,62 @@ export default class Scene {
         value = 1
       }
 
-      if (that.clicked) {
+      if (_this.clicked) {
         TweenLite.to(geometry.scale, 0.1, { x: value, y: value, z: value })
-        TweenLite.to(geometry.rotation, 0.1, { z: (index % 2 === 0) ? '+= 0.1' : '-= 0.1' })
+        TweenLite.to(geometry.rotation, 0.1, { z: (index % 2 === 0) ? '+= 0.05' : '-= 0.05' })
       } else {
         TweenLite.to(geometry.scale, 0.1, { z: value })
       }
     })
 
-    this.circle.rotation.z += 0.01
+    _this.circle.rotation.z += 0.01
 
-    this.renderer.render(this.scene, this.camera)
+    _this.renderer.render(_this.scene, _this.camera)
 
-    this.composer.render()
+    _this.composer.render()
   }
 
   resize () {
-    this.camera.aspect = this.ratio
-    this.camera.updateProjectionMatrix()
+    const _this = this
 
-    this.renderer.setSize(window.innerWidth, window.innerHeight)
+    _this.camera.aspect = _this.ratio
+    _this.camera.updateProjectionMatrix()
+
+    _this.renderer.setSize(window.innerWidth, window.innerHeight)
   }
 
   mousemove (e) {
-    this.mouse.x = e.clientX - window.innerWidth / 2
-    this.mouse.y = e.clientY - window.innerHeight / 2
+    const _this = this
+
+    _this.mouse.x = e.clientX - window.innerWidth / 2
+    _this.mouse.y = e.clientY - window.innerHeight / 2
   }
 
   click () {
-    const that = this
-    const clicked = this.clicked
+    const _this = this
+    const clicked = _this.clicked
 
-    this.geometry.forEach((geometry, index) => {
+    _this.geometry.forEach((geometry, index) => {
       if (clicked) {
         TweenLite.to(geometry.scale, 1, { x: 1, y: 1, z: 1 })
         TweenLite.to(geometry.rotation, 1, { x: 0, y: 0, z: 0 })
         TweenLite.to(geometry.position, 1, { x: 0, y: 100, z: 0 })
 
-        that.clicked = false
+        _this.clicked = false
       } else {
         TweenLite.to(geometry.rotation, 1, {
-          x: int(0, Math.PI),
-          y: int(0, Math.PI),
-          z: int(0, Math.PI)
+          x: randomInt(0, Math.PI),
+          y: randomInt(0, Math.PI),
+          z: randomInt(0, Math.PI)
         })
 
         TweenLite.to(geometry.position, 1, {
-          x: '+= ' + int(-1000, 1000),
-          y: '+= ' + int(-1000, 1000),
-          z: '+= ' + int(-500, -250)
+          x: '+= ' + randomInt(-1000, 1000),
+          y: '+= ' + randomInt(-1000, 1000),
+          z: '+= ' + randomInt(-500, -250)
         })
 
-        that.clicked = true
+        _this.clicked = true
       }
     })
   }

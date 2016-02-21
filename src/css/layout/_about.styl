@@ -1,28 +1,18 @@
 .about
-  background #FFF
+  background rgba(#FFF, .1)
   border 1px solid #FFF
-  color #000
-  height 315px
+  border-radius 2px
+  color #FFF
+  height 325px
   padding 25px
   position absolute
   transition background .4s, color .4s
-  width 315px
+  width 325px
   z-index 2
 
   &:hover
-    background transparent
-    color #FFF
-
-  @media (max-width: 800px)
-    background none
-    color #FFF
-
-  @media (max-width: 400px)
-    background rgba(0, 0, 0, .75)
-    height 100%
-    text-align center
-    width 100%
-    z-index -1
+    background #FFF
+    color #000
 
 .about-title
   display block
