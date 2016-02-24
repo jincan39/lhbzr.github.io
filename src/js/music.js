@@ -1,3 +1,5 @@
+/* global Audio */
+
 import get from './lib/get'
 
 export default class Music {

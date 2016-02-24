@@ -11,7 +11,7 @@ html
 
     meta(name='viewport' content='width=device-width, initial-scale=1.0')
 
-    link(rel='shortcut icon' href='dist/img/favicon.ico')
+    link(rel='shortcut icon' href='dist/img/favicon.png')
 
     link(rel='stylesheet' href='//cdn.jsdelivr.net/font-hack/2.015/css/hack.min.css')
     link(rel='stylesheet' href='dist/css/main.css')
@@ -35,9 +35,10 @@ html
     include ./includes/_menu
 
     include ./includes/_music
+    
+    include ./includes/_projects
 
-    include ./includes/_award
-
+    script(src='//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/plugins/ScrollToPlugin.min.js')
     script(src='//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TweenMax.min.js')
     script(src='//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/utils/Draggable.min.js')
     script(src='dist/js/main.js')

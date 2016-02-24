@@ -1,11 +1,13 @@
-var pkg = require('../package.json')
-var gulp = require('gulp')
-var htmlmin = require('gulp-htmlmin')
-var jade = require('gulp-jade')
+import pkg from '../package.json'
 
-gulp.task('html', function () {
+import gulp from 'gulp'
+
+import jade from 'gulp-jade'
+import htmlmin from 'gulp-htmlmin'
+
+gulp.task('html', () => {
   gulp
-    .src(pkg.folders.src + '/html/*.jade')
+    .src(`${pkg.folders.src}/html/*.jade`)
     .pipe(jade({ pretty: true }))
     .pipe(htmlmin({ collapseWhitespace: true, minifyJS: true }))
     .pipe(gulp.dest(''))

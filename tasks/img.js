@@ -1,12 +1,14 @@
-var pkg = require('../package.json')
-var gulp = require('gulp')
-var changed = require('gulp-changed')
-var imagemin = require('gulp-imagemin')
+import pkg from '../package.json'
 
-gulp.task('img', function () {
+import gulp from 'gulp'
+
+import changed from 'gulp-changed'
+import imagemin from 'gulp-imagemin'
+
+gulp.task('img', () => {
   gulp
-    .src(pkg.folders.src + '/img/**')
-    .pipe(changed(pkg.folders.dist + '/img'))
+    .src(`${pkg.folders.src}/img/**`)
+    .pipe(changed(`${pkg.folders.dist}/img`))
     .pipe(imagemin())
-    .pipe(gulp.dest(pkg.folders.dist + '/img'))
+    .pipe(gulp.dest(`${pkg.folders.dist}/img`))
 })

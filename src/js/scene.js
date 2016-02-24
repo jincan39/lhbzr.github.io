@@ -1,3 +1,5 @@
+/* global TweenLite, requestAnimationFrame */
+
 import randomInt from './lib/int'
 
 import THREE from 'three'

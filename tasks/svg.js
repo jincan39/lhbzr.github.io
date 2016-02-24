@@ -1,10 +1,12 @@
-var pkg = require('../package.json')
-var gulp = require('gulp')
-var svgstore = require('gulp-svgstore')
+import pkg from '../package.json'
 
-gulp.task('svg', function () {
+import gulp from 'gulp'
+
+import svgstore from 'gulp-svgstore'
+
+gulp.task('svg', () => {
   gulp
-    .src(pkg.folders.src + '/svg/*.svg')
+    .src(`${pkg.folders.src}/svg/*.svg`)
     .pipe(svgstore())
-    .pipe(gulp.dest(pkg.folders.dist + '/svg'))
+    .pipe(gulp.dest(`${pkg.folders.dist}/svg`))
 })

@@ -1,3 +1,5 @@
+/* global XMLHttpRequest */
+
 export default function get (url, callback) {
   const request = new XMLHttpRequest()
 

@@ -1,4 +1,5 @@
 import get from './lib/get'
+
 import Music from './music'
 import Scene from './scene'
 
@@ -15,6 +16,13 @@ about()
 import menu from './menu'
 
 menu()
+
+/**
+ * Projects.
+ */
+import projects from './projects'
+
+projects()
 
 /**
  * Music.
@@ -69,6 +77,21 @@ scene.createShaders()
 scene.render()
 
 /**
+ * Canvas.
+ */
+document.querySelector('.canvas').addEventListener('mousewheel', (e) => {
+  let volume = Math.round(music.audio.volume * 100) / 100
+
+  if (e.wheelDelta < 0 && volume - 0.05 >= 0) {
+    volume = Math.abs(volume - 0.05)
+  } else if (e.wheelDelta > 0 && volume + 0.05 <= 1) {
+    volume = Math.abs(volume + 0.05)
+  }
+
+  music.audio.volume = volume
+})
+
+/**
  * SVG.
  */
 get('dist/svg/svg.svg', (res) => {
@@ -95,15 +118,3 @@ window.addEventListener('click', (e) => {
 window.addEventListener('mousemove', (e) => {
   scene.mousemove(e)
 }, false)
-
-window.addEventListener('mousewheel', (e) => {
-  let volume = Math.round(music.audio.volume * 100) / 100
-
-  if (e.wheelDelta < 0 && volume - 0.05 >= 0) {
-    volume = Math.abs(volume - 0.05)
-  } else if (e.wheelDelta > 0 && volume + 0.05 <= 1) {
-    volume = Math.abs(volume + 0.05)
-  }
-
-  music.audio.volume = volume
-})

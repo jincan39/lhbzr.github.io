@@ -4,15 +4,11 @@
   border-radius 2px
   color #FFF
   height 325px
+  overflow hidden
   padding 25px
   position absolute
-  transition background .4s, color .4s
   width 325px
   z-index 2
-
-  &:hover
-    background #FFF
-    color #000
 
 .about-title
   display block
@@ -29,3 +25,13 @@
   font-size 12px
   letter-spacing 1px
   line-height 24px
+
+.about-bg
+  background #FFF
+  bottom -75px
+  left -150px
+  position absolute
+  right -150px
+  top -75px
+  transform rotate(-10deg) translateY(-100%)
+  z-index -1

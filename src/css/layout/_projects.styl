@@ -1,0 +1,56 @@
+.projects
+  background #000
+  border-top 1px solid #FFF
+  bottom 0
+  left 0
+  position absolute
+  right 0
+  transform translateY(100%)
+  z-index 99999
+
+.projects-label
+  bottom 100%
+  color #FFF
+  font-size 10px
+  font-weight 700
+  left 50%
+  letter-spacing 0.1em
+  position absolute
+  text-transform uppercase
+  transform translateX(-50%)
+  z-index 2
+
+  &:after
+    background #FFF
+    content ''
+    display block
+    height 30px
+    margin 15px auto 0
+    width 1px
+
+.projects-list
+  font-size 0
+  margin 0
+  overflow hidden
+  padding 0
+  white-space nowrap
+  width 100%
+
+.project
+  display inline-block
+  text-align center
+  vertical-align middle
+
+.project-link
+  background #000
+  display block
+  opacity .75
+  position relative
+  transition opacity .4s
+
+  &:hover
+    opacity 1
+
+.project-img
+  display block
+  width 100%

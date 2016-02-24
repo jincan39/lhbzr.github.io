@@ -1,9 +1,11 @@
-var pkg = require('../package.json')
-var gulp = require('gulp')
-var browser = require('browser-sync')
+import pkg from '../package.json'
 
-gulp.task('sync', function () {
-  browser.init(pkg.folders.dist + '/**', {
+import gulp from 'gulp'
+
+import browser from 'browser-sync'
+
+gulp.task('sync', () => {
+  browser.init(`${pkg.folders.src}/**`, {
     server: {
       baseDir: ''
     }
