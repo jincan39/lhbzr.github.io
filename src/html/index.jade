@@ -28,14 +28,15 @@ html
     meta(name='twitter:image:src' content='dist/img/share/twitter.jpg')
 
   body    
-    include ./includes/_canvas
+    .content
+      include ./includes/_canvas
 
-    include ./includes/_about
+      include ./includes/_menu
+      
+      include ./includes/_about
 
-    include ./includes/_menu
+      include ./includes/_music
 
-    include ./includes/_music
-    
     include ./includes/_projects
 
     script(src='//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/plugins/ScrollToPlugin.min.js')

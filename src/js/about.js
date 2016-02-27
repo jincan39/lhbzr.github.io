@@ -14,17 +14,17 @@ export default function crateAbout () {
   about.addEventListener('mouseenter', () => {
     const bg = about.querySelector('.about-bg')
 
-    TweenMax.to(about, 0.4, { color: '#000' })
-    TweenMax.fromTo(bg, 0.4, { y: '-100%' }, { y: '0%' })
-    TweenMax.fromTo(bg, 0.2, { rotation: -10 }, { rotation: 10 })
+    TweenMax.to(about, 0.4, { color: '#FFF' })
+    TweenMax.fromTo(bg, 0.4, { y: '0%' }, { y: '100%' })
+    TweenMax.fromTo(bg, 0.2, { rotation: 10 }, { rotation: -10 })
   })
 
   about.addEventListener('mouseleave', () => {
     const bg = about.querySelector('.about-bg')
 
-    TweenMax.to(about, 0.4, { color: '#FFF' })
-    TweenMax.fromTo(bg, 0.4, { y: '-0%' }, { y: '100%' })
-    TweenMax.fromTo(bg, 0.2, { rotation: 10 }, { rotation: -10 })
+    TweenMax.to(about, 0.4, { color: '#000' })
+    TweenMax.fromTo(bg, 0.4, { y: '-100%' }, { y: '0%' })
+    TweenMax.fromTo(bg, 0.2, { rotation: -10 }, { rotation: 10 })
   })
 
   about.style.left = randomInt(0, window.innerWidth - about.offsetWidth) + 'px'
