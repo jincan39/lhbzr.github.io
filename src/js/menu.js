@@ -24,9 +24,9 @@ export default function createMenu () {
       const text = _link.querySelector('.menu-text')
       const bg = _link.querySelector('.menu-bg')
 
-      TweenMax.to(_link, 0.4, { color: '#FFF', fill: '#FFF' })
-      TweenMax.fromTo(bg, 0.4, { y: '0%' }, { y: '100%' })
-      TweenMax.fromTo(bg, 0.2, { rotation: -10 }, { rotation: 10 })
+      TweenMax.to(_link, 0.4, { color: '#000', fill: '#000' })
+      TweenMax.fromTo(bg, 0.4, { y: '-100%' }, { y: '0%' })
+      TweenMax.fromTo(bg, 0.2, { rotation: 10 }, { rotation: -10 })
 
       interval = setInterval(() => {
         const value = text.innerHTML.trim()
@@ -41,9 +41,9 @@ export default function createMenu () {
       const text = _link.querySelector('.menu-text')
       const bg = _link.querySelector('.menu-bg')
 
-      TweenMax.to(_link, 0.4, { color: '#000', fill: '#000' })
-      TweenMax.fromTo(bg, 0.4, { y: '-100%' }, { y: '0%' })
-      TweenMax.fromTo(bg, 0.2, { rotation: 10 }, { rotation: -10 })
+      TweenMax.to(_link, 0.4, { color: '#FFF', fill: '#FFF' })
+      TweenMax.fromTo(bg, 0.4, { y: '0%' }, { y: '100%' })
+      TweenMax.fromTo(bg, 0.2, { rotation: -10 }, { rotation: 10 })
 
       clearInterval(interval)
 
