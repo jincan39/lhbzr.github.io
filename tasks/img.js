@@ -1,9 +1,9 @@
-import pkg from '../package.json'
+const pkg = require('../package.json')
 
-import gulp from 'gulp'
+const gulp = require('gulp')
 
-import changed from 'gulp-changed'
-import imagemin from 'gulp-imagemin'
+const changed = require('gulp-changed')
+const imagemin = require('gulp-imagemin')
 
 gulp.task('img', () => {
   gulp

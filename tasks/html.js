@@ -1,9 +1,9 @@
-import pkg from '../package.json'
+const pkg = require('../package.json')
 
-import gulp from 'gulp'
+const gulp = require('gulp')
 
-import jade from 'gulp-jade'
-import htmlmin from 'gulp-htmlmin'
+const jade = require('gulp-jade')
+const htmlmin = require('gulp-htmlmin')
 
 gulp.task('html', () => {
   gulp

@@ -1,5 +1,5 @@
 .projects
-  background #000
+  background rgba(#FFF, .1)
   border-top 1px solid #FFF
   bottom 0
   left 0
@@ -7,23 +7,6 @@
   right 0
   transform translateY(100%)
   z-index 2
-
-  &:after,
-  &:before
-    bottom 0
-    content ''
-    position absolute
-    top 0
-    width 200px
-    z-index 10
-
-  &:after
-    background linear-gradient(to left, #000 0%, transparent 100%)
-    right 0
-
-  &:before
-    background linear-gradient(to right, #000 0%, transparent 100%)
-    left 0
 
 .projects-label
   bottom 100%
@@ -49,7 +32,7 @@
   font-size 0
   margin 0
   overflow hidden
-  padding 0 15px
+  padding 35px
   white-space nowrap
   width 100%
 
@@ -59,11 +42,14 @@
   vertical-align middle
 
 .project-link
-  background #000
   display block
-  padding 30px 15px
+  padding 0 75px
   position relative
 
-.project-img
+.project-logo
   display block
-  width 100%
+  fill #FFF
+  stroke-width -100px
+
+  g path
+    fill #000 !important

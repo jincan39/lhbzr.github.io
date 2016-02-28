@@ -71,26 +71,6 @@ musicNext.addEventListener('click', (e) => {
  */
 const scene = new Scene(music)
 
-scene.createGeometry()
-scene.createLight()
-scene.createShaders()
-scene.render()
-
-/**
- * Canvas.
- */
-document.querySelector('.canvas').addEventListener('mousewheel', (e) => {
-  let volume = Math.round(music.audio.volume * 100) / 100
-
-  if (e.wheelDelta < 0 && volume - 0.05 >= 0) {
-    volume = Math.abs(volume - 0.05)
-  } else if (e.wheelDelta > 0 && volume + 0.05 <= 1) {
-    volume = Math.abs(volume + 0.05)
-  }
-
-  music.audio.volume = volume
-})
-
 /**
  * SVG.
  */
@@ -107,6 +87,22 @@ get('dist/svg/svg.svg', (res) => {
 /**
  * Window.
  */
+window.addEventListener('mousewheel', (e) => {
+  let volume = Math.round(music.audio.volume * 100) / 100
+
+  if (e.wheelDelta < 0 && volume - 0.05 >= 0) {
+    volume = Math.abs(volume - 0.05)
+  } else if (e.wheelDelta > 0 && volume + 0.05 <= 1) {
+    volume = Math.abs(volume + 0.05)
+  }
+
+  music.audio.volume = volume
+})
+
+window.addEventListener('load', () => {
+  document.body.classList.add('is-loaded')
+})
+
 window.addEventListener('resize', (e) => {
   scene.resize(e)
 }, false)

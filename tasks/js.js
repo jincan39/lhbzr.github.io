@@ -1,16 +1,16 @@
-import pkg from '../package.json'
+const pkg = require('../package.json')
 
-import gulp from 'gulp'
+const gulp = require('gulp')
 
-import browserify from 'browserify'
-import babelify from 'babelify'
-import watchify from 'watchify'
-import uglify from 'gulp-uglify'
+const browserify = require('browserify')
+const babelify = require('babelify')
+const watchify = require('watchify')
+const uglify = require('gulp-uglify')
 
-import source from 'vinyl-source-stream'
-import buffer from 'vinyl-buffer'
+const source = require('vinyl-source-stream')
+const buffer = require('vinyl-buffer')
 
-import util from 'gulp-util'
+const util = require('gulp-util')
 
 gulp.task('js', () => {
   var bundler = browserify({

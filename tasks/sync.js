@@ -1,8 +1,8 @@
-import pkg from '../package.json'
+const pkg = require('../package.json')
 
-import gulp from 'gulp'
+const gulp = require('gulp')
 
-import browser from 'browser-sync'
+const browser = require('browser-sync')
 
 gulp.task('sync', () => {
   browser.init(`${pkg.folders.src}/**`, {

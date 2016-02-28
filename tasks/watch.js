@@ -1,6 +1,6 @@
-import pkg from '../package.json'
+const pkg = require('../package.json')
 
-import gulp from 'gulp'
+const gulp = require('gulp')
 
 gulp.task('watch', ['sync'], () => {
   global.isWatching = true

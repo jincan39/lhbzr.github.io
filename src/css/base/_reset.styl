@@ -18,6 +18,22 @@ body {
   margin: 0;
   overflow: hidden;
   user-select: none;
+
+  &:after {
+    background: #000;
+    bottom: 0;
+    content: '';
+    display: block;
+    left: 0;
+    position: fixed;
+    right 0;
+    top: 0;
+    z-index: 99999;
+  }
+
+  &.is-loaded:after {
+    display: none;
+  }
 }
 
 article,

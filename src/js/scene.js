@@ -47,6 +47,11 @@ export default class Scene {
     this.music = music
 
     this.clicked = false
+
+    this.createGeometry()
+    this.createLight()
+    this.createShaders()
+    this.render()
   }
 
   createGeometry () {

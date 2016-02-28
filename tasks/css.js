@@ -1,10 +1,10 @@
-import pkg from '../package.json'
+const pkg = require('../package.json')
 
-import gulp from 'gulp'
+const gulp = require('gulp')
 
-import stylus from 'gulp-stylus'
-import autoprefixer from 'gulp-autoprefixer'
-import cssnano from 'gulp-cssnano'
+const stylus = require('gulp-stylus')
+const autoprefixer = require('gulp-autoprefixer')
+const cssnano = require('gulp-cssnano')
 
 gulp.task('css', () => {
   gulp

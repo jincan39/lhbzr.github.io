@@ -8,9 +8,7 @@
   padding 0
 
 .menu-link
-  background rgba(#FFF, .1)
-  border 1px solid #FFF
-  border-radius 2px
+  border-radius 3px
   color #FFF
   display block
   fill #FFF
@@ -23,6 +21,40 @@
   position absolute
   text-transform uppercase
   z-index 5
+
+  &-top,
+  &-right
+  &-bottom,
+  &-left
+    background #FFF
+    content ''
+    position absolute
+
+  &-right,
+  &-left
+    height 100%
+    width 1px
+
+  &-top,
+  &-bottom
+    height 1px
+    width 100%
+
+  &-top
+    left 0
+    top 0
+
+  &-right
+    right 0
+    top 0
+
+  &-left
+    left 0
+    top 0
+
+  &-bottom
+    bottom 0
+    left 0
 
 .menu-bg
   background #FFF

@@ -1,8 +1,8 @@
-import pkg from '../package.json'
+const pkg = require('../package.json')
 
-import gulp from 'gulp'
+const gulp = require('gulp')
 
-import svgstore from 'gulp-svgstore'
+const svgstore = require('gulp-svgstore')
 
 gulp.task('svg', () => {
   gulp
