@@ -1,7 +1,7 @@
 /* global TweenMax, TimelineMax, Draggable */
 
-import randomInt from './lib/int'
-import replaceString from './lib/replace'
+import randomInt from './lib/randomInt'
+import replaceChar from './lib/replaceChar'
 
 export default function createMenu () {
   const links = document.querySelectorAll('.menu-link')
@@ -32,7 +32,7 @@ export default function createMenu () {
         const index = randomInt(0, value.length - 1)
         const char = String.fromCharCode(randomInt(65, 122))
 
-        text.innerHTML = replaceString(value, index, char)
+        text.innerHTML = replaceChar(value, index, char)
       }, 10)
     })
 

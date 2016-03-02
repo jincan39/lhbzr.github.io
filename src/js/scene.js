@@ -1,11 +1,11 @@
 /* global TweenLite, requestAnimationFrame */
 
-import randomInt from './lib/int'
+import randomInt from './lib/randomInt'
 
 import THREE from 'three'
 import THREEEffectComposer from 'three-effectcomposer'
 const EffectComposer = THREEEffectComposer(THREE)
-import RGBShiftShader from './shaders/rgbshift'
+import RGBShiftShader from './shaders/rgbShift'
 
 export default class Scene {
   constructor (music) {
