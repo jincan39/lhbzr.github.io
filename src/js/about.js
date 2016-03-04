@@ -43,6 +43,6 @@ export default function crateAbout () {
       .from('.about-top', 0.2, { x: '100%' })
       .from('.about-bg', 0.4, { y: '-100%' })
       .fromTo('.about-bg', 0.2, { rotation: -10 }, { rotation: 10 }, '-= 0.2')
-      .staggerFrom('.about-desc span', 0.0175, { autoAlpha: 0 }, 0.0175)
+      .staggerFromTo('.about-desc span', 0.1, { opacity: 0 }, { opacity: 1 }, 0.005)
   })
 }
