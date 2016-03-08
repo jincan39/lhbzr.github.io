@@ -1,4 +1,5 @@
 //
+// WebGL Noise.
 // https://github.com/ashima/webgl-noise
 //
 vec3 mod289(vec3 x) {
@@ -160,11 +161,12 @@ float pnoise(vec3 P, vec3 rep) {
 
 
 //
+// Vertex Displacement Noise.
 // https://www.clicktorelease.com/blog/vertex-displacement-noise-3d-webgl-glsl-three-js
 //
 varying vec2 vUv;
 varying float noise;
-uniform float time;
+uniform float u_time;
 
 float turbulence( vec3 p ) {
   float w = 100.0;
@@ -179,8 +181,8 @@ float turbulence( vec3 p ) {
 void main() {
   vUv = uv;
 
-  noise = 10.0 *  -.10 * turbulence( .5 * normal + time );
-  float b = 5.0 * pnoise( 0.05 * position + vec3( 2.0 * time ), vec3( 100.0 ) );
+  noise = 10.0 *  -.10 * turbulence( .5 * normal + u_time * .05 );
+  float b = 5.0 * pnoise( 0.05 * position + vec3( 2.0 * u_time * 0.5 ), vec3( 100.0 ) );
   float displacement = - 10. * noise + b;
 
   vec3 newPosition = position + normal * displacement;
