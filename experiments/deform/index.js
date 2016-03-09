@@ -1,23 +1,26 @@
-/* global Audio, Power0, requestAnimationFrame */
+/* global XMLHttpRequest, Audio, Power0, requestAnimationFrame */
 
 import THREE from 'three'
 import GSAP from 'gsap'
 import dat from 'dat-gui'
 import Stats from 'stats-js'
 
-const Soundcloud = require('soundcloud-badge')
 const Analyser = require('web-audio-analyser')
-
 const OrbitControls = require('three-orbit-controls')(THREE)
 const glslify = require('glslify')
 
-const EffectComposer = require('three-effectcomposer')(THREE)
-const DotScreenShader = require('./shaders/dotScreenShader')
-const RGBShiftShader = require('./shaders/rgbShift')
+// const EffectComposer = require('three-effectcomposer')(THREE)
+// const DotScreenShader = require('./shaders/dotScreenShader')
+// const RGBShiftShader = require('./shaders/rgbShift')
 
 class Paralyzed {
   constructor () {
-    this.color = '#5A00FF'
+    this.color = '#4018FF'
+    this.url = 'https://soundcloud.com/coyotekisses/six-shooter'
+
+    this.data = null
+    this.div = null
+
     this.gui = null
     this.renderer = null
     this.scene = null
@@ -49,13 +52,24 @@ class Paralyzed {
   startStats () {
     this.stats = new Stats()
 
-    this.stats.domElement.style.bottom = 0
     this.stats.domElement.style.display = 'block'
+    this.stats.domElement.style.left = 0
     this.stats.domElement.style.position = 'absolute'
-    this.stats.domElement.style.right = 0
+    this.stats.domElement.style.top = 0
     this.stats.domElement.style.zIndex = 50
 
     document.body.appendChild(this.stats.domElement)
+  }
+
+  createInfos () {
+    const img = '<img src="https://developers.soundcloud.com/assets/logo_white.png" class="soundcloud-img">'
+
+    this.div = document.createElement('a')
+    this.div.className = 'soundcloud-link'
+    this.div.setAttribute('href', this.data.permalink_url)
+    this.div.innerHTML = `${img} ${this.data.title} - ${this.data.user.username}`
+
+    document.body.appendChild(this.div)
   }
 
   createRender () {
@@ -64,7 +78,7 @@ class Paralyzed {
       transparent: false
     })
 
-    this.renderer.setClearColor(0x000000)
+    this.renderer.setClearColor(0x283739)
     this.renderer.setSize(window.innerWidth, window.innerHeight)
     this.renderer.domElement.style.display = 'block'
 
@@ -110,61 +124,71 @@ class Paralyzed {
   }
 
   createShaders () {
-    this.scene.add(new THREE.AmbientLight(0xFF00FF))
+    // this.composer = new EffectComposer(this.renderer)
+    // this.composer.addPass(new EffectComposer.RenderPass(this.scene, this.camera))
 
-    this.composer = new EffectComposer(this.renderer)
-    this.composer.addPass(new EffectComposer.RenderPass(this.scene, this.camera))
+    // const dotEffect = new EffectComposer.ShaderPass(DotScreenShader)
+    // dotEffect.uniforms.scale.value = 4
 
-    const dotEffect = new EffectComposer.ShaderPass(DotScreenShader)
-    dotEffect.uniforms.scale.value = 4
+    // this.composer.addPass(dotEffect)
 
-    this.composer.addPass(dotEffect)
+    // const rgbEffect = new EffectComposer.ShaderPass(RGBShiftShader)
+    // rgbEffect.uniforms.amount.value = 0.05
+    // rgbEffect.renderToScreen = true
 
-    const rgbEffect = new EffectComposer.ShaderPass(RGBShiftShader)
-    rgbEffect.uniforms.amount.value = 0.05
-    rgbEffect.renderToScreen = true
-
-    this.composer.addPass(rgbEffect)
+    // this.composer.addPass(rgbEffect)
   }
 
   loadSong () {
     const AudioContext = window.AudioContext || window.webkitAudioContext
+    const request = new XMLHttpRequest()
 
     const _this = this
 
-    Soundcloud({
-      client_id: '78c6552c14b382e23be3bce2fc411a82',
-      song: 'https://soundcloud.com/iamtheelephante/clean-bandit-rather-be-elephante-remix',
-      dark: false,
-      getFonts: false
-    }, (err, src, data, div) => {
-      if (err) throw err
+    request.onreadystatechange = () => {
+      if (request.readyState === 4 && request.status === 200) {
+        const response = JSON.parse(request.responseText)
 
-      _this.music = new Audio()
-      _this.music.crossOrigin = 'anonymous'
-      _this.music.src = src
-      _this.music.play()
+        _this.data = response
 
-      _this.musicAnalyser = Analyser(_this.music, new AudioContext(), {
-        audible: true,
-        stereo: true
-      })
-    })
+        _this.music = new Audio()
+        _this.music.crossOrigin = 'anonymous'
+        _this.music.src = `${response.stream_url}?client_id=78c6552c14b382e23be3bce2fc411a82`
+        _this.music.play()
+
+        _this.music.addEventListener('ended', () => {
+          _this.music.play()
+        })
+
+        _this.analyser = Analyser(_this.music, new AudioContext(), {
+          audible: true,
+          stereo: true
+        })
+
+        console.log(_this.data)
+        _this.createInfos()
+      }
+    }
+
+    request.open('GET', `//api.soundcloud.com/resolve.json?url=${this.url}&client_id=78c6552c14b382e23be3bce2fc411a82`, true)
+
+    request.send()
   }
 
   update () {
     this.stats.begin()
 
-    this.composer.render()
+    // this.composer.render()
     this.controls.update()
 
-    const array = this.musicAnalyser ? this.musicAnalyser.frequencies() : [1]
-    const arrayAverage = array.reduce((p, c) => p + c, 0) / array.length
+    const array = this.analyser ? this.analyser.frequencies() : [1]
+    let arrayAverage = array.reduce((p, c) => p + c, 0) / array.length
+
+    arrayAverage = (arrayAverage < 60) ? 60 : arrayAverage
 
     const clockElapsedTime = this.clock.getElapsedTime()
 
     GSAP.to(this.material.uniforms.u_brightness, 0.2, {
-      // ease: Power0.easeNone,
       value: arrayAverage / 50
     })
 
@@ -179,9 +203,20 @@ class Paralyzed {
 
     this.renderer.render(this.scene, this.camera)
   }
+
+  resize () {
+    this.camera.aspect = window.innerWidth / window.innerHeight
+    this.camera.updateProjectionMatrix()
+
+    this.renderer.setSize(window.innerWidth, window.innerHeight)
+  }
 }
 
 const paralyzed = new Paralyzed()
 
 document.body.style.margin = '0'
 document.body.style.padding = '0'
+
+window.addEventListener('resize', () => {
+  paralyzed.resize()
+})
