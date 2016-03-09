@@ -15,7 +15,15 @@ const glslify = require('glslify')
 
 class Paralyzed {
   constructor () {
-    this.color = '#4018FF'
+    this.uniforms = {
+      background: '#4018FF',
+      color: '#FFFFFF',
+      speed: 0.5,
+      brightness: 1
+    }
+
+    console.log(this.uniforms)
+
     this.url = 'https://soundcloud.com/coyotekisses/six-shooter'
 
     this.data = null
@@ -44,8 +52,16 @@ class Paralyzed {
 
     const _this = this
 
-    this.gui.addColor(this, 'color').onChange(function () {
-      _this.mesh.material.uniforms.u_background.value = new THREE.Color(_this.color)
+    this.gui.addColor(this.uniforms, 'background').onChange(function () {
+      _this.mesh.material.uniforms.u_background.value = new THREE.Color(_this.uniforms.background)
+    })
+
+    this.gui.addColor(this.uniforms, 'color').onChange(function () {
+      _this.mesh.material.uniforms.u_color.value = new THREE.Color(_this.uniforms.color)
+    })
+
+    this.gui.add(this.uniforms, 'speed', -1, 1).onChange(function () {
+      _this.mesh.material.uniforms.u_speed.value = _this.uniforms.speed
     })
   }
 
@@ -111,10 +127,10 @@ class Paralyzed {
           x: 1,
           y: 1
         }},
-        u_speed: { type: 'f', value: 0.5 },
-        u_color: { type: 'c', value: new THREE.Color(0xFFFFFF) },
-        u_background: { type: 'c', value: new THREE.Color(this.color) },
-        u_brightness: { type: 'f', value: 1 }
+        u_speed: { type: 'f', value: this.uniforms.speed },
+        u_color: { type: 'c', value: new THREE.Color(this.uniforms.color) },
+        u_background: { type: 'c', value: new THREE.Color(this.uniforms.background) },
+        u_brightness: { type: 'f', value: this.uniforms.brightness }
       }
     })
 
