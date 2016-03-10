@@ -12,9 +12,9 @@ const glslify = require('glslify')
 class App {
   constructor () {
     this.uniforms = {
-      background: '#4018FF',
+      background: '#FF7800',
       color: '#FFFFFF',
-      speed: 0.5,
+      speed: 1,
       brightness: 1
     }
 
@@ -177,6 +177,10 @@ class App {
     GSAP.to(this.material.uniforms.u_time, 0.2, {
       ease: Power0.easeNone,
       value: clockElapsedTime / 2
+    })
+
+    GSAP.to(this.mesh.rotation, 0.2, {
+      y: '+= 0.01'
     })
 
     this.stats.end()
