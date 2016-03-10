@@ -94,7 +94,7 @@ class Paralyzed {
       transparent: false
     })
 
-    this.renderer.setClearColor(0x283739)
+    this.renderer.setClearColor(0x000000)
     this.renderer.setSize(window.innerWidth, window.innerHeight)
     this.renderer.domElement.style.display = 'block'
 
