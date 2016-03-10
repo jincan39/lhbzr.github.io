@@ -1,19 +1,15 @@
 /* global XMLHttpRequest, Audio, Power0, requestAnimationFrame */
 
-import THREE from 'three'
-import GSAP from 'gsap'
-import dat from 'dat-gui'
-import Stats from 'stats-js'
+const THREE = require('three')
+const GSAP = require('gsap')
+const dat = require('dat-gui')
+const Stats = require('stats-js')
 
 const Analyser = require('web-audio-analyser')
 const OrbitControls = require('three-orbit-controls')(THREE)
 const glslify = require('glslify')
 
-// const EffectComposer = require('three-effectcomposer')(THREE)
-// const DotScreenShader = require('./shaders/dotScreenShader')
-// const RGBShiftShader = require('./shaders/rgbShift')
-
-class Paralyzed {
+class App {
   constructor () {
     this.uniforms = {
       background: '#4018FF',
@@ -22,12 +18,7 @@ class Paralyzed {
       brightness: 1
     }
 
-    console.log(this.uniforms)
-
-    this.url = 'https://soundcloud.com/coyotekisses/six-shooter'
-
-    this.data = null
-    this.div = null
+    this.url = 'https://soundcloud.com/pallace/pallace-joy-pain'
 
     this.gui = null
     this.renderer = null
@@ -41,7 +32,6 @@ class Paralyzed {
     this.createRender()
     this.createScene()
     this.createGeometry()
-    this.createShaders()
     this.startGUI()
     this.startStats()
     this.update()
@@ -75,17 +65,6 @@ class Paralyzed {
     this.stats.domElement.style.zIndex = 50
 
     document.body.appendChild(this.stats.domElement)
-  }
-
-  createInfos () {
-    const img = '<img src="https://developers.soundcloud.com/assets/logo_white.png" class="soundcloud-img">'
-
-    this.div = document.createElement('a')
-    this.div.className = 'soundcloud-link'
-    this.div.setAttribute('href', this.data.permalink_url)
-    this.div.innerHTML = `${img} ${this.data.title} - ${this.data.user.username}`
-
-    document.body.appendChild(this.div)
   }
 
   createRender () {
@@ -139,22 +118,6 @@ class Paralyzed {
     this.scene.add(this.mesh)
   }
 
-  createShaders () {
-    // this.composer = new EffectComposer(this.renderer)
-    // this.composer.addPass(new EffectComposer.RenderPass(this.scene, this.camera))
-
-    // const dotEffect = new EffectComposer.ShaderPass(DotScreenShader)
-    // dotEffect.uniforms.scale.value = 4
-
-    // this.composer.addPass(dotEffect)
-
-    // const rgbEffect = new EffectComposer.ShaderPass(RGBShiftShader)
-    // rgbEffect.uniforms.amount.value = 0.05
-    // rgbEffect.renderToScreen = true
-
-    // this.composer.addPass(rgbEffect)
-  }
-
   loadSong () {
     const AudioContext = window.AudioContext || window.webkitAudioContext
     const request = new XMLHttpRequest()
@@ -164,8 +127,6 @@ class Paralyzed {
     request.onreadystatechange = () => {
       if (request.readyState === 4 && request.status === 200) {
         const response = JSON.parse(request.responseText)
-
-        _this.data = response
 
         _this.music = new Audio()
         _this.music.crossOrigin = 'anonymous'
@@ -181,8 +142,14 @@ class Paralyzed {
           stereo: true
         })
 
-        console.log(_this.data)
-        _this.createInfos()
+        const div = document.createElement('a')
+        const divImg = '<img src="https://developers.soundcloud.com/assets/logo_white.png" class="soundcloud-img">'
+
+        div.className = 'soundcloud-link'
+        div.setAttribute('href', response.permalink_url)
+        div.innerHTML = `${divImg} ${response.title} - ${response.user.username}`
+
+        document.body.appendChild(div)
       }
     }
 
@@ -194,7 +161,6 @@ class Paralyzed {
   update () {
     this.stats.begin()
 
-    // this.composer.render()
     this.controls.update()
 
     const array = this.analyser ? this.analyser.frequencies() : [1]
@@ -228,11 +194,11 @@ class Paralyzed {
   }
 }
 
-const paralyzed = new Paralyzed()
+const app = new App()
 
 document.body.style.margin = '0'
 document.body.style.padding = '0'
 
 window.addEventListener('resize', () => {
-  paralyzed.resize()
+  app.resize()
 })

@@ -165,26 +165,32 @@ float pnoise(vec3 P, vec3 rep) {
 // https://www.clicktorelease.com/blog/vertex-displacement-noise-3d-webgl-glsl-three-js
 //
 varying vec2 vUv;
-varying float noise;
+
+varying float v_noise;
 uniform float u_time;
 
-float turbulence( vec3 p ) {
+float turbulence(vec3 p) {
   float w = 100.0;
   float t = -.5;
-  for (float f = 1.0 ; f <= 10.0 ; f++ ){
-    float power = pow( 2.0, f );
-    t += abs( pnoise( vec3( power * p ), vec3( 10.0, 10.0, 10.0 ) ) / power );
+
+  for (float f = 1.0 ; f <= 10.0 ; f++) {
+    float power = pow(2.0, f);
+
+    t += abs(pnoise(vec3(power * p), vec3(10.0, 10.0, 10.0)) / power);
   }
+
   return t;
 }
 
 void main() {
   vUv = uv;
 
-  noise = 10.0 *  -.10 * turbulence( .5 * normal + u_time * .05 );
-  float b = 5.0 * pnoise( 0.05 * position + vec3( 2.0 * u_time * 0.5 ), vec3( 100.0 ) );
-  float displacement = - 10. * noise + b;
+  v_noise = 10.0 *  -.10 * turbulence(.5 * normal + u_time * .05);
+
+  float b = 5.0 * pnoise(0.05 * position + vec3(2.0 * u_time * 0.5), vec3(100.0));
+  float displacement = - 10. * v_noise + b;
 
   vec3 newPosition = position + normal * displacement;
-  gl_Position = projectionMatrix * modelViewMatrix * vec4( newPosition, 1.0 );
+
+  gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
 }
