@@ -9,25 +9,16 @@ import RGBShiftShader from './shaders/rgbShift'
 
 export default class Scene {
   constructor (music) {
-    this.ratio = window.innerWidth / window.innerHeight
+    this.clicked = false
+    this.music = music
 
-    this.canvas = document.querySelector('.canvas')
+    this.canvas = null
+    this.renderer = null
 
-    this.camera = new THREE.PerspectiveCamera(75, this.ratio, 0.1, 1000)
-    this.camera.position.z = 275
-    this.camera.lookAt = new THREE.Vector3()
-
-    this.scene = new THREE.Scene()
-
-    this.renderer = new THREE.WebGLRenderer({
-      alpha: true,
-      canvas: this.canvas
-    })
-
-    this.renderer.setSize(window.innerWidth, window.innerHeight)
+    this.scene = null
+    this.camera = null
 
     this.circle = new THREE.Object3D()
-
     this.geometry = []
     this.geometrySleeve = []
     this.geometryLength = 100
@@ -37,25 +28,45 @@ export default class Scene {
       new THREE.OctahedronGeometry(40, 0)
     ]
 
-    this.composer = new EffectComposer(this.renderer)
+    this.composer = null
 
     this.mouse = {
       x: 0,
       y: 0
     }
 
-    this.music = music
-
-    this.clicked = false
+    this.createRenderer()
+    this.createScene()
 
     this.createGeometry()
     this.createLight()
     this.createShaders()
+
     this.render()
+  }
+
+  createRenderer () {
+    this.canvas = document.querySelector('.canvas')
+
+    this.renderer = new THREE.WebGLRenderer({
+      alpha: true,
+      canvas: this.canvas
+    })
+
+    this.renderer.setSize(window.innerWidth, window.innerHeight)
+  }
+
+  createScene () {
+    this.scene = new THREE.Scene()
+
+    this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
+    this.camera.position.z = 275
+    this.camera.lookAt = new THREE.Vector3()
   }
 
   createGeometry () {
     const _this = this
+
     const number = randomInt(0, _this.geometryType.length - 1)
 
     for (let i = 0; i < _this.geometryLength; i++) {
@@ -80,39 +91,34 @@ export default class Scene {
   }
 
   createLight () {
-    const _this = this
-
     const lightOne = new THREE.DirectionalLight(0xFFFFFF, 1)
     lightOne.position.set(1, 1, 1)
 
-    _this.scene.add(lightOne)
+    this.scene.add(lightOne)
 
     const lightTwo = new THREE.DirectionalLight(0xFFFFFF, 1)
     lightTwo.position.set(-1, -1, 1)
 
-    _this.scene.add(lightTwo)
+    this.scene.add(lightTwo)
   }
 
   createShaders () {
-    const _this = this
+    this.composer = new EffectComposer(this.renderer)
 
-    const effect = new EffectComposer.ShaderPass(RGBShiftShader)
-    effect.uniforms.amount.value = 0.05
-    effect.renderToScreen = true
+    this.effect = new EffectComposer.ShaderPass(RGBShiftShader)
+    this.effect.uniforms.amount.value = 0.05
+    this.effect.renderToScreen = true
 
-    _this.effect = effect
+    this.composer.addPass(new EffectComposer.RenderPass(this.scene, this.camera))
+    this.composer.addPass(this.effect)
 
-    _this.composer.addPass(new EffectComposer.RenderPass(_this.scene, _this.camera))
-    _this.composer.addPass(effect)
-
-    _this.renderer.render(_this.scene, _this.camera)
+    this.renderer.render(this.scene, this.camera)
   }
 
   render () {
     const _this = this
-    const frequencies = _this.music.getFrequency()
 
-    requestAnimationFrame(_this.render.bind(_this))
+    const frequencies = _this.music.getFrequency()
 
     TweenLite.to(_this.effect.uniforms.amount, 1, {
       value: (_this.clicked) ? 0.005 : (_this.mouse.x / window.innerWidth)
@@ -140,30 +146,29 @@ export default class Scene {
     _this.renderer.render(_this.scene, _this.camera)
 
     _this.composer.render()
+
+    requestAnimationFrame(_this.render.bind(_this))
   }
 
   resize () {
-    const _this = this
+    this.camera.aspect = window.innerWidth / window.innerHeight
+    this.camera.updateProjectionMatrix()
 
-    _this.camera.aspect = _this.ratio
-    _this.camera.updateProjectionMatrix()
-
-    _this.renderer.setSize(window.innerWidth, window.innerHeight)
+    this.renderer.setSize(window.innerWidth, window.innerHeight)
   }
 
   mousemove (e) {
-    const _this = this
-
-    _this.mouse.x = e.clientX - window.innerWidth / 2
-    _this.mouse.y = e.clientY - window.innerHeight / 2
+    this.mouse.x = e.clientX - window.innerWidth / 2
+    this.mouse.y = e.clientY - window.innerHeight / 2
   }
 
   click () {
     const _this = this
-    const clicked = _this.clicked
+
+    const isClicked = _this.clicked
 
     _this.geometry.forEach((geometry, index) => {
-      if (clicked) {
+      if (isClicked) {
         TweenLite.to(geometry.scale, 1, { x: 1, y: 1, z: 1 })
         TweenLite.to(geometry.rotation, 1, { x: 0, y: 0, z: 0 })
         TweenLite.to(geometry.position, 1, { x: 0, y: 100, z: 0 })
@@ -177,9 +182,9 @@ export default class Scene {
         })
 
         TweenLite.to(geometry.position, 1, {
-          x: '+= ' + randomInt(-1000, 1000),
-          y: '+= ' + randomInt(-1000, 1000),
-          z: '+= ' + randomInt(-500, -250)
+          x: `+= ${ randomInt(-1000, 1000) }`,
+          y: `+= ${ randomInt(-1000, 1000) }`,
+          z: `+= ${ randomInt(-500, -250) }`
         })
 
         _this.clicked = true

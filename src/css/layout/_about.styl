@@ -42,6 +42,11 @@
     bottom 0
     left 0
 
+  @media (max-width 800px)
+    height 200px
+    padding 13px 15px
+    width 200px
+
 .about-title
   display block
   font-size 20px
@@ -49,14 +54,17 @@
   margin-bottom 15px
   margin-top 0
 
-  @media (max-width: 400px)
-    letter-spacing 2px
-    margin-top 0.67em
-
 .about-desc
   font-size 14px
   letter-spacing 1px
   line-height 24px
+
+  @media (max-width 800px)
+    font-size 12px
+    line-height 20px
+
+    &:last-of-type
+      display none
 
 .about-bg
   background #FFF

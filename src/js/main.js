@@ -3,26 +3,16 @@ import get from './lib/get'
 import Music from './music'
 import Scene from './scene'
 
-/**
- * About.
- */
-import about from './about'
-
-about()
+import setAbout from './about'
+import setMenu from './menu'
+import setProjects from './projects'
 
 /**
- * Menu.
+ * Site.
  */
-import menu from './menu'
-
-menu()
-
-/**
- * Projects.
- */
-import projects from './projects'
-
-projects()
+setAbout()
+setMenu()
+setProjects()
 
 /**
  * Music.
@@ -74,14 +64,14 @@ const scene = new Scene(music)
 /**
  * SVG.
  */
-get('dist/svg/svg.svg', (res) => {
+get('dist/svg/svg.svg', (response) => {
   const body = document.body
-  const wrapper = document.createElement('div')
+  const div = document.createElement('div')
 
-  wrapper.style.display = 'none'
-  wrapper.innerHTML = res.responseText.replace(/\n/g, '')
+  div.style.display = 'none'
+  div.innerHTML = response.responseText.replace(/\n/g, '')
 
-  body.insertBefore(wrapper, body.childNodes[0])
+  body.insertBefore(div, body.childNodes[0])
 })
 
 /**
@@ -104,6 +94,9 @@ window.addEventListener('load', () => {
 })
 
 window.addEventListener('resize', (e) => {
+  setAbout()
+  setMenu()
+
   scene.resize(e)
 }, false)
 
