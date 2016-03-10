@@ -120,8 +120,6 @@ export default class Scene {
 
     const frequencies = _this.music.getFrequency()
 
-    console.log(frequencies)
-
     TweenLite.to(_this.effect.uniforms.amount, 1, {
       value: (_this.clicked) ? 0.005 : (_this.mouse.x / window.innerWidth)
     })
