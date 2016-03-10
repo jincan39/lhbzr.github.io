@@ -120,6 +120,8 @@ export default class Scene {
 
     const frequencies = _this.music.getFrequency()
 
+    console.log(frequencies)
+
     TweenLite.to(_this.effect.uniforms.amount, 1, {
       value: (_this.clicked) ? 0.005 : (_this.mouse.x / window.innerWidth)
     })
@@ -128,16 +130,16 @@ export default class Scene {
       let value
 
       if (window.AudioContext || window.webkitAudioContext) {
-        value = (frequencies[index] / 256 * 2.5) + 0.01
+        value = (frequencies[index] / 100) + 0.01
       } else {
         value = 1
       }
 
       if (_this.clicked) {
-        TweenLite.to(geometry.scale, 0.1, { x: value, y: value, z: value })
-        TweenLite.to(geometry.rotation, 0.1, { z: (index % 2 === 0) ? '+= 0.05' : '-= 0.05' })
+        TweenLite.to(geometry.scale, 0.2, { x: value, y: value, z: value })
+        TweenLite.to(geometry.rotation, 0.2, { z: (index % 2 === 0) ? '+= 0.05' : '-= 0.05' })
       } else {
-        TweenLite.to(geometry.scale, 0.1, { z: value })
+        TweenLite.to(geometry.scale, 0.2, { z: value })
       }
     })
 

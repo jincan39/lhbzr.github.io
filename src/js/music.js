@@ -25,6 +25,7 @@ export default class Music {
     this.frequency = new Uint8Array(this.analyser.frequencyBinCount)
 
     this.songs = [
+      'https://soundcloud.com/jeantonique/poom-face-the-fire-jean',
       'https://soundcloud.com/user-18875822/christian-fj-buttner-nik-felice-ignite-it-instrumental',
       'https://soundcloud.com/autografmusic/metaphysical',
       'https://soundcloud.com/kleerup/let-me-in-sebastien-remix-feat-susanne-sundfor',
