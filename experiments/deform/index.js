@@ -1,13 +1,17 @@
-/* global XMLHttpRequest, Audio, Power0, requestAnimationFrame */
+/* global XMLHttpRequest, Audio, Power0, requestAnimationFrame, TweenLite */
+
+require('gsap')
 
 const THREE = require('three')
-const GSAP = require('gsap')
 const dat = require('dat-gui')
 const Stats = require('stats-js')
 
 const Analyser = require('web-audio-analyser')
 const OrbitControls = require('three-orbit-controls')(THREE)
 const glslify = require('glslify')
+
+const EffectComposer = require('three-effectcomposer')(THREE)
+const VignetteShader = require('./shaders/vignetteShader')
 
 class App {
   constructor () {
@@ -32,8 +36,9 @@ class App {
     this.createRender()
     this.createScene()
     this.createGeometry()
-    this.startGUI()
-    this.startStats()
+    this.createShaders()
+    // this.startGUI()
+    // this.startStats()
     this.update()
   }
 
@@ -73,7 +78,7 @@ class App {
       transparent: false
     })
 
-    this.renderer.setClearColor(0x000000)
+    this.renderer.setClearColor(0x4C4C4C)
     this.renderer.setSize(window.innerWidth, window.innerHeight)
     this.renderer.domElement.style.display = 'block'
 
@@ -118,11 +123,22 @@ class App {
     this.scene.add(this.mesh)
   }
 
-  loadSong () {
-    const AudioContext = window.AudioContext || window.webkitAudioContext
-    const request = new XMLHttpRequest()
+  createShaders () {
+    this.composer = new EffectComposer(this.renderer)
+    this.composer.addPass(new EffectComposer.RenderPass(this.scene, this.camera))
 
+    const vignetteShader = new EffectComposer.ShaderPass(VignetteShader)
+    vignetteShader.uniforms['offset'].value = 0.95
+    vignetteShader.uniforms['darkness'].value = 1.5
+    vignetteShader.renderToScreen = true
+
+    this.composer.addPass(vignetteShader)
+  }
+
+  loadSong () {
     const _this = this
+
+    const request = new XMLHttpRequest()
 
     request.onreadystatechange = () => {
       if (request.readyState === 4 && request.status === 200) {
@@ -137,7 +153,7 @@ class App {
           _this.music.play()
         })
 
-        _this.analyser = Analyser(_this.music, new AudioContext(), {
+        _this.analyser = Analyser(_this.music, new (window.AudioContext || window.webkitAudioContext)(), {
           audible: true,
           stereo: true
         })
@@ -159,7 +175,7 @@ class App {
   }
 
   update () {
-    this.stats.begin()
+    // this.stats.begin()
 
     this.controls.update()
 
@@ -170,24 +186,26 @@ class App {
 
     const clockElapsedTime = this.clock.getElapsedTime()
 
-    GSAP.to(this.material.uniforms.u_brightness, 0.2, {
+    TweenLite.to(this.material.uniforms.u_brightness, 0.2, {
       value: arrayAverage / 50
     })
 
-    GSAP.to(this.material.uniforms.u_time, 0.2, {
+    TweenLite.to(this.material.uniforms.u_time, 0.2, {
       ease: Power0.easeNone,
       value: clockElapsedTime / 2
     })
 
-    GSAP.to(this.mesh.rotation, 0.2, {
+    TweenLite.to(this.mesh.rotation, 0.2, {
       y: '+= 0.01'
     })
 
-    this.stats.end()
+    // this.stats.end()
 
     requestAnimationFrame(this.update.bind(this))
 
     this.renderer.render(this.scene, this.camera)
+
+    this.composer.render()
   }
 
   resize () {
