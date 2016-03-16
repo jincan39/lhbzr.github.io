@@ -1,0 +1,64 @@
+/**
+ * Music.
+ */
+.home-music
+  bottom 15px
+  color #FFF
+  font-size 13px
+  font-weight 100
+  letter-spacing 0.1em
+  position absolute
+  text-align center
+  width 100%
+  z-index 3
+
+  @media (max-width 1110px)
+    display none
+
+
+/**
+ * Buttons.
+ */
+.home-music-btns
+  display block
+  margin-bottom 10px
+
+.home-music-btn
+  border none
+  background none
+  outline none
+  padding 0
+  fill #FFF
+
+.home-music-toggle
+  .home-music-btn-icon-pause
+    display block
+
+  .home-music-btn-icon-play
+    display none
+
+  &.is-paused
+    .home-music-btn-icon-pause
+      display none
+
+    .home-music-btn-icon-play
+      display block
+
+.home-music-btn-icon
+  height 13px
+  stroke #FFF
+  width 13px
+
+
+/**
+ * Infos.
+ */
+.home-music-soundcloud
+  display inline-block
+  margin-right 15px
+  margin-top -2px
+  vertical-align middle
+
+.home-music-title,
+.home-music-user
+  text-transform capitalize

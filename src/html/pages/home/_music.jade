@@ -1,0 +1,25 @@
+.home-music
+  .home-music-btns
+    button.home-music-btn.home-music-prev
+      svg.home-music-btn-icon(xmlns='http://www.w3.org/2000/svg' viewbox='0 0 9.2 12')
+        path(fill='none' d='M8.9,11.7L3.2,6l5.7-5.7')
+        path(fill='none' d='M0.5,11.7l0-11.3')
+
+    button.home-music-btn.home-music-toggle
+      svg.home-music-btn-icon.home-music-btn-icon-pause(xmlns='http://www.w3.org/2000/svg' viewbox='0 0 6.7 12')
+        path(fill='none' d='M0.5,0v11.3')
+        path(fill='none' d='M6.2,11.3V0')
+
+      svg.home-music-btn-icon.home-music-btn-icon-play(xmlns='http://www.w3.org/2000/svg' viewbox='0 0 6.7 12')
+        path(fill='none' d='M0.4,0.4L6,6l-5.7,5.7')
+
+    button.home-music-btn.home-music-next
+      svg.home-music-btn-icon(xmlns='http://www.w3.org/2000/svg' viewbox='0 0 9.2 12')
+        path(fill='none' d='M0.4,0.4L6,6l-5.7,5.7')
+        path(fill='none' d='M8.7,0.4l0,11.3')
+
+  .home-music-info
+    a.home-music-soundcloud(href='https://soundcloud.com/' target='_blank')
+      img(src='dist/img/logo/soundcloud.png')
+
+    #[a.home-music-title(href='#' target='_blank') Music] by #[a.home-music-user(href='#' target='_blank') User]

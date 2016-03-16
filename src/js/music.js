@@ -72,7 +72,7 @@ export default class Music {
     const songs = _this.songs
 
     get(
-      `//api.soundcloud.com/resolve.json?url=${ songs[song] }&client_id=78c6552c14b382e23be3bce2fc411a82`,
+      `//api.soundcloud.com/resolve.json?url=${songs[song]}&client_id=78c6552c14b382e23be3bce2fc411a82`,
       (request) => {
         const data = JSON.parse(request.responseText)
 
@@ -83,12 +83,12 @@ export default class Music {
           _this.next()
         }
 
-        const title = document.querySelector('.music-title')
+        const title = document.querySelector('.home-music-title')
 
         title.setAttribute('href', data.permalink_url)
         title.textContent = data.title
 
-        const user = document.querySelector('.music-user')
+        const user = document.querySelector('.home-music-user')
 
         user.setAttribute('href', data.user.permalink_url)
         user.textContent = data.user.username

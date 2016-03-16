@@ -3,24 +3,24 @@ import get from './lib/get'
 import Music from './music'
 import Scene from './scene'
 
-import setAbout from './about'
-import setMenu from './menu'
-import setProjects from './projects'
+// import setAbout from './about'
+// import setMenu from './menu'
+// import setProjects from './projects'
 
 /**
  * Site.
  */
-setAbout()
-setMenu()
-setProjects()
+// setAbout()
+// setMenu()
+// setProjects()
 
 /**
  * Music.
  */
 const music = new Music()
-const musicPrev = document.querySelector('.music-prev')
-const musicToggle = document.querySelector('.music-toggle')
-const musicNext = document.querySelector('.music-next')
+const musicPrev = document.querySelector('.home-music-prev')
+const musicToggle = document.querySelector('.home-music-toggle')
+const musicNext = document.querySelector('.home-music-next')
 
 music.audio.addEventListener('pause', () => {
   musicToggle.classList.add('is-paused')
@@ -94,8 +94,8 @@ window.addEventListener('load', () => {
 })
 
 window.addEventListener('resize', (e) => {
-  setAbout()
-  setMenu()
+  // setAbout()
+  // setMenu()
 
   scene.resize(e)
 }, false)
