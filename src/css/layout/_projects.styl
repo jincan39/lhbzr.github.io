@@ -1,0 +1,149 @@
+/**
+ * Projects.
+ */
+.projects
+  background #000
+  font-size 0
+  height 100%
+  padding 20px 23px 20px 20px
+  position fixed
+  top 0
+  left 0
+  overflow-x hidden
+  overflow-y auto
+  z-index 1
+
+  &::-webkit-scrollbar
+    width 3px
+
+  &::-webkit-scrollbar-track
+    background #000
+
+  &::-webkit-scrollbar-thumb
+    background #FFF
+
+
+/**
+ * List.
+ */
+.projects-list
+  margin 0
+  padding 0
+
+.projects-item
+  display block
+
+  &:not(:first-child)
+    margin-top 20px
+
+.projects-link
+  border 1px solid #313131
+  display inline-block
+  position relative
+
+
+/**
+ * Image.
+ */
+.projects-img
+  display block
+  height 175px
+  width 260px
+
+.projects-square
+  display block
+  bottom 10px
+  left 10px
+  overflow hidden
+  position absolute
+  right 10px
+  top 10px
+
+.projects-square-top,
+.projects-square-right,
+.projects-square-bottom,
+.projects-square-left
+  background rgba(#FFF, .2)
+  position absolute
+
+.projects-square-top,
+.projects-square-bottom
+  left 0
+  height 1px
+  width 100%
+
+.projects-square-right,
+.projects-square-left
+  top 1px
+  height calc(100% - 2px)
+  width 1px
+
+.projects-square-top
+  top 0
+
+.projects-square-right
+  right 0
+
+.projects-square-bottom
+  bottom 0
+
+.projects-square-left
+  left 0
+
+
+/**
+ * Info.
+ */
+.projects-info
+  left 50%
+  overflow hidden
+  position absolute
+  text-align center
+  top 50%
+  transform translate(-50%, -50%)
+  white-space nowrap
+
+.projects-title
+  display inline-block
+  color #FFF
+  font-size 18px
+  font-weight 200
+  letter-spacing 3px
+  margin-bottom 5px
+  margin-right -3px
+  padding 4px 10px
+  position relative
+  text-transform uppercase
+
+.projects-title-hover
+  color #000
+  display block
+  font-size 18px
+  font-weight 200
+  left 10px
+  letter-spacing 3px
+  overflow hidden
+  position absolute
+  padding 4px 0
+  right 10px
+  text-transform uppercase
+  top 0
+  z-index 2
+
+.projects-title-bg
+  background #FFF
+  display block
+  left 0
+  height 100%
+  position absolute
+  right 0
+  top 0
+  z-index 1
+
+.projects-tag
+  display block
+  color #FFF
+  font-size 10px
+  letter-spacing 1.5px
+  overflow hidden
+  text-transform lowercase

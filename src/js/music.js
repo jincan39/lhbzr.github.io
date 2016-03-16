@@ -78,7 +78,7 @@ export default class Music {
 
         if (data.stream_url) {
           audio.src = data.stream_url + '?client_id=78c6552c14b382e23be3bce2fc411a82'
-          audio.play()
+          // audio.play()
         } else {
           _this.next()
         }

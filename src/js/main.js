@@ -3,16 +3,14 @@ import get from './lib/get'
 import Music from './music'
 import Scene from './scene'
 
-// import setAbout from './about'
-// import setMenu from './menu'
-// import setProjects from './projects'
+import setAbout from './about'
+import setProjects from './projects'
 
 /**
  * Site.
  */
-// setAbout()
-// setMenu()
-// setProjects()
+setAbout()
+setProjects()
 
 /**
  * Music.
@@ -78,15 +76,15 @@ get('dist/svg/svg.svg', (response) => {
  * Window.
  */
 window.addEventListener('mousewheel', (e) => {
-  let volume = Math.round(music.audio.volume * 100) / 100
+  let value = Math.round(music.audio.volume * 100) / 100
 
-  if (e.wheelDelta < 0 && volume - 0.05 >= 0) {
-    volume = Math.abs(volume - 0.05)
-  } else if (e.wheelDelta > 0 && volume + 0.05 <= 1) {
-    volume = Math.abs(volume + 0.05)
+  if (e.wheelDelta < 0 && value - 0.05 >= 0) {
+    value = Math.abs(value - 0.05)
+  } else if (e.wheelDelta > 0 && value + 0.05 <= 1) {
+    value = Math.abs(value + 0.05)
   }
 
-  music.audio.volume = volume
+  music.audio.volume = value
 })
 
 window.addEventListener('load', () => {
@@ -94,9 +92,6 @@ window.addEventListener('load', () => {
 })
 
 window.addEventListener('resize', (e) => {
-  // setAbout()
-  // setMenu()
-
   scene.resize(e)
 }, false)
 

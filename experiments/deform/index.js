@@ -80,7 +80,6 @@ class App {
 
     this.renderer.setClearColor(0x4C4C4C)
     this.renderer.setSize(window.innerWidth, window.innerHeight)
-    this.renderer.domElement.style.display = 'block'
 
     document.body.appendChild(this.renderer.domElement)
   }
@@ -217,9 +216,6 @@ class App {
 }
 
 const app = new App()
-
-document.body.style.margin = '0'
-document.body.style.padding = '0'
 
 window.addEventListener('resize', () => {
   app.resize()

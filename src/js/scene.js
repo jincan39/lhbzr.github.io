@@ -4,8 +4,9 @@ import randomInt from './lib/randomInt'
 
 import THREE from 'three'
 import THREEEffectComposer from 'three-effectcomposer'
+
 const EffectComposer = THREEEffectComposer(THREE)
-import RGBShiftShader from './shaders/rgbShift'
+import RGBShiftShader from './shaders/RGBShift'
 
 export default class Scene {
   constructor (music) {
@@ -59,9 +60,8 @@ export default class Scene {
   createScene () {
     this.scene = new THREE.Scene()
 
-    this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
+    this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000)
     this.camera.position.z = 275
-    this.camera.lookAt = new THREE.Vector3()
   }
 
   createGeometry () {
@@ -163,18 +163,16 @@ export default class Scene {
   }
 
   click () {
-    const _this = this
-
-    const isClicked = _this.clicked
-
-    _this.geometry.forEach((geometry, index) => {
-      if (isClicked) {
+    if (this.clicked) {
+      this.geometry.forEach((geometry, index) => {
         TweenLite.to(geometry.scale, 1, { x: 1, y: 1, z: 1 })
         TweenLite.to(geometry.rotation, 1, { x: 0, y: 0, z: 0 })
         TweenLite.to(geometry.position, 1, { x: 0, y: 100, z: 0 })
+      })
 
-        _this.clicked = false
-      } else {
+      this.clicked = false
+    } else {
+      this.geometry.forEach((geometry, index) => {
         TweenLite.to(geometry.rotation, 1, {
           x: randomInt(0, Math.PI),
           y: randomInt(0, Math.PI),
@@ -186,9 +184,9 @@ export default class Scene {
           y: `+= ${ randomInt(-1000, 1000) }`,
           z: `+= ${ randomInt(-500, -250) }`
         })
+      })
 
-        _this.clicked = true
-      }
-    })
+      this.clicked = true
+    }
   }
 }
