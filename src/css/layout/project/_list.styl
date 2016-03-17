@@ -1,0 +1,90 @@
+/**
+ * Wrapper.
+ */
+.project-item
+  display table
+  height 100vh
+  left 0
+  opacity 0
+  padding 0 15%
+  position absolute
+  top 0
+  visibility hidden
+  width 100%
+
+
+/**
+ * Columns.
+ */
+.project-item-left,
+.project-item-right
+  display table-cell
+  text-align left
+  vertical-align middle
+
+.project-item-left
+  width 60%
+
+.project-item-right
+  padding-left 5%
+  width 40%
+
+
+/**
+ * Media.
+ */
+.project-media
+  border 1px solid #FFF
+  height 55vh
+  overflow-y auto
+  overflow-x hidden
+  width 100%
+
+  &::-webkit-scrollbar
+    width 3px
+
+  &::-webkit-scrollbar-track
+    background #000
+
+  &::-webkit-scrollbar-thumb
+    background #FFF
+
+.project-img
+  display block
+  height auto
+  width 100%
+
+/**
+ * Info.
+ */
+.project-title
+  display block
+  font-size 50px
+  font-weight 100
+  letter-spacing 7.5px
+  margin-bottom 15px
+  text-transform uppercase
+
+.project-desc
+  font-size 14px
+  letter-spacing 2.1px
+  line-height 25px
+  margin-bottom 80px
+
+.project-link
+  display inline-block
+  font-size 14px
+  letter-spacing 2px
+  padding-left 75px
+  position relative
+  text-transform uppercase
+
+  &:after
+    background #FFF
+    content ''
+    display block
+    height 1px
+    left 0
+    position absolute
+    top 50%
+    width 60px

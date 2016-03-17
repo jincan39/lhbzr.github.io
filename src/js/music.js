@@ -14,7 +14,6 @@ export default class Music {
     this.context = new (window.AudioContext || window.webkitAudioContext)()
 
     this.analyser = this.context.createAnalyser()
-    this.analyser.smoothingTimeConstant = 0.1
     this.analyser.fftSize = 2048
     this.analyser.connect(this.context.destination)
 
@@ -78,7 +77,7 @@ export default class Music {
 
         if (data.stream_url) {
           audio.src = data.stream_url + '?client_id=78c6552c14b382e23be3bce2fc411a82'
-          // audio.play()
+          audio.play()
         } else {
           _this.next()
         }

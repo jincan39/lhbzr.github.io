@@ -3,14 +3,23 @@ import get from './lib/get'
 import Music from './music'
 import Scene from './scene'
 
+import onLoad from './loaded'
+
+import { setLogo } from './logo'
+
 import setAbout from './about'
 import setProjects from './projects'
+import setProject from './project'
+import setButtons from './buttons'
 
 /**
  * Site.
  */
+setLogo()
 setAbout()
 setProjects()
+setProject()
+setButtons()
 
 /**
  * Music.
@@ -33,25 +42,25 @@ music.audio.addEventListener('ended', () => {
 })
 
 musicToggle.addEventListener('click', (e) => {
-  e.stopPropagation()
-
   if (music.isPaused()) {
     music.play()
   } else {
     music.pause()
   }
+
+  e.stopPropagation()
 })
 
 musicPrev.addEventListener('click', (e) => {
-  e.stopPropagation()
-
   music.prev()
+
+  e.stopPropagation()
 })
 
 musicNext.addEventListener('click', (e) => {
-  e.stopPropagation()
-
   music.next()
+
+  e.stopPropagation()
 })
 
 /**
@@ -73,9 +82,15 @@ get('dist/svg/svg.svg', (response) => {
 })
 
 /**
- * Window.
+ * Home.
  */
-window.addEventListener('mousewheel', (e) => {
+const home = document.querySelector('.home')
+
+home.addEventListener('click', (e) => {
+  scene.click(e)
+})
+
+home.addEventListener('mousewheel', (e) => {
   let value = Math.round(music.audio.volume * 100) / 100
 
   if (e.wheelDelta < 0 && value - 0.05 >= 0) {
@@ -87,16 +102,17 @@ window.addEventListener('mousewheel', (e) => {
   music.audio.volume = value
 })
 
+/**
+ * Window.
+ */
 window.addEventListener('load', () => {
   document.body.classList.add('is-loaded')
+
+  onLoad()
 })
 
 window.addEventListener('resize', (e) => {
   scene.resize(e)
-}, false)
-
-window.addEventListener('click', (e) => {
-  scene.click(e)
 }, false)
 
 window.addEventListener('mousemove', (e) => {

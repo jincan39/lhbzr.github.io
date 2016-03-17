@@ -1,10 +1,9 @@
-/* global TweenLite, requestAnimationFrame */
+/* global Power0, requestAnimationFrame, TweenLite */
 
 import randomInt from './lib/randomInt'
 
 import THREE from 'three'
 import THREEEffectComposer from 'three-effectcomposer'
-
 const EffectComposer = THREEEffectComposer(THREE)
 import RGBShiftShader from './shaders/RGBShift'
 
@@ -134,10 +133,10 @@ export default class Scene {
       }
 
       if (_this.clicked) {
-        TweenLite.to(geometry.scale, 0.2, { x: value, y: value, z: value })
-        TweenLite.to(geometry.rotation, 0.2, { z: (index % 2 === 0) ? '+= 0.05' : '-= 0.05' })
+        TweenLite.to(geometry.scale, 0.05, { ease: Power0.easeNone, x: value, y: value, z: value })
+        TweenLite.to(geometry.rotation, 0.05, { ease: Power0.easeNone, z: (index % 2 === 0) ? '+= 0.05' : '-= 0.05' })
       } else {
-        TweenLite.to(geometry.scale, 0.2, { z: value })
+        TweenLite.to(geometry.scale, 0.05, { ease: Power0.easeNone, z: value })
       }
     })
 
@@ -180,9 +179,9 @@ export default class Scene {
         })
 
         TweenLite.to(geometry.position, 1, {
-          x: `+= ${ randomInt(-1000, 1000) }`,
-          y: `+= ${ randomInt(-1000, 1000) }`,
-          z: `+= ${ randomInt(-500, -250) }`
+          x: `+= ${randomInt(-1000, 1000)}`,
+          y: `+= ${randomInt(-1000, 1000)}`,
+          z: `+= ${randomInt(-500, -250)}`
         })
       })
 

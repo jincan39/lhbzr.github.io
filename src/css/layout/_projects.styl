@@ -11,6 +11,7 @@
   left 0
   overflow-x hidden
   overflow-y auto
+  transform translateX(-100%)
   z-index 1
 
   &::-webkit-scrollbar
@@ -40,6 +41,13 @@
   border 1px solid #313131
   display inline-block
   position relative
+  transition -webkit-filter .4s, filter .4s
+  -webkit-filter grayscale(100%)
+  filter grayscale(100%)
+
+  &:hover
+    -webkit-filter grayscale(0%)
+    filter grayscale(0%)
 
 
 /**

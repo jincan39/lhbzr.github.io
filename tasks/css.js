@@ -10,7 +10,7 @@ gulp.task('css', () => {
   gulp
     .src(`${pkg.folders.src}/css/main.styl`)
     .pipe(stylus({ 'include css': true }))
-    .pipe(autoprefixer('ie >= 8', 'ff >= 3', 'safari >= 4', 'opera >= 12', 'chrome >= 4'))
+    .pipe(autoprefixer('last 10 versions'))
     .pipe(cssnano())
     .pipe(gulp.dest(`${pkg.folders.dist}/css`))
 })
