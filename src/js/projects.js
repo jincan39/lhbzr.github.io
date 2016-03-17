@@ -37,10 +37,10 @@ export default function setProjects () {
 
       TweenMax.to(link.querySelector('.projects-tag'), 0.4, { opacity: 1, maxHeight: '15px' })
 
-      TweenMax.to(link.querySelector('.projects-square-left'), 0.2, { y: '0%' })
-      TweenMax.to(link.querySelector('.projects-square-bottom'), 0.2, { x: '0%' })
-      TweenMax.to(link.querySelector('.projects-square-right'), 0.2, { y: '0%' })
-      TweenMax.to(link.querySelector('.projects-square-top'), 0.2, { x: '0%' })
+      TweenMax.to(link.querySelector('.projects-square-left'), 0.4, { y: '0%' })
+      TweenMax.to(link.querySelector('.projects-square-bottom'), 0.4, { x: '0%' })
+      TweenMax.to(link.querySelector('.projects-square-right'), 0.4, { y: '0%' })
+      TweenMax.to(link.querySelector('.projects-square-top'), 0.4, { x: '0%' })
     })
 
     link.addEventListener('mouseleave', () => {
@@ -49,10 +49,10 @@ export default function setProjects () {
 
       TweenMax.to(link.querySelector('.projects-tag'), 0.4, { opacity: 0, maxHeight: 0 })
 
-      TweenMax.to(link.querySelector('.projects-square-top'), 0.2, { x: '100%' })
-      TweenMax.to(link.querySelector('.projects-square-right'), 0.2, { y: '100%' })
-      TweenMax.to(link.querySelector('.projects-square-bottom'), 0.2, { x: '-100%' })
-      TweenMax.to(link.querySelector('.projects-square-left'), 0.2, { y: '-100%' })
+      TweenMax.to(link.querySelector('.projects-square-top'), 0.4, { x: '100%' })
+      TweenMax.to(link.querySelector('.projects-square-right'), 0.4, { y: '100%' })
+      TweenMax.to(link.querySelector('.projects-square-bottom'), 0.4, { x: '-100%' })
+      TweenMax.to(link.querySelector('.projects-square-left'), 0.4, { y: '-100%' })
     })
   })
 }
