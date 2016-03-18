@@ -43,6 +43,8 @@ export default class Scene {
     this.createShaders()
 
     this.render()
+
+    this.setElements()
   }
 
   createRenderer () {
@@ -80,8 +82,8 @@ export default class Scene {
       _this.geometry[i].position.y = 100
 
       _this.geometrySleeve[i] = new THREE.Object3D()
-      _this.geometrySleeve[i].add(_this.geometry[i])
       _this.geometrySleeve[i].rotation.z = i * (360 / _this.geometryLength) * Math.PI / 180
+      _this.geometrySleeve[i].add(_this.geometry[i])
 
       _this.circle.add(_this.geometrySleeve[i])
     }
@@ -91,13 +93,12 @@ export default class Scene {
 
   createLight () {
     const lightOne = new THREE.DirectionalLight(0xFFFFFF, 1)
-    lightOne.position.set(1, 1, 1)
-
-    this.scene.add(lightOne)
-
     const lightTwo = new THREE.DirectionalLight(0xFFFFFF, 1)
+
+    lightOne.position.set(1, 1, 1)
     lightTwo.position.set(-1, -1, 1)
 
+    this.scene.add(lightOne)
     this.scene.add(lightTwo)
   }
 
@@ -117,8 +118,6 @@ export default class Scene {
   render () {
     const _this = this
 
-    const frequencies = _this.music.getFrequency()
-
     TweenLite.to(_this.effect.uniforms.amount, 1, {
       value: (_this.clicked) ? 0.005 : (_this.mouse.x / window.innerWidth)
     })
@@ -127,7 +126,7 @@ export default class Scene {
       let value
 
       if (window.AudioContext || window.webkitAudioContext) {
-        value = (frequencies[index] / 100) + 0.01
+        value = (_this.music.getFrequency()[index] / 100) + 0.01
       } else {
         value = 1
       }
@@ -143,7 +142,6 @@ export default class Scene {
     _this.circle.rotation.z += 0.01
 
     _this.renderer.render(_this.scene, _this.camera)
-
     _this.composer.render()
 
     requestAnimationFrame(_this.render.bind(_this))
@@ -187,5 +185,17 @@ export default class Scene {
 
       this.clicked = true
     }
+  }
+
+  setElements () {
+    const _this = this
+
+    const elements = document.querySelectorAll('.home, .projects-link')
+
+    Array.from(elements).forEach((element) => {
+      element.addEventListener('click', (e) => {
+        // _this.click(e)
+      })
+    })
   }
 }

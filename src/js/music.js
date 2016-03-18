@@ -47,7 +47,7 @@ export default class Music {
     this.songPrev = null
     this.songNext = null
 
-    this.load(this.song)
+    this.load()
   }
 
   isPaused () {
@@ -67,30 +67,20 @@ export default class Music {
   load (song) {
     const _this = this
 
-    const audio = _this.audio
-    const songs = _this.songs
-
     get(
-      `//api.soundcloud.com/resolve.json?url=${songs[song]}&client_id=78c6552c14b382e23be3bce2fc411a82`,
+      `//api.soundcloud.com/resolve.json?url=${_this.songs[_this.song]}&client_id=78c6552c14b382e23be3bce2fc411a82`,
       (request) => {
         const data = JSON.parse(request.responseText)
 
         if (data.stream_url) {
-          audio.src = data.stream_url + '?client_id=78c6552c14b382e23be3bce2fc411a82'
-          audio.play()
+          _this.audio.src = data.stream_url + '?client_id=78c6552c14b382e23be3bce2fc411a82'
+          // _this.audio.play()
         } else {
           _this.next()
         }
 
-        const title = document.querySelector('.home-music-title')
-
-        title.setAttribute('href', data.permalink_url)
-        title.textContent = data.title
-
-        const user = document.querySelector('.home-music-user')
-
-        user.setAttribute('href', data.user.permalink_url)
-        user.textContent = data.user.username
+        _this.data = data
+        _this.setElements()
       }
     )
 
@@ -113,5 +103,50 @@ export default class Music {
 
   play () {
     this.audio.play()
+  }
+
+  setElements () {
+    const _this = this
+
+    const musicTitle = document.querySelector('.music-title')
+    const musicUser = document.querySelector('.music-user')
+
+    musicTitle.setAttribute('href', _this.data.permalink_url)
+    musicTitle.textContent = _this.data.title
+
+    musicUser.setAttribute('href', _this.data.user.permalink_url)
+    musicUser.textContent = _this.data.user.username
+
+    const musicToggle = document.querySelector('.music-toggle')
+    const musicPrev = document.querySelector('.music-prev')
+    const musicNext = document.querySelector('.music-next')
+
+    _this.audio.addEventListener('pause', () => {
+      musicToggle.classList.add('is-paused')
+    })
+
+    _this.audio.addEventListener('play', () => {
+      musicToggle.classList.remove('is-paused')
+    })
+
+    _this.audio.addEventListener('ended', () => {
+      _this.load((_this.song < _this.songs.length - 1) ? _this.song + 1 : 0)
+    })
+
+    musicToggle.addEventListener('click', () => {
+      if (_this.isPaused()) {
+        _this.play()
+      } else {
+        _this.pause()
+      }
+    })
+
+    musicPrev.addEventListener('click', () => {
+      _this.prev()
+    })
+
+    musicNext.addEventListener('click', () => {
+      _this.next()
+    })
   }
 }

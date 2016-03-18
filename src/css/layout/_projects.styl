@@ -12,7 +12,7 @@
   overflow-x hidden
   overflow-y auto
   transform translateX(-100%)
-  z-index 1
+  z-index 2
 
   &::-webkit-scrollbar
     width 3px
@@ -88,15 +88,19 @@
 
 .projects-square-top
   top 0
+  transform translateX(100%)
 
 .projects-square-right
   right 0
+  transform translateY(100%)
 
 .projects-square-bottom
   bottom 0
+  transform translateX(-100%)
 
 .projects-square-left
   left 0
+  transform translateY(-100%)
 
 
 /**
@@ -133,7 +137,7 @@
   overflow hidden
   position absolute
   padding 4px 0
-  right 10px
+  right 100%
   text-transform uppercase
   top 0
   z-index 2
@@ -144,7 +148,7 @@
   left 0
   height 100%
   position absolute
-  right 0
+  right 100%
   top 0
   z-index 1
 
@@ -153,5 +157,7 @@
   color #FFF
   font-size 10px
   letter-spacing 1.5px
+  max-height 0
+  opacity 0
   overflow hidden
   text-transform lowercase

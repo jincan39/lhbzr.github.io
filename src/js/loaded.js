@@ -1,7 +1,7 @@
 /* global TimelineMax */
 
-import { setLogoLoaded } from './logo'
+import { logoSetLoaded } from './logo'
 
 export default function onLoad () {
-  setLogoLoaded()
+  logoSetLoaded()
 }

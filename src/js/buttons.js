@@ -3,9 +3,9 @@
 import randomInt from './lib/randomInt'
 import replaceChar from './lib/replaceChar'
 
-export default function setButton () {
-  const buttons = document.querySelectorAll('.btn')
+const buttons = document.querySelectorAll('.btn')
 
+export function buttonsSet () {
   Array.from(buttons).forEach((button) => {
     let buttonInterval
     let buttonText = button.querySelector('.btn-text')

@@ -12,6 +12,9 @@
   visibility hidden
   width 100%
 
+  &.is-active
+    visibility visible
+
 
 /**
  * Columns.
@@ -19,14 +22,15 @@
 .project-item-left,
 .project-item-right
   display table-cell
-  text-align left
   vertical-align middle
 
 .project-item-left
+  text-align center
   width 60%
 
 .project-item-right
   padding-left 5%
+  text-align left
   width 40%
 
 
@@ -37,14 +41,16 @@
   position relative
 
 .project-media-list
-  border 1px solid #FFF
   display inline-block
   height auto
+  margin 1px
   max-height 55vh
   overflow-y scroll
   overflow-x hidden
+  position relative
   vertical-align middle
-  width 100%
+  width calc(100% - 2px)
+  z-index 2
 
   &::-webkit-scrollbar
     width 3px
@@ -56,17 +62,20 @@
     background #FFF
 
 .project-media-item
-  overflow hidden
-  height 0
+  display none
 
   &.is-active
-    height auto
+    display block
 
 .project-img
   display block
   height auto
   width 100%
 
+
+/**
+ * Navegação.
+ */
 .project-media-btn
   cursor pointer
   display block
@@ -103,6 +112,56 @@
     border-width 0 1px 1px 0
     top 18px
 
+
+/**
+ * Square.
+ */
+.project-media-square
+  display block
+  bottom 0
+  left 0
+  overflow hidden
+  position absolute
+  right 0
+  top 0
+  z-index 1
+
+.project-media-square-top,
+.project-media-square-right,
+.project-media-square-bottom,
+.project-media-square-left
+  background #FFF
+  position absolute
+
+.project-media-square-top,
+.project-media-square-bottom
+  left 0
+  height 1px
+  width 100%
+
+.project-media-square-right,
+.project-media-square-left
+  top 0
+  height 100%
+  width 1px
+
+.project-media-square-top
+  top 0
+  transform translateX(100%)
+
+.project-media-square-right
+  right 0
+  transform translateY(100%)
+
+.project-media-square-bottom
+  bottom 0
+  transform translateX(-100%)
+
+.project-media-square-left
+  left 0
+  transform translateY(-100%)
+
+
 /**
  * Info.
  */
@@ -120,6 +179,7 @@
   letter-spacing 2.1px
   line-height 25px
   margin-bottom 80px
+  max-width 375px
 
 .project-link
   display inline-block

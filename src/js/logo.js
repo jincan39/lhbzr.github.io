@@ -1,22 +1,25 @@
 /* global SVGMorpheus, TweenMax */
 
+import setStrokeDash from './lib/setStrokeDash'
+
 import getOffset from './lib/getOffset'
 
-let logo
-let logoElement = document.querySelector('.logo')
+const logo = new SVGMorpheus('.logo')
+const logoElement = document.querySelector('.logo')
 
-let homeLogo = document.querySelector('.home-logo')
-let homeOffset = getOffset(homeLogo)
+const homeLogo = document.querySelector('.home-logo')
+const homeOffset = getOffset(homeLogo)
 
-let aboutLogo = document.querySelector('.about-logo')
-let aboutOffset = getOffset(aboutLogo)
+const aboutLogo = document.querySelector('.about-logo')
+const aboutOffset = getOffset(aboutLogo)
 
-let projectLogo = document.querySelector('.project-logo')
-let projectOffset = getOffset(projectLogo)
+const projectLogo = document.querySelector('.project-logo')
+const projectOffset = getOffset(projectLogo)
 
-export function setLogo () {
-  logo = new SVGMorpheus('.logo')
-
+/**
+ * Set: Default.
+ */
+export function logoSet () {
   TweenMax.set(logoElement, {
     height: homeLogo.clientHeight,
     left: homeOffset.left,
@@ -25,20 +28,21 @@ export function setLogo () {
   })
 }
 
-export function setLogoLoaded () {
+/**
+ * Animation: Loaded.
+ */
+export function logoSetLoaded () {
   const logoPath = logoElement.querySelectorAll('path')
 
-  Array.from(logoPath).forEach((path) => {
-    const pathLength = path.getTotalLength()
-
-    path.style.strokeDasharray = pathLength + ' ' + pathLength
-    path.style.strokeDashoffset = pathLength
-  })
+  setStrokeDash(logoPath)
 
   TweenMax.to(logoPath, 2, { delay: 0.2, strokeDashoffset: 0 })
 }
 
-export function setLogoHome () {
+/**
+ * Animation: Home.
+ */
+export function logoSetHome () {
   logo.to('logo-horizontal', { duration: 1000 })
 
   TweenMax.to(logoElement, 1, {
@@ -49,7 +53,10 @@ export function setLogoHome () {
   })
 }
 
-export function setLogoAbout () {
+/**
+ * Animation: About.
+ */
+export function logoSetAbout () {
   logo.to('logo-vertical', { duration: 1000 })
 
   TweenMax.to(logoElement, 1, {
@@ -60,7 +67,10 @@ export function setLogoAbout () {
   })
 }
 
-export function setLogoProject () {
+/**
+ * Animation: Project.
+ */
+export function logoSetProject () {
   logo.to('logo-vertical', { duration: 1000 })
 
   TweenMax.to(logoElement, 1, {

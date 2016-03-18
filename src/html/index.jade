@@ -32,24 +32,25 @@ html
     
     include ./pages/_logo
 
-    section.home#home
-      include ./pages/home/_logo
-      include ./pages/home/_music
-      include ./pages/home/_menu
+    include ./pages/_music
 
     include ./pages/_projects
+
+    section.home#home
+      include ./pages/home/_logo
+      include ./pages/home/_menu
     
     section.about#about
       div.about-wrapper
         include ./pages/about/_close
-        include ./pages/about/_info
+        include ./pages/about/_content
         include ./pages/about/_menu
         
     section.project#project
       div.project-wrapper
         include ./pages/project/_close
+        include ./pages/project/_content
         include ./pages/project/_logo
-        include ./pages/project/_list
 
     script(src='//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/plugins/ScrollToPlugin.min.js')
     script(src='//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TweenMax.min.js')
