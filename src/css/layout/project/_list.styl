@@ -34,10 +34,16 @@
  * Media.
  */
 .project-media
+  position relative
+
+.project-media-list
   border 1px solid #FFF
-  height 55vh
-  overflow-y auto
+  display inline-block
+  height auto
+  max-height 55vh
+  overflow-y scroll
   overflow-x hidden
+  vertical-align middle
   width 100%
 
   &::-webkit-scrollbar
@@ -49,10 +55,53 @@
   &::-webkit-scrollbar-thumb
     background #FFF
 
+.project-media-item
+  overflow hidden
+  height 0
+
+  &.is-active
+    height auto
+
 .project-img
   display block
   height auto
   width 100%
+
+.project-media-btn
+  cursor pointer
+  display block
+  font-size 0
+  height 50px
+  left 50%
+  position absolute
+  transform translateX(-50%)
+  width 50px
+
+  &:after
+    border-color #FFF
+    border-style solid
+    content ''
+    display block
+    left 50%
+    height 15px
+    margin-left -2px
+    position absolute
+    transform rotate(45deg) translateX(-50%)
+    width 15px
+
+.project-media-btn-prev
+  top -75px
+
+  &:after
+    border-width 1px 0 0 1px
+    top 28px
+
+.project-media-btn-next
+  bottom -75px
+
+  &:after
+    border-width 0 1px 1px 0
+    top 18px
 
 /**
  * Info.
@@ -63,6 +112,7 @@
   font-weight 100
   letter-spacing 7.5px
   margin-bottom 15px
+  margin-top 0
   text-transform uppercase
 
 .project-desc

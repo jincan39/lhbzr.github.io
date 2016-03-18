@@ -86,10 +86,6 @@ get('dist/svg/svg.svg', (response) => {
  */
 const home = document.querySelector('.home')
 
-home.addEventListener('click', (e) => {
-  scene.click(e)
-})
-
 home.addEventListener('mousewheel', (e) => {
   let value = Math.round(music.audio.volume * 100) / 100
 
@@ -100,6 +96,17 @@ home.addEventListener('mousewheel', (e) => {
   }
 
   music.audio.volume = value
+})
+
+/**
+ * Buttons.
+ */
+const buttons = document.querySelectorAll('.btn')
+
+Array.from(buttons).forEach((button) => {
+  button.addEventListener('click', (e) => {
+    scene.click(e)
+  })
 })
 
 /**
