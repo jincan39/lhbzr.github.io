@@ -8,18 +8,17 @@ const logo = new SVGMorpheus('.logo')
 const logoElement = document.querySelector('.logo')
 
 const homeLogo = document.querySelector('.home-logo')
-const homeOffset = getOffset(homeLogo)
 
 const aboutLogo = document.querySelector('.about-logo')
-const aboutOffset = getOffset(aboutLogo)
 
 const projectLogo = document.querySelector('.project-logo')
-const projectOffset = getOffset(projectLogo)
 
 /**
  * Set: Default.
  */
 export function logoSet () {
+  const homeOffset = getOffset(homeLogo)
+
   TweenMax.set(logoElement, {
     height: homeLogo.clientHeight,
     left: homeOffset.left,
@@ -29,21 +28,12 @@ export function logoSet () {
 }
 
 /**
- * Animation: Loaded.
- */
-export function logoSetLoaded () {
-  const logoPath = logoElement.querySelectorAll('path')
-
-  setStrokeDash(logoPath)
-
-  TweenMax.to(logoPath, 2, { delay: 0.2, strokeDashoffset: 0 })
-}
-
-/**
  * Animation: Home.
  */
 export function logoSetHome () {
   logo.to('logo-horizontal', { duration: 1000 })
+
+  const homeOffset = getOffset(homeLogo)
 
   TweenMax.to(logoElement, 1, {
     height: homeLogo.clientHeight,
@@ -59,6 +49,8 @@ export function logoSetHome () {
 export function logoSetAbout () {
   logo.to('logo-vertical', { duration: 1000 })
 
+  const aboutOffset = getOffset(aboutLogo)
+
   TweenMax.to(logoElement, 1, {
     height: aboutLogo.clientHeight,
     left: aboutOffset.left,
@@ -72,6 +64,8 @@ export function logoSetAbout () {
  */
 export function logoSetProject () {
   logo.to('logo-vertical', { duration: 1000 })
+
+  const projectOffset = getOffset(projectLogo)
 
   TweenMax.to(logoElement, 1, {
     height: projectLogo.clientHeight,

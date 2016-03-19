@@ -27,6 +27,14 @@ const projectMediaNext = document.querySelectorAll('.project-media-btn-next')
 export function projectOpen (target) {
   logoSetProject()
 
+  const targetImg = target.querySelectorAll('.project-img')
+
+  Array.from(targetImg).forEach((img) => {
+    if (!img.getAttribute('src')) {
+      img.setAttribute('src', img.getAttribute('data-src'))
+    }
+  })
+
   const timeline = new TimelineMax()
 
   timeline

@@ -75,7 +75,8 @@ export default class Scene {
         _this.geometryType[number],
         new THREE.MeshPhongMaterial({
           color: 0xFFFFFF,
-          wireframe: true
+          wireframe: true,
+          transparent: true
         })
       )
 
@@ -190,11 +191,11 @@ export default class Scene {
   setElements () {
     const _this = this
 
-    const elements = document.querySelectorAll('.home, .projects-link')
+    const elements = document.querySelectorAll('.home, .js-projects-open, .js-about-open, .js-about-close')
 
     Array.from(elements).forEach((element) => {
       element.addEventListener('click', (e) => {
-        // _this.click(e)
+        _this.click(e)
       })
     })
   }

@@ -5,7 +5,8 @@ import wrapLettersWithElement from './lib/wrapLettersWithElement'
 
 import { logoSetHome, logoSetAbout } from './logo'
 
-const home = document.querySelector('.home')
+const homeBtnPath = document.querySelectorAll('.home-menu-btn path')
+const homeBtnText = document.querySelectorAll('.home-menu-btn .btn-text')
 
 const about = document.querySelector('.about')
 
@@ -29,8 +30,9 @@ export function aboutOpen () {
 
   timeline
     // Other.
-    .to(home, 0.4, { autoAlpha: 0 })
-    .to(about, 0.4, { autoAlpha: 1 })
+    .staggerTo(homeBtnPath, 0.4, { strokeDashoffset: 135 }, 0.2, 'other')
+    .to(homeBtnText, 0.4, { autoAlpha: 0 }, 'other')
+    .to(about, 0.4, { autoAlpha: 1 }, 'other')
 
     // Content.
     .staggerFromTo('.about-title span', 0.1, { autoAlpha: 0 }, { autoAlpha: 1 }, 0.05, 'appear')
@@ -59,7 +61,8 @@ export function aboutClose () {
     .to(about, 0.4, { autoAlpha: 0, onComplete: () => {
       logoSetHome()
     }}, '-= 0.2')
-    .to(home, 0.4, { autoAlpha: 1 })
+    .staggerTo(homeBtnPath, 0.4, { strokeDashoffset: 0 }, 0.2, 'other')
+    .to(homeBtnText, 0.4, { autoAlpha: 1 }, 'other')
 }
 
 /**
@@ -120,7 +123,6 @@ export function aboutSet () {
     aboutClose()
 
     e.preventDefault()
-    e.stopPropagation()
   })
 
   /**

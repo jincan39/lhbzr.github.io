@@ -1,5 +1,8 @@
 /* global TimelineMax */
 
+const homeBtnPath = document.querySelectorAll('.home-menu-btn path')
+const homeBtnText = document.querySelectorAll('.home-menu-btn .btn-text')
+
 const projects = document.querySelector('.projects')
 const projectsBtnOpen = document.querySelector('.js-projects-open')
 const projectsBtnClose = document.querySelector('.home, .projects-link')
@@ -12,6 +15,8 @@ export function projectsOpen () {
   const timeline = new TimelineMax()
 
   timeline
+    .staggerTo(homeBtnPath, 0.4, { strokeDashoffset: 135 }, 0.2, 'other')
+    .to(homeBtnText, 0.4, { autoAlpha: 0 }, 'other')
     .to(projectsBtnOpen, 0.2, { autoAlpha: 0 })
     .to(projects, 0.4, { x: '0%' })
     .staggerFromTo(projectsLink, 0.4, { autoAlpha: 0, scale: 0.5, x: '-100%' }, { autoAlpha: 1, scale: 1, x: '0%' }, 0.075, '-= 0.2')
@@ -23,6 +28,8 @@ export function projectsClose () {
   timeline
     .to(projects, 0.4, { x: '-100%' })
     .to(projectsBtnOpen, 0.2, { autoAlpha: 1 })
+    .staggerTo(homeBtnPath, 0.4, { strokeDashoffset: 0 }, 0.2, 'other')
+    .to(homeBtnText, 0.4, { autoAlpha: 1 }, 'other')
 }
 
 /**

@@ -29,17 +29,19 @@ body {
   &:after {
     background: #000;
     bottom: 0;
-    // content: '';
+    content: '';
     display: block;
     left: 0;
     position: fixed;
     right 0;
     top: 0;
+    transition: all .4s;
     z-index: 99999;
   }
 
   &.is-loaded:after {
-    display: none;
+    opacity: 0;
+    visibility: hidden;
   }
 }
 
