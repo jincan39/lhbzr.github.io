@@ -52,8 +52,6 @@ import { buttonsSet } from './buttons'
    */
   const scene = new Scene(music)
 
-  console.log(scene.geometry)
-
   /**
    * SVG.
    */
