@@ -3,28 +3,32 @@
  */
 .project
   background rgba(0, 0, 0, .8)
-  display table
+  display block
   height 100%
   left 0
   opacity 0
+  overflow-x hidden
+  overflow-y auto
   position absolute
   top 0
   visibility hidden
   width 100%
   z-index 3
 
+  @media (max-width: 1080px)
+    background #000
+
 .project-wrapper
+  display table
+  height 100%
+  width 100%
+
+.project-content
   color #FFF
   display table-cell
+  padding 50px 0
   text-align center
   vertical-align middle
 
-.project-logo
-  height 130px
-  left 0
-  position absolute
-  stroke #FFF
-  top 50%
-  transform translateY(-50%)
-  visibility hidden
-  width 10%
+  @media (max-width: 1080px)
+    vertical-align top

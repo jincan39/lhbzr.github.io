@@ -1,9 +1,9 @@
 doctype html
 html
   head
-    title LHBZR
+    title LHBZR - Portfolio of Luis Henrique Bizarro
 
-    meta(name='description' content='Front-End Developer based in São Paulo, Brazil.')
+    meta(name='description' content='Luis Henrique Bizarro is a Front-End Developer based in São Paulo, Brazil.')
 
     meta(charset='UTF-8')
 
@@ -19,38 +19,41 @@ html
     meta(property='og:url' content='http://lhbzr.com/')
     meta(property='og:title' content='LHBZR')
     meta(property='og:image' content='dist/img/share/facebook.jpg')
-    meta(property='og:description' content='Front End Developer based in São Paulo, Brazil.')
+    meta(property='og:description' content='Luis Henrique Bizarro is a Front-End Developer based in São Paulo, Brazil.')
 
     meta(name='twitter:card' content='summary_large_image')
     meta(name='twitter:site' content='@lhbzr')
     meta(name='twitter:title' content='LHBZR')
-    meta(name='twitter:description' content='Front End Developer based in São Paulo, Brazil.')
+    meta(name='twitter:description' content='Luis Henrique Bizarro is a Front-End Developer based in São Paulo, Brazil.')
     meta(name='twitter:image:src' content='dist/img/share/twitter.jpg')
 
   body
-    include ./pages/_canvas
-    
-    include ./pages/_logo
+    .content
+      include ./pages/_canvas
+      
+      include ./pages/_logo
 
-    include ./pages/_music
+      include ./pages/_music
 
-    include ./pages/_projects
+      include ./pages/_projects
 
-    section.home#home
-      include ./pages/home/_logo
-      include ./pages/home/_menu
-    
-    section.about#about
-      div.about-wrapper
-        include ./pages/about/_close
-        include ./pages/about/_content
-        include ./pages/about/_menu
-        
-    section.project#project
-      div.project-wrapper
-        include ./pages/project/_close
-        include ./pages/project/_content
-        include ./pages/project/_logo
+      section.home#home
+        include ./pages/home/_logo
+        include ./pages/home/_menu
+      
+      section.about#about
+        .about-wrapper
+          .about-content
+            include ./pages/about/_content
+            include ./pages/about/_menu
+            include ./pages/about/_close
+          
+      section.project#project
+        .project-wrapper
+          .project-content
+            include ./pages/project/_logo
+            include ./pages/project/_content
+            include ./pages/project/_close
 
     script(src='//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TweenMax.min.js')
     script(src='//cdnjs.cloudflare.com/ajax/libs/SVG-Morpheus/0.1.8/svg-morpheus.js')

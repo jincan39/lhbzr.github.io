@@ -1,4 +1,4 @@
-/* global TimelineMax, TweenMax */
+/* global TimelineMax */
 
 import setStrokeDash from './lib/setStrokeDash'
 import wrapLettersWithElement from './lib/wrapLettersWithElement'
@@ -58,7 +58,7 @@ export function projectOpen (target) {
     .staggerFromTo(target.querySelectorAll('.project-desc span'), 0.05, { autoAlpha: 0 }, { autoAlpha: 1 }, 0.005, 'text')
 
     // Link.
-    .fromTo(target.querySelector('.project-link'), 0.4, { autoAlpha: 0, x: -25 }, { autoAlpha: 1, x: 0 }, 'nav')
+    .fromTo(target.querySelector('.project-link'), 0.4, { autoAlpha: 0 }, { autoAlpha: 1 }, 'nav')
 
     // Navigation.
     .fromTo('.project-item.is-active .project-media-btn-prev', 0.4, { opacity: 0, y: 25 }, { opacity: 1, y: 0 }, 'nav')
@@ -82,7 +82,7 @@ export function projectClose (target) {
     .to('.project-item.is-active .project-media-btn-next', 0.4, { opacity: 0, y: -25 }, 'nav')
 
     // Link.
-    .to(target.querySelector('.project-link'), 0.4, { autoAlpha: 0, x: -25 }, 'nav')
+    .to(target.querySelector('.project-link'), 0.4, { autoAlpha: 0 }, 'nav')
 
     // Content.
     .to(target.querySelector('.project-media-list'), 1, { autoAlpha: 0 }, 'text')
@@ -134,8 +134,12 @@ function projectImgChange (items, direction) {
   const itemActive = items[itemActiveIndex]
   const itemSelected = items[itemSelectedIndex]
 
-  itemActive.classList.remove('is-active')
-  itemSelected.classList.add('is-active')
+  timeline
+    .to(itemActive, 0.6, { autoAlpha: 0, height: 0, onComplete: () => {
+      itemActive.classList.remove('is-active')
+      itemSelected.classList.add('is-active')
+    }})
+    .fromTo(itemSelected, 0.6, { autoAlpha: 0, height: 0 }, { autoAlpha: 1, height: itemSelected.querySelector('img').clientHeight })
 }
 
 /**

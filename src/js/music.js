@@ -36,7 +36,6 @@ export default class Music {
       'https://soundcloud.com/c2cdjs/down-the-road',
       'https://soundcloud.com/madeon/pay-no-mind',
       'https://soundcloud.com/futureclassic/hayden-james-something-about-you-2',
-      'https://soundcloud.com/kflay/5-am-w-something-a-la-mode',
       'https://soundcloud.com/majorlazer/major-lazer-dj-snake-lean-on-feat-mo',
       'https://soundcloud.com/themagician/lykke-li-i-follow-rivers-the-magician-remix',
       'https://soundcloud.com/rac/lana-del-rey-blue-jeans-rac',
@@ -74,7 +73,7 @@ export default class Music {
 
         if (data.stream_url) {
           _this.audio.src = data.stream_url + '?client_id=78c6552c14b382e23be3bce2fc411a82'
-          // _this.audio.play()
+          _this.audio.play()
         } else {
           _this.next()
         }
