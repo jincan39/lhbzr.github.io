@@ -74,6 +74,10 @@ export default class Music {
         if (data.stream_url) {
           _this.audio.src = data.stream_url + '?client_id=78c6552c14b382e23be3bce2fc411a82'
           _this.audio.play()
+
+          _this.audio.addEventListener('ended', () => {
+            _this.next()
+          })
         } else {
           _this.next()
         }
