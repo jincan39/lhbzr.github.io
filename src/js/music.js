@@ -27,7 +27,8 @@ export default class Music {
       'https://soundcloud.com/muse/supermassive-black-hole',
       'https://soundcloud.com/fosterthepeoplemusic/pumpedupkicks',
       'https://soundcloud.com/unablespain/the-hives-hate-to-say-i-told-you-so-unable-radio-edit',
-      'https://soundcloud.com/foals/foals-my-number'
+      'https://soundcloud.com/foals/foals-my-number',
+      'https://soundcloud.com/theblackkeys/fever'
     ]
 
     this.song = Math.floor(Math.random() * this.songs.length)
