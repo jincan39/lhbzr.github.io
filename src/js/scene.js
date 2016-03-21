@@ -9,12 +9,9 @@ import RGBShiftShader from './shaders/RGBShift'
 
 export default class Scene {
   constructor (music) {
-    this.clicked = false
     this.music = music
 
-    this.canvas = null
     this.renderer = null
-
     this.scene = null
     this.camera = null
 
@@ -30,32 +27,27 @@ export default class Scene {
 
     this.composer = null
 
-    this.mouse = {
-      x: 0,
-      y: 0
-    }
+    this.x = 0
+
+    this.clicked = false
 
     this.createRenderer()
     this.createScene()
-
     this.createGeometry()
     this.createLight()
     this.createShaders()
-
+    this.createEvents()
     this.render()
-
-    this.setElements()
   }
 
   createRenderer () {
-    this.canvas = document.querySelector('.canvas')
-
     this.renderer = new THREE.WebGLRenderer({
-      alpha: true,
-      canvas: this.canvas
+      alpha: true
     })
 
     this.renderer.setSize(window.innerWidth, window.innerHeight)
+
+    document.body.appendChild(this.renderer.domElement)
   }
 
   createScene () {
@@ -107,7 +99,7 @@ export default class Scene {
     this.composer = new EffectComposer(this.renderer)
 
     this.effect = new EffectComposer.ShaderPass(RGBShiftShader)
-    this.effect.uniforms.amount.value = 0.05
+    this.effect.uniforms.amount.value = 0.005
     this.effect.renderToScreen = true
 
     this.composer.addPass(new EffectComposer.RenderPass(this.scene, this.camera))
@@ -116,12 +108,38 @@ export default class Scene {
     this.renderer.render(this.scene, this.camera)
   }
 
+  createEvents () {
+    const _this = this
+
+    const triggers = document.querySelectorAll('.home, .js-projects-open, .js-about-open, .js-about-close')
+
+    Array.from(triggers).forEach((trigger) => {
+      trigger.addEventListener('click', (e) => {
+        _this.click(e)
+      })
+    })
+
+    window.addEventListener('resize', (e) => {
+      _this.resize(e)
+    })
+
+    window.addEventListener('mousemove', (e) => {
+      _this.mousemove(e)
+    })
+  }
+
   render () {
     const _this = this
 
-    TweenLite.to(_this.effect.uniforms.amount, 1, {
-      value: (_this.clicked) ? 0.005 : (_this.mouse.x / window.innerWidth)
-    })
+    if (window.innerWidth > 600) {
+      TweenLite.to(_this.effect.uniforms.amount, 1, {
+        value: (_this.clicked) ? 0.005 : (_this.x / window.innerWidth)
+      })
+    } else {
+      TweenLite.to(_this.effect.uniforms.amount, 1, {
+        value: 0.01
+      })
+    }
 
     _this.geometry.forEach((geometry, index) => {
       let value
@@ -156,8 +174,7 @@ export default class Scene {
   }
 
   mousemove (e) {
-    this.mouse.x = e.clientX - window.innerWidth / 2
-    this.mouse.y = e.clientY - window.innerHeight / 2
+    this.x = e.clientX - window.innerWidth / 2
   }
 
   click () {
@@ -186,17 +203,5 @@ export default class Scene {
 
       this.clicked = true
     }
-  }
-
-  setElements () {
-    const _this = this
-
-    const elements = document.querySelectorAll('.home, .js-projects-open, .js-about-open, .js-about-close')
-
-    Array.from(elements).forEach((element) => {
-      element.addEventListener('click', (e) => {
-        _this.click(e)
-      })
-    })
   }
 }

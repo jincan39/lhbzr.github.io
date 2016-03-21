@@ -2,6 +2,8 @@
 
 import 'babel-polyfill'
 
+import Detector from './lib/detector'
+
 import get from './lib/get'
 
 import Music from './music'
@@ -15,128 +17,131 @@ import { projectsSet, projectsClose } from './projects'
 import { projectSet } from './project'
 import { buttonsSet } from './buttons'
 
-(function () {
-  document.body.classList.add('is-loaded')
+document.body.classList.add('is-loaded')
 
-  const logoPath = document.querySelectorAll('.logo path')
+const logoPath = document.querySelectorAll('.logo path')
 
-  const homeBtnPath = document.querySelectorAll('.home-menu-item path')
-  const homeBtnText = document.querySelectorAll('.home-menu-item .btn-text')
+const homeBtnPath = document.querySelectorAll('.home-menu-item path')
+const homeBtnText = document.querySelectorAll('.home-menu-item .btn-text')
 
-  /**
-   * Logo.
-   */
-  logoSet()
+/**
+ * Logo.
+ */
+logoSet()
 
-  /**
-   * Elements.
-   */
-  aboutSet()
-  projectsSet()
-  projectSet()
-  buttonsSet()
+/**
+ * Elements.
+ */
+aboutSet()
+projectsSet()
+projectSet()
+buttonsSet()
 
-  /**
-   * Strokes.
-   */
-  setStrokeDash(logoPath)
-  setStrokeDash(homeBtnPath)
+/**
+ * Strokes.
+ */
+setStrokeDash(logoPath)
+setStrokeDash(homeBtnPath)
 
-  /**
-   * Music.
-   */
-  const music = new Music()
-  const musicToggle = document.querySelector('.music-toggle')
-  const musicPrev = document.querySelector('.music-prev')
-  const musicNext = document.querySelector('.music-next')
+/**
+ * Music.
+ */
+const music = new Music()
+const musicToggle = document.querySelector('.music-toggle')
+const musicPrev = document.querySelector('.music-prev')
+const musicNext = document.querySelector('.music-next')
 
-  music.audio.addEventListener('pause', () => {
-    musicToggle.classList.add('is-paused')
-  })
+music.audio.addEventListener('pause', () => {
+  musicToggle.classList.add('is-paused')
+})
 
-  music.audio.addEventListener('play', () => {
-    musicToggle.classList.remove('is-paused')
-  })
+music.audio.addEventListener('play', () => {
+  musicToggle.classList.remove('is-paused')
+})
 
-  music.audio.addEventListener('ended', () => {
-    music.next()
-  })
+music.audio.addEventListener('ended', () => {
+  music.next()
+})
 
-  musicToggle.addEventListener('click', () => {
-    if (music.isPaused()) {
-      music.play()
-    } else {
-      music.pause()
-    }
-  })
+musicToggle.addEventListener('click', () => {
+  if (music.isPaused()) {
+    music.play()
+  } else {
+    music.pause()
+  }
+})
 
-  musicPrev.addEventListener('click', () => {
-    music.prev()
-  })
+musicPrev.addEventListener('click', () => {
+  music.prev()
+})
 
-  musicNext.addEventListener('click', () => {
-    music.next()
-  })
+musicNext.addEventListener('click', () => {
+  music.next()
+})
 
-  /**
-   * Scene.
-   */
+/**
+ * Scene.
+ */
+if (Detector.webgl) {
   const scene = new Scene(music)
+} else {
+  const alert = document.createElement('div')
 
-  /**
-   * SVG.
-   */
-  get('dist/svg/svg.svg', (response) => {
-    const body = document.body
-    const div = document.createElement('div')
+  alert.className = 'alert'
+  alert.innerHTML = `The full experience of LHBZR requires WebGL, please updgrade your browser to the latest
+                     <a href='http://mozilla.org/firefox/' class='alert-link' target='_blank'>Mozilla Firefox</a>
+                     or <a href='http://www.google.com/chrome/' class='alert-link' target='_blank'>Google Chrome</a>.`
 
-    div.style.display = 'none'
-    div.innerHTML = response.responseText.replace(/\n/g, '')
+  document.body.appendChild(alert)
+}
 
-    body.insertBefore(div, body.childNodes[0])
-  })
+/**
+ * SVG.
+ */
+get('dist/svg/svg.svg', (response) => {
+  const body = document.body
+  const div = document.createElement('div')
 
-  /**
-   * Home.
-   */
-  const home = document.querySelector('.home')
+  div.style.display = 'none'
+  div.innerHTML = response.responseText.replace(/\n/g, '')
 
-  home.addEventListener('click', (e) => {
-    projectsClose()
-  })
+  body.insertBefore(div, body.childNodes[0])
+})
 
-  home.addEventListener('mousewheel', (e) => {
-    let value = Math.round(music.audio.volume * 100) / 100
+/**
+ * Home.
+ */
+const home = document.querySelector('.home')
 
-    if (e.wheelDelta < 0 && value - 0.05 >= 0) {
-      value = Math.abs(value - 0.05)
-    } else if (e.wheelDelta > 0 && value + 0.05 <= 1) {
-      value = Math.abs(value + 0.05)
-    }
+home.addEventListener('click', (e) => {
+  projectsClose()
+})
 
-    music.audio.volume = value
-  })
+home.addEventListener('mousewheel', (e) => {
+  let value = Math.round(music.audio.volume * 100) / 100
 
-  /**
-   * Window.
-   */
-  window.addEventListener('resize', (e) => {
-    logoSet()
+  if (e.wheelDelta < 0 && value - 0.05 >= 0) {
+    value = Math.abs(value - 0.05)
+  } else if (e.wheelDelta > 0 && value + 0.05 <= 1) {
+    value = Math.abs(value + 0.05)
+  }
 
-    scene.resize(e)
-  }, false)
+  music.audio.volume = value
+})
 
-  window.addEventListener('mousemove', (e) => {
-    scene.mousemove(e)
-  }, false)
+/**
+ * Window.
+ */
+window.addEventListener('resize', (e) => {
+  logoSet()
+}, false)
 
-  /**
-   * Loaded.
-   */
-  const timeline = new TimelineMax()
+/**
+ * Loaded.
+ */
+const timeline = new TimelineMax()
 
-  timeline
-    .to(logoPath, 2, { strokeDashoffset: 0 })
-    .to(homeBtnPath, 0.4, { strokeDashoffset: 0 }, 'btn')
-    .from(homeBtnText, 0.4, { autoAlpha: 0 }, 'btn')
-})()
+timeline
+  .to(logoPath, 2, { strokeDashoffset: 0 })
+  .to(homeBtnPath, 0.4, { strokeDashoffset: 0 }, 'btn')
+  .from(homeBtnText, 0.4, { autoAlpha: 0 }, 'btn')

@@ -1,4 +1,4 @@
-/* global TweenMax, TimelineMax */
+/* global TimelineMax */
 
 import setStrokeDash from './lib/setStrokeDash'
 import wrapLettersWithElement from './lib/wrapLettersWithElement'
