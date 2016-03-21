@@ -23,6 +23,7 @@ class App {
 
     this.createRender()
     this.createScene()
+    this.createGeometry()
 
     this.update()
   }
@@ -60,41 +61,47 @@ class App {
     this.scene = new THREE.Scene()
 
     this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.01, 1000)
-    this.camera.position.set(0, 0, -10)
+    this.camera.position.z = 275
 
     this.controls = new OrbitControls(this.camera, this.renderer.domElement)
   }
 
   createGeometry () {
-    const material = new THREE.PointCloudMaterial({
-      size: 10,
-      vertexColors: THREE.VertexColors
+    this.group = new THREE.Object3D()
+
+    const sphereGeometry = new THREE.SphereGeometry(100, 32, 32)
+    const sphereMaterial = new THREE.MeshBasicMaterial({
+      blending: THREE.AdditiveBlending,
+      color: 0x00FFFF,
+      opacity: 0.1,
+      transparent: true,
+      wireframe: true
     })
 
-    // const geometry = new THREE.SphereGeometry(10, 35, 2)
+    this.sphere = new THREE.Mesh(sphereGeometry, sphereMaterial)
+    this.group.add(this.sphere)
 
-    var geometry = new THREE.Geometry()
-    var x, y, z
+    const galaxyGeometry = new THREE.SphereGeometry(100, 32, 32)
+    const galaxyMaterial = new THREE.PointsMaterial({
+      blending: THREE.AdditiveBlending,
+      color: 0x00FFFFF,
+      opacity: 1,
+      transparent: true,
+      size: 2
+    })
 
-    for (var i = 0; i <= 1000; i++) {
-      x = (Math.random() * 10) - 10
-      y = (Math.random() * 10) - 10
-      z = (Math.random() * 10) - 10
+    this.galaxy = new THREE.Points(galaxyGeometry, galaxyMaterial)
+    this.group.add(this.galaxy)
 
-      geometry.vertices.push(new THREE.Vector3(x, y, z))
-    }
-
-    const cloud = new THREE.PointCloud(geometry, material)
-
-    console.log(cloud)
-
-    this.scene.add(cloud)
+    this.scene.add(this.group)
   }
 
   update () {
     this.stats.begin()
 
     this.renderer.render(this.scene, this.camera)
+
+    this.group.rotation.y += 0.01
 
     this.controls.update()
 
