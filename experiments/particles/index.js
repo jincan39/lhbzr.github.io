@@ -6,6 +6,8 @@ const THREE = require('three')
 const dat = require('dat-gui')
 const Stats = require('stats-js')
 
+const glslify = require('glslify')
+
 const OrbitControls = require('three-orbit-controls')(THREE)
 
 class App {
@@ -61,7 +63,7 @@ class App {
     this.scene = new THREE.Scene()
 
     this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.01, 1000)
-    this.camera.position.z = 275
+    this.camera.position.z = 35
 
     this.controls = new OrbitControls(this.camera, this.renderer.domElement)
   }
@@ -69,31 +71,21 @@ class App {
   createGeometry () {
     this.group = new THREE.Object3D()
 
-    const sphereGeometry = new THREE.SphereGeometry(100, 32, 32)
-    const sphereMaterial = new THREE.MeshBasicMaterial({
+    const galaxyMaterial = new THREE.ShaderMaterial({
       blending: THREE.AdditiveBlending,
-      color: 0x00FFFF,
-      opacity: 0.1,
       transparent: true,
-      wireframe: true
+      uniforms: {
+        color: { type: 'c', value: new THREE.Color(0xFFFFFF) }
+      },
+      fragmentShader: glslify('./shaders/particleFrag.glsl'),
+      vertexShader: glslify('./shaders/particleVert.glsl')
     })
 
-    this.sphere = new THREE.Mesh(sphereGeometry, sphereMaterial)
-    this.group.add(this.sphere)
-
-    const galaxyGeometry = new THREE.SphereGeometry(100, 32, 32)
-    const galaxyMaterial = new THREE.PointsMaterial({
-      blending: THREE.AdditiveBlending,
-      color: 0x00FFFFF,
-      opacity: 1,
-      transparent: true,
-      size: 2
-    })
+    const galaxyGeometry = new THREE.SphereGeometry(10, 35, 35)
 
     this.galaxy = new THREE.Points(galaxyGeometry, galaxyMaterial)
-    this.group.add(this.galaxy)
 
-    this.scene.add(this.group)
+    this.scene.add(this.galaxy)
   }
 
   update () {
