@@ -1,40 +1,21 @@
-## LHBZR
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
+### LHBZR
+LHBZR is my portfolio made with Web Graphics Library (Three.js) and Web Audio.
 
-LHBZR is a experimental personal website made with Web Audio API via Soundcloud and Web Graphics Library using Three.js.
+[![JS Standard Style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
+[![MIT License](https://img.shields.io/badge/license-mit-blue.svg)](LICENSE)
 
-### Getting Started
-```sh
-# Clone this repository.
-git clone https://github.com/lhbzr/lhbzr.github.io.git
+### Experiments
+[![Triangles Experiment](/dist/img/projects/triangles.jpg)](/experiments/triangles/)
+[![Sphere Experiment](/dist/img/projects/sphere.jpg)](/experiments/sphere/)
+[![Deform Experiment](/dist/img/projects/deform.jpg)](/experiments/deform/)
 
-# Enter in the folder.
-cd lhbzr
-
-# Install dependencies.
-npm install
-```
-
-### Tasks
-```sh
-# Compile HTML files with Jade.
-gulp html
-
-# Compile CSS files with Stylus and Autoprefixer.
-gulp css
-
-# Compile JavaScript files with Babel, Browserify and Uglify.
-gulp js
-
-# Minify images with Imagemin.
-gulp img
-
-# Generate SVG sprites with SVGStore.
-gulp svg
-
-# Watch file changes and start Browsersync.
-gulp watch
-
-# Run everything and prepare production.
-gulp build
-```
+### Soundtrack
+- [I Won't Let You Down by OK Go](https://soundcloud.com/okgo/i-wont-let-you-down)
+- [Wrong Club by The Ting Tings](https://soundcloud.com/the-ting-tings/wrong-club)
+- [How You Like Me Now by The Heavy](https://soundcloud.com/theheavyyy/like-me)
+- [Ain't It Fun by Paramore](https://soundcloud.com/fueled_by_ramen/paramore-aint-it-fun)
+- [Supermassive Black Hole by Muse](https://soundcloud.com/muse/supermassive-black-hole)
+- [Pumped Up Kicks by Foster The People](https://soundcloud.com/fosterthepeoplemusic/pumpedupkicks)
+- [Hate To Say I Told You So by The Hives](https://soundcloud.com/unablespain/the-hives-hate-to-say-i-told-you-so-unable-radio-edit)
+- [My Number by Foals](https://soundcloud.com/foals/foals-my-number)
+- [Fever by The Black Keys](https://soundcloud.com/theblackkeys/fever)
