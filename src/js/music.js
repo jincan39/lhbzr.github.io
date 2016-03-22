@@ -66,8 +66,11 @@ export default class Music {
       (request) => {
         const data = JSON.parse(request.responseText)
 
+        const music = document.querySelector('.music')
         const musicTitle = document.querySelector('.music-title')
         const musicUser = document.querySelector('.music-user')
+
+        music.classList.add('is-active')
 
         musicTitle.setAttribute('href', data.permalink_url)
         musicTitle.textContent = data.title
