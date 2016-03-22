@@ -5,16 +5,16 @@
     return Math.floor(Math.random() * (max - min + 1) + min)
   }
 
-  var windowClicked = false
-
   var mouseX = 0
+
+  var isClicked = false
 
   var audio
   var audioContext
   var audioAnalyser
   var audioSource
   var audioFrequency
-  var request
+  var audioRequest
 
   function initAudio () {
     audio = new Audio()
@@ -31,13 +31,13 @@
 
     audioSource.connect(audioAnalyser)
 
-    request = new XMLHttpRequest()
+    audioRequest = new XMLHttpRequest()
 
-    request.open('GET', '//api.soundcloud.com/resolve.json?url=https://soundcloud.com/theblackkeys/gold-on-the-ceiling&client_id=78c6552c14b382e23be3bce2fc411a82', true)
+    audioRequest.open('GET', '//api.soundcloud.com/resolve.json?url=https://soundcloud.com/theblackkeys/gold-on-the-ceiling&client_id=78c6552c14b382e23be3bce2fc411a82', true)
 
-    request.onreadystatechange = function () {
-      if (request.readyState === 4 && request.status === 200) {
-        var information = JSON.parse(request.responseText)
+    audioRequest.onreadystatechange = function () {
+      if (audioRequest.readyState === 4 && audioRequest.status === 200) {
+        var information = JSON.parse(audioRequest.responseText)
 
         audio.src = information.stream_url + '?client_id=78c6552c14b382e23be3bce2fc411a82'
         audio.play()
@@ -56,12 +56,14 @@
       }
     }
 
-    request.send()
+    audioRequest.send()
 
     audioAnalyser.connect(audioContext.destination)
 
     audioFrequency = new Uint8Array(audioAnalyser.frequencyBinCount)
   }
+
+  initAudio()
 
   var scene
   var camera
@@ -70,11 +72,13 @@
   var composer
 
   var circle = new THREE.Object3D()
+
   var triangle = []
   var triangleGeometry = new THREE.TetrahedronGeometry(45, 0)
   var triangleMaterial = new THREE.MeshPhongMaterial({ color: 0xFFFFFF })
   var triangleSleeve = []
   var triangleLength = 100
+
   var effectOne
   var effectTwo
 
@@ -132,13 +136,15 @@
     document.body.appendChild(renderer.domElement)
   }
 
+  initScene()
+
   function render () {
     requestAnimationFrame(render)
 
     for (var i = 0; i < triangleLength; i++) {
       var value = ((audioFrequency[i] / 256) * 2.5) + 0.01
 
-      if (windowClicked) {
+      if (isClicked) {
         TweenLite.to(triangle[i].scale, 0.1, {
           x: value,
           y: value,
@@ -171,7 +177,7 @@
   }
 
   window.addEventListener('click', function () {
-    if (windowClicked) {
+    if (isClicked) {
       for (var i = 0; i < triangleLength; i++) {
         TweenLite.to(triangle[i].scale, 1, {
           x: 1,
@@ -192,11 +198,11 @@
         })
       }
 
-      effectOne.uniforms['scale'].value = 5
+      effectOne.uniforms.scale.value = 5
 
       triangleMaterial.wireframe = false
 
-      windowClicked = false
+      isClicked = false
     } else {
       for (var j = 0; j < triangleLength; j++) {
         TweenLite.to(triangle[j].rotation, 1, {
@@ -212,13 +218,15 @@
         })
       }
 
-      effectOne.uniforms['scale'].value = 0
+      effectOne.uniforms.scale.value = 0
 
       triangleMaterial.wireframe = true
 
-      windowClicked = true
+      isClicked = true
     }
   })
+
+  render()
 
   window.addEventListener('resize', function () {
     camera.aspect = window.innerWidth / window.innerHeight
@@ -242,8 +250,4 @@
   window.addEventListener('mousemove', function (e) {
     mouseX = e.clientX - window.innerWidth / 2
   })
-
-  initAudio()
-  initScene()
-  render()
 })()

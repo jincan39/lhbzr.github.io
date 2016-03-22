@@ -1,4 +1,4 @@
-/* global XMLHttpRequest, Audio, Power0, requestAnimationFrame, TweenLite */
+/* global Audio, Power0, requestAnimationFrame, TweenLite, XMLHttpRequest */
 
 require('gsap')
 
@@ -25,6 +25,8 @@ class App {
     this.url = 'https://soundcloud.com/pallace/pallace-joy-pain'
 
     this.gui = null
+    this.stats = null
+
     this.renderer = null
     this.scene = null
     this.camera = null
@@ -33,12 +35,15 @@ class App {
     this.clock = new THREE.Clock({ autoStart: true })
 
     this.loadSong()
+
     this.createRender()
     this.createScene()
     this.createGeometry()
     this.createShaders()
+
     // this.startGUI()
     // this.startStats()
+
     this.update()
   }
 
