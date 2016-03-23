@@ -146,7 +146,7 @@ export function aboutSet () {
    * Event Listener: Window.
    */
   window.addEventListener('resize', () => {
-    if (document.querySelector('.about').classList.contains('is-active')) {
+    if (about.classList.contains('is-active')) {
       logoSetAbout()
     }
   })

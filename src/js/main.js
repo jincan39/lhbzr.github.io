@@ -130,6 +130,15 @@ home.addEventListener('mousewheel', (e) => {
 })
 
 /**
+ * Window.
+ */
+window.addEventListener('resize', () => {
+  if (!document.querySelector('.about').classList.contains('is-active') && !document.querySelector('.project').classList.contains('is-active')) {
+    logoSet()
+  }
+})
+
+/**
  * Loaded.
  */
 const timeline = new TimelineMax()

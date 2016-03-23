@@ -211,7 +211,7 @@ export function projectSet () {
    * Event Listener: Window.
    */
   window.addEventListener('resize', () => {
-    if (document.querySelector('.project').classList.contains('is-active')) {
+    if (project.classList.contains('is-active')) {
       logoSetProject()
     }
   })
