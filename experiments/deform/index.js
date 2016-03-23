@@ -17,9 +17,9 @@ class App {
   constructor () {
     this.uniforms = {
       background: '#FF7800',
+      brightness: 1,
       color: '#FFFFFF',
-      speed: 1,
-      brightness: 1
+      speed: 1
     }
 
     this.url = 'https://soundcloud.com/pallace/pallace-joy-pain'
@@ -41,14 +41,17 @@ class App {
     this.createGeometry()
     this.createShaders()
 
-    // this.startGUI()
-    // this.startStats()
+    this.startGUI()
+    this.startStats()
+    this.toggleDebug()
 
     this.update()
   }
 
   startGUI () {
     this.gui = new dat.GUI()
+
+    this.gui.domElement.style.display = 'none'
 
     const _this = this
 
@@ -68,13 +71,24 @@ class App {
   startStats () {
     this.stats = new Stats()
 
-    this.stats.domElement.style.display = 'block'
+    this.stats.domElement.style.display = 'none'
     this.stats.domElement.style.left = 0
     this.stats.domElement.style.position = 'absolute'
     this.stats.domElement.style.top = 0
     this.stats.domElement.style.zIndex = 50
 
     document.body.appendChild(this.stats.domElement)
+  }
+
+  toggleDebug () {
+    window.addEventListener('keydown', (e) => {
+      switch (e.keyCode) {
+        case 68:
+          this.stats.domElement.style.display = (this.stats.domElement.style.display === 'block') ? 'none' : 'block'
+          this.gui.domElement.style.display = (this.gui.domElement.style.display === 'block') ? 'none' : 'block'
+          break
+      }
+    })
   }
 
   createRender () {
@@ -179,7 +193,7 @@ class App {
   }
 
   update () {
-    // this.stats.begin()
+    this.stats.begin()
 
     this.controls.update()
 
@@ -203,7 +217,7 @@ class App {
       y: '+= 0.01'
     })
 
-    // this.stats.end()
+    this.stats.end()
 
     requestAnimationFrame(this.update.bind(this))
 
