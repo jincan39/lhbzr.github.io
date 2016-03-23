@@ -1,11 +1,11 @@
 #pragma glslify: curl = require(glsl-curl-noise)
 
-attribute vec3 position;
+uniform float time;
 
 void main() {
-    vec3 positionRandom = curl(position);
-    vec4 positionMv = modelViewMatrix * vec4(positionRandom, 1.0);
+    vec3 positionRadom = curl(position + time) * -10.0;
+    vec4 positionMv = modelViewMatrix * vec4(positionRadom, 1.0);
 
-    gl_PointSize = 1.0;
+    gl_PointSize = 1.5;
     gl_Position = projectionMatrix * positionMv;
 }
