@@ -41,7 +41,9 @@ export function aboutOpen () {
 
     // Close.
     .staggerTo(aboutBtnClosePath, 0.4, { strokeDashoffset: 0 }, 0.2, 'appear')
-    .fromTo(aboutBtnCloseText, 0.4, { autoAlpha: 0 }, { autoAlpha: 1 }, 'appear')
+    .fromTo(aboutBtnCloseText, 0.4, { autoAlpha: 0 }, { autoAlpha: 1, onComplete: () => {
+      about.classList.add('is-active')
+    }}, 'appear')
 }
 
 export function aboutClose () {
@@ -62,7 +64,9 @@ export function aboutClose () {
       logoSetHome()
     }}, '-= 0.2')
     .staggerTo(homeBtnPath, 0.4, { strokeDashoffset: 0 }, 0.2, 'other')
-    .to(homeBtnText, 0.4, { autoAlpha: 1 }, 'other')
+    .to(homeBtnText, 0.4, { autoAlpha: 1, onComplete: () => {
+      about.classList.remove('is-active')
+    }}, 'other')
 }
 
 /**
@@ -136,5 +140,14 @@ export function aboutSet () {
     link.addEventListener('mouseleave', () => {
       aboutLinkLeave(link)
     })
+  })
+
+  /**
+   * Event Listener: Window.
+   */
+  window.addEventListener('resize', () => {
+    if (document.querySelector('.about').classList.contains('is-active')) {
+      logoSetAbout()
+    }
   })
 }

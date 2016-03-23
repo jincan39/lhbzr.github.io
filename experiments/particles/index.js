@@ -81,7 +81,7 @@ class App {
       vertexShader: glslify('./shaders/particleVert.glsl')
     })
 
-    const galaxyGeometry = new THREE.SphereGeometry(10, 35, 35)
+    const galaxyGeometry = new THREE.SphereGeometry(10, 500, 500)
 
     this.galaxy = new THREE.Points(galaxyGeometry, galaxyMaterial)
 

@@ -66,7 +66,9 @@ export function projectOpen (target) {
 
     // Close.
     .staggerTo(projectBtnClosePath, 0.4, { strokeDashoffset: 0 }, 0.2, 'nav')
-    .fromTo(projectBtnCloseText, 0.4, { autoAlpha: 0 }, { autoAlpha: 1 }, 'nav')
+    .fromTo(projectBtnCloseText, 0.4, { autoAlpha: 0 }, { autoAlpha: 1, onComplete: () => {
+      project.classList.add('is-active')
+    }}, 'nav')
 }
 
 export function projectClose (target) {
@@ -105,7 +107,9 @@ export function projectClose (target) {
     }})
     .to(home, 0.4, { autoAlpha: 1 }, 'disappear')
     .to(projects, 0.4, { x: '0%' }, 'disappear')
-    .set(target.querySelector('.project-media-list'), { clearProps: 'all' }, 'disappear')
+    .set(target.querySelector('.project-media-list'), { clearProps: 'all', onComplete: () => {
+      project.classList.remove('is-active')
+    }}, 'disappear')
 }
 
 /**
@@ -201,5 +205,14 @@ export function projectSet () {
 
       e.preventDefault()
     })
+  })
+
+  /**
+   * Event Listener: Window.
+   */
+  window.addEventListener('resize', () => {
+    if (document.querySelector('.project').classList.contains('is-active')) {
+      logoSetProject()
+    }
   })
 }
