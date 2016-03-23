@@ -7,6 +7,8 @@ const dat = require('dat-gui')
 const Stats = require('stats-js')
 
 const OrbitControls = require('three-orbit-controls')(THREE)
+const OBJLoader = require('./loaders/OBJLoader')
+const MTLLoader = require('./loaders/MTLLoader')
 
 class App {
   constructor () {
@@ -22,6 +24,7 @@ class App {
 
     this.createRender()
     this.createScene()
+    this.createLight()
     this.createGeometry()
 
     this.startGUI()
@@ -77,13 +80,35 @@ class App {
     this.scene = new THREE.Scene()
 
     this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.01, 1000)
-    this.camera.position.z = 30
+    this.camera.position.z = 100
 
     this.controls = new OrbitControls(this.camera, this.renderer.domElement)
   }
 
-  createGeometry () {
+  createLight () {
+    const light = new THREE.AmbientLight(0xFFFFFF)
 
+    this.scene.add(light)
+  }
+
+  createGeometry () {
+    const _this = this
+
+    var mtlLoader = new THREE.MTLLoader()
+
+    mtlLoader.load('models/granite-head-of-amenemhat-iii/Autodesk123DSculpt.mtl', (materials) => {
+      materials.preload()
+
+      const objLoader = new THREE.OBJLoader()
+
+      objLoader.setMaterials(materials)
+
+      objLoader.load('models/granite-head-of-amenemhat-iii/sculpt.obj', (object) => {
+        object.position.y = -95
+
+        _this.scene.add(object)
+      })
+    })
   }
 
   update () {
