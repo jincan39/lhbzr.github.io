@@ -1,5 +1,7 @@
 /* global Power0, requestAnimationFrame, TweenLite */
 
+import isMobile from 'ismobilejs'
+
 import randomInt from './lib/randomInt'
 
 import THREE from 'three'
@@ -18,7 +20,7 @@ export default class Scene {
     this.circle = new THREE.Object3D()
     this.geometry = []
     this.geometrySleeve = []
-    this.geometryLength = 100
+    this.geometryLength = !isMobile.phone ? 100 : 30
     this.geometryType = [
       new THREE.TetrahedronGeometry(50, 0),
       new THREE.IcosahedronGeometry(40, 0),
