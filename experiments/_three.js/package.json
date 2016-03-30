@@ -1,6 +1,6 @@
 {
-  "name": "untitled",
-  "description": "Untitled Experiment by Luis Henrique Bizarro.",
+  "name": "three.js",
+  "description": "Three.js Experiment Boilerplate by Luis Henrique Bizarro.",
   "devDependencies": {
     "babel-preset-es2015": "^6.3.13",
     "babelify": "^7.2.0",

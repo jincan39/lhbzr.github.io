@@ -3,7 +3,7 @@
 require('gsap')
 
 const THREE = require('three')
-const dat = require('dat-gui')
+const DatGUI = require('dat-gui')
 const Stats = require('stats-js')
 
 const OrbitControls = require('three-orbit-controls')(THREE)
@@ -32,7 +32,7 @@ class App {
   }
 
   startGUI () {
-    this.gui = new dat.GUI()
+    this.gui = new DatGUI.GUI()
 
     this.gui.domElement.style.display = 'none'
   }
