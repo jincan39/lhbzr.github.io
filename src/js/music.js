@@ -22,15 +22,19 @@ export default class Music {
     }
 
     this.songs = [
-      'https://soundcloud.com/okgo/i-wont-let-you-down',
+      // 'https://soundcloud.com/okgo/i-wont-let-you-down',
       'https://soundcloud.com/the-ting-tings/wrong-club',
       'https://soundcloud.com/theheavyyy/like-me',
       'https://soundcloud.com/fueled_by_ramen/paramore-aint-it-fun',
-      'https://soundcloud.com/muse/supermassive-black-hole',
-      'https://soundcloud.com/fosterthepeoplemusic/pumpedupkicks',
+      // 'https://soundcloud.com/muse/supermassive-black-hole',
+      // 'https://soundcloud.com/fosterthepeoplemusic/pumpedupkicks',
       'https://soundcloud.com/unablespain/the-hives-hate-to-say-i-told-you-so-unable-radio-edit',
-      'https://soundcloud.com/foals/foals-my-number',
-      'https://soundcloud.com/theblackkeys/fever'
+      // 'https://soundcloud.com/foals/foals-my-number',
+      // 'https://soundcloud.com/theblackkeys/fever',
+      'https://soundcloud.com/warnerbrosrecords/franz-ferdinand-right-action-3',
+      'https://soundcloud.com/warnerbrosrecords/the-black-keys-gold-on-the',
+      'https://soundcloud.com/plusonemusic/the-kooks-naive',
+      'https://soundcloud.com/jive-records/01-in-one-ear'
     ]
 
     this.song = Math.floor(Math.random() * this.songs.length)
@@ -62,7 +66,7 @@ export default class Music {
     this.songNext = (this.song !== this.songs.length - 1) ? this.song + 1 : 0
 
     get(
-      `//api.soundcloud.com/resolve.json?url=${this.songs[song]}&client_id=78c6552c14b382e23be3bce2fc411a82`,
+      `//api.soundcloud.com/resolve.json?url=${this.songs[song]}&client_id=d764995c8ec4e9f30f85b3bd8396312c`,
       (request) => {
         const data = JSON.parse(request.responseText)
 

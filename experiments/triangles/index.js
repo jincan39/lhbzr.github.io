@@ -33,13 +33,13 @@
 
     audioRequest = new XMLHttpRequest()
 
-    audioRequest.open('GET', '//api.soundcloud.com/resolve.json?url=https://soundcloud.com/theblackkeys/gold-on-the-ceiling&client_id=78c6552c14b382e23be3bce2fc411a82', true)
+    audioRequest.open('GET', '//api.soundcloud.com/resolve.json?url=https://soundcloud.com/warnerbrosrecords/the-black-keys-gold-on-the&client_id=d764995c8ec4e9f30f85b3bd8396312c', true)
 
     audioRequest.onreadystatechange = function () {
       if (audioRequest.readyState === 4 && audioRequest.status === 200) {
         var information = JSON.parse(audioRequest.responseText)
 
-        audio.src = information.stream_url + '?client_id=78c6552c14b382e23be3bce2fc411a82'
+        audio.src = information.stream_url + '?client_id=d764995c8ec4e9f30f85b3bd8396312c'
         audio.play()
 
         audio.addEventListener('ended', function () {
