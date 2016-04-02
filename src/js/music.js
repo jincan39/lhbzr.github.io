@@ -22,19 +22,16 @@ export default class Music {
     }
 
     this.songs = [
-      // 'https://soundcloud.com/okgo/i-wont-let-you-down',
       'https://soundcloud.com/the-ting-tings/wrong-club',
-      'https://soundcloud.com/theheavyyy/like-me',
       'https://soundcloud.com/fueled_by_ramen/paramore-aint-it-fun',
-      // 'https://soundcloud.com/muse/supermassive-black-hole',
-      // 'https://soundcloud.com/fosterthepeoplemusic/pumpedupkicks',
       'https://soundcloud.com/unablespain/the-hives-hate-to-say-i-told-you-so-unable-radio-edit',
-      // 'https://soundcloud.com/foals/foals-my-number',
-      // 'https://soundcloud.com/theblackkeys/fever',
       'https://soundcloud.com/warnerbrosrecords/franz-ferdinand-right-action-3',
       'https://soundcloud.com/warnerbrosrecords/the-black-keys-gold-on-the',
+      'https://soundcloud.com/plusonemusic/the-heavy-how-you-like-me-now',
       'https://soundcloud.com/plusonemusic/the-kooks-naive',
-      'https://soundcloud.com/jive-records/01-in-one-ear'
+      'https://soundcloud.com/jive-records/06-back-against-the-wall',
+      'https://soundcloud.com/daftpunk-music/daft-punk-instant-crush-casablancas',
+      'https://soundcloud.com/wichita-recordings/peter-bjorn-and-john-young-folks'
     ]
 
     this.song = Math.floor(Math.random() * this.songs.length)
