@@ -7,20 +7,27 @@ LHBZR is my portfolio made with Web Graphics Library (Three.js) and Web Audio.
 ### Experiments
 <table>
   <tr>
-    <td>![Particles Experiment](/dist/img/projects/particles.jpg)</td>
-    <td>![Deform Experiment](/dist/img/projects/deform.jpg)</td>
+    <td><img src="/dist/img/projects/particles.jpg"></td>
+    <td><img src="/dist/img/projects/deform.jpg"></td>
   </tr>
   <tr>
-    <td align="center">[Launch Experiment](https://lhbzr.com/experiments/particles) | [Source Code](/experiments/particles)</td>
-    <td align="center">[Launch Experiment](https://lhbzr.com/experiments/deform) | [Source Code](/experiments/deform)</td>
+    <td align="center">
+      <a href="https://lhbzr.com/experiments/particles">Launch Experiment</a> | <a href="/experiments/particles">Source Code</a>
+    <td align="center">
+      <a href="https://lhbzr.com/experiments/deform">Launch Experiment</a> | <a href="/experiments/deform">Source Code</a>
+    </td>
   </tr>
   <tr>
-    <td>![Triangles Experiment](/dist/img/projects/triangles.jpg)</td>
-    <td>![Sphere Experiment](/dist/img/projects/sphere.jpg)</td>
+    <td><img src="/dist/img/projects/triangles.jpg"></td>
+    <td><img src="/dist/img/projects/sphere.jpg"></td>
   </tr>
   <tr>
-    <td align="center">[Launch Experiment](https://lhbzr.com/experiments/triangles) | [Source Code](/experiments/triangles)</td>
-    <td align="center">[Launch Experiment](https://lhbzr.com/experiments/sphere) | [Source Code](/experiments/sphere)</td>
+    <td align="center">
+      <a href="https://lhbzr.com/experiments/triangles">Launch Experiment</a> | <a href="/experiments/triangles">Source Code</a>
+    </td>
+    <td align="center">
+      <a href="https://lhbzr.com/experiments/sphere">Launch Experiment</a> | <a href="/experiments/sphere">Source Code</a>
+    </td>
   </tr>
 </table>
 
