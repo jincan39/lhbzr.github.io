@@ -5,9 +5,10 @@ LHBZR is my portfolio made with Web Graphics Library (Three.js) and Web Audio.
 [![MIT License](https://img.shields.io/badge/license-mit-blue.svg)](LICENSE)
 
 ### Experiments
+[![Particles Experiment](/dist/img/projects/particles.jpg)](/experiments/particles/)
+[![Deform Experiment](/dist/img/projects/deform.jpg)](/experiments/deform/)
 [![Triangles Experiment](/dist/img/projects/triangles.jpg)](/experiments/triangles/)
 [![Sphere Experiment](/dist/img/projects/sphere.jpg)](/experiments/sphere/)
-[![Deform Experiment](/dist/img/projects/deform.jpg)](/experiments/deform/)
 
 ### Soundtrack
 - [I Won't Let You Down by OK Go](https://soundcloud.com/okgo/i-wont-let-you-down)
