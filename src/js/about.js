@@ -12,6 +12,7 @@ const about = document.querySelector('.about')
 
 const aboutTitle = document.querySelector('.about-title')
 const aboutDesc = document.querySelectorAll('.about-desc')
+const aboutCredits = document.querySelector('.about-credits')
 
 const aboutBtnOpen = document.querySelector('.js-about-open')
 const aboutBtnClose = document.querySelector('.js-about-close')
@@ -39,6 +40,9 @@ export function aboutOpen () {
     .staggerFromTo('.about-desc span', 0.05, { autoAlpha: 0 }, { autoAlpha: 1 }, 0.005, 'appear')
     .staggerFromTo(aboutMenuLink, 0.4, { autoAlpha: 0, x: 50 }, { autoAlpha: 1, x: 0 }, 0.075, 'appear')
 
+    // Credits.
+    .fromTo(aboutCredits, 0.4, { autoAlpha: 0, x: -25 }, { autoAlpha: 1, x: 0 }, 'appear')
+
     // Close.
     .staggerTo(aboutBtnClosePath, 0.4, { strokeDashoffset: 0 }, 0.2, 'appear')
     .fromTo(aboutBtnCloseText, 0.4, { autoAlpha: 0 }, { autoAlpha: 1, onComplete: () => {
@@ -53,6 +57,9 @@ export function aboutClose () {
     // Close.
     .to(aboutBtnCloseText, 0.4, { autoAlpha: 0 }, 'disappear')
     .staggerTo(aboutBtnClosePath, 0.4, { strokeDashoffset: 135 }, -0.2, 'disappear')
+
+    // Credits.
+    .to(aboutCredits, 0.4, { autoAlpha: 0, x: -25 }, 'disappear')
 
     // Content.
     .staggerTo(aboutMenuLink, 0.4, { autoAlpha: 0, x: 50 }, -0.075, 'disappear')
