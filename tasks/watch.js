@@ -1,5 +1,4 @@
 const pkg = require('../package.json')
-
 const gulp = require('gulp')
 
 gulp.task('watch', ['sync'], () => {

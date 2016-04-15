@@ -1,7 +1,5 @@
 const pkg = require('../package.json')
-
 const gulp = require('gulp')
-
 const jade = require('gulp-jade')
 const htmlmin = require('gulp-htmlmin')
 

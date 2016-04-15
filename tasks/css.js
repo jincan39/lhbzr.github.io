@@ -1,7 +1,5 @@
 const pkg = require('../package.json')
-
 const gulp = require('gulp')
-
 const stylus = require('gulp-stylus')
 const autoprefixer = require('gulp-autoprefixer')
 const cssnano = require('gulp-cssnano')

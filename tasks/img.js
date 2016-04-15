@@ -1,7 +1,5 @@
 const pkg = require('../package.json')
-
 const gulp = require('gulp')
-
 const changed = require('gulp-changed')
 const imagemin = require('gulp-imagemin')
 

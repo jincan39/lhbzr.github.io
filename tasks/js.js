@@ -1,15 +1,11 @@
 const pkg = require('../package.json')
-
 const gulp = require('gulp')
-
 const browserify = require('browserify')
 const babelify = require('babelify')
 const watchify = require('watchify')
 const uglify = require('gulp-uglify')
-
 const source = require('vinyl-source-stream')
 const buffer = require('vinyl-buffer')
-
 const util = require('gulp-util')
 
 gulp.task('js', () => {

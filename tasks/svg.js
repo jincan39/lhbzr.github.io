@@ -1,7 +1,5 @@
 const pkg = require('../package.json')
-
 const gulp = require('gulp')
-
 const svgstore = require('gulp-svgstore')
 
 gulp.task('svg', () => {
