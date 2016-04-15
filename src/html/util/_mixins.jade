@@ -1,0 +1,29 @@
+mixin projects-square
+  .projects-square
+    span.projects-square-top
+    span.projects-square-right
+    span.projects-square-bottom
+    span.projects-square-left
+
+    
+mixin projects-info(title, tag)
+  .projects-info
+    strong.projects-title=title
+      span.projects-title-hover=title
+      span.projects-title-bg
+
+    span.projects-tag=tag
+
+
+mixin project-square
+  .project-media-square
+    span.project-media-square-top
+    span.project-media-square-right
+    span.project-media-square-bottom
+    span.project-media-square-left
+    
+
+mixin project-arrows
+  .project-media-arrows
+    a.project-media-btn.project-media-btn-prev(href='#') Prev
+    a.project-media-btn.project-media-btn-next(href='#') Next
