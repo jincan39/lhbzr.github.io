@@ -41,7 +41,7 @@ export function aboutOpen () {
     .staggerFromTo(aboutMenuLink, 0.4, { autoAlpha: 0, x: 50 }, { autoAlpha: 1, x: 0 }, 0.075, 'appear')
 
     // Credits.
-    .fromTo(aboutCredits, 0.4, { autoAlpha: 0, x: -25 }, { autoAlpha: 1, x: 0 }, 'appear')
+    .fromTo(aboutCredits, 0.4, { autoAlpha: 0, x: 50 }, { autoAlpha: 1, x: 0 }, 'appear')
 
     // Close.
     .staggerTo(aboutBtnClosePath, 0.4, { strokeDashoffset: 0 }, 0.2, 'appear')
@@ -59,7 +59,7 @@ export function aboutClose () {
     .staggerTo(aboutBtnClosePath, 0.4, { strokeDashoffset: 135 }, -0.2, 'disappear')
 
     // Credits.
-    .to(aboutCredits, 0.4, { autoAlpha: 0, x: -25 }, 'disappear')
+    .to(aboutCredits, 0.4, { autoAlpha: 0, x: 50 }, 'disappear')
 
     // Content.
     .staggerTo(aboutMenuLink, 0.4, { autoAlpha: 0, x: 50 }, -0.075, 'disappear')
