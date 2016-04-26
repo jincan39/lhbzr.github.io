@@ -29,7 +29,6 @@ export default class Music {
       'https://soundcloud.com/warnerbrosrecords/the-black-keys-gold-on-the',
       'https://soundcloud.com/plusonemusic/the-heavy-how-you-like-me-now',
       'https://soundcloud.com/plusonemusic/the-kooks-naive',
-      'https://soundcloud.com/jive-records/06-back-against-the-wall',
       'https://soundcloud.com/daftpunk-music/daft-punk-instant-crush-casablancas',
       'https://soundcloud.com/wichita-recordings/peter-bjorn-and-john-young-folks'
     ]
