@@ -1,7 +1,13 @@
 /* global Audio */
 
-import get from './lib/get'
+/**
+ * Libraries.
+ */
+import get from '../lib/get'
 
+/**
+ * Class.
+ */
 export default class Music {
   constructor () {
     this.audio = new Audio()
@@ -29,8 +35,7 @@ export default class Music {
       'https://soundcloud.com/warnerbrosrecords/the-black-keys-gold-on-the',
       'https://soundcloud.com/plusonemusic/the-heavy-how-you-like-me-now',
       'https://soundcloud.com/plusonemusic/the-kooks-naive',
-      'https://soundcloud.com/daftpunk-music/daft-punk-instant-crush-casablancas',
-      'https://soundcloud.com/wichita-recordings/peter-bjorn-and-john-young-folks'
+      'https://soundcloud.com/daftpunk-music/daft-punk-instant-crush-casablancas'
     ]
 
     this.song = Math.floor(Math.random() * this.songs.length)
@@ -79,7 +84,7 @@ export default class Music {
         musicUser.textContent = data.user.username
 
         if (data.stream_url) {
-          _this.audio.src = data.stream_url + '?client_id=78c6552c14b382e23be3bce2fc411a82'
+          _this.audio.src = `${data.stream_url}?client_id=78c6552c14b382e23be3bce2fc411a82`
           _this.audio.play()
         } else {
           _this.next()

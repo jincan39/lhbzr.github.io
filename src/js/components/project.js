@@ -1,10 +1,19 @@
 /* global TimelineMax */
 
-import setStrokeDash from './lib/setStrokeDash'
-import wrapLettersWithElement from './lib/wrapLettersWithElement'
-
+/**
+ * Imports.
+ */
 import { logoSetHome, logoSetProject } from './logo'
 
+/**
+ * Library.
+ */
+import setStrokeDash from '../lib/setStrokeDash'
+import wrapLettersWithElement from '../lib/wrapLettersWithElement'
+
+/**
+ * Elements.
+ */
 const home = document.querySelector('.home')
 
 const projects = document.querySelector('.projects')
@@ -22,7 +31,7 @@ const projectMediaPrev = document.querySelectorAll('.project-media-btn-prev')
 const projectMediaNext = document.querySelectorAll('.project-media-btn-next')
 
 /**
- * Functions: Open and Close.
+ * Functions.
  */
 export function projectOpen (target) {
   logoSetProject()
@@ -112,9 +121,6 @@ export function projectClose (target) {
     }}, 'disappear')
 }
 
-/**
- * Functions: Previously and Next.
- */
 function projectImgChange (items, direction) {
   const timeline = new TimelineMax()
 
@@ -147,14 +153,14 @@ function projectImgChange (items, direction) {
 }
 
 /**
- * Project.
+ * Setup.
  */
-export function projectSet () {
-  /**
-   * Functions: Utils.
-   */
+export function projectSetup () {
   setStrokeDash(projectBtnClosePath)
 
+  /**
+   * Content.
+   */
   Array.from(projectTitle).forEach((h2) => {
     h2.innerHTML = wrapLettersWithElement(h2.textContent, 'span')
   })
@@ -164,7 +170,7 @@ export function projectSet () {
   })
 
   /**
-   * Event Listeners: Open and Close.
+   * Open and Close.
    */
   Array.from(projectBtnOpen).forEach((link) => {
     link.addEventListener('click', (e) => {
@@ -185,7 +191,7 @@ export function projectSet () {
   })
 
   /**
-   * Event Listeners: Previously and Next.
+   * Previous and Next.
    */
   Array.from(projectMediaPrev).forEach((btn) => {
     btn.addEventListener('click', function (e) {
@@ -208,7 +214,7 @@ export function projectSet () {
   })
 
   /**
-   * Event Listener: Window.
+   * Window.
    */
   window.addEventListener('resize', () => {
     if (project.classList.contains('is-active')) {

@@ -1,10 +1,19 @@
 /* global TimelineMax */
 
-import setStrokeDash from './lib/setStrokeDash'
-import wrapLettersWithElement from './lib/wrapLettersWithElement'
-
+/**
+ * Imports.
+ */
 import { logoSetHome, logoSetAbout } from './logo'
 
+/**
+ * Library.
+ */
+import setStrokeDash from '../lib/setStrokeDash'
+import wrapLettersWithElement from '../lib/wrapLettersWithElement'
+
+/**
+ * Elements.
+ */
 const homeBtnPath = document.querySelectorAll('.home-menu-btn path')
 const homeBtnText = document.querySelectorAll('.home-menu-btn .btn-text')
 
@@ -22,7 +31,7 @@ const aboutBtnClosePath = aboutBtnClose.querySelectorAll('path')
 const aboutMenuLink = document.querySelectorAll('.about-menu-link')
 
 /**
- * Functions: Open and Close.
+ * Functions.
  */
 export function aboutOpen () {
   logoSetAbout()
@@ -45,9 +54,8 @@ export function aboutOpen () {
 
     // Close.
     .staggerTo(aboutBtnClosePath, 0.4, { strokeDashoffset: 0 }, 0.2, 'appear')
-    .fromTo(aboutBtnCloseText, 0.4, { autoAlpha: 0 }, { autoAlpha: 1, onComplete: () => {
-      about.classList.add('is-active')
-    }}, 'appear')
+    .fromTo(aboutBtnCloseText, 0.4, { autoAlpha: 0 }, { autoAlpha: 1 }, 'appear')
+    .call(() => { about.classList.add('is-active') })
 }
 
 export function aboutClose () {
@@ -67,18 +75,13 @@ export function aboutClose () {
     .staggerTo('.about-title span', 0.1, { autoAlpha: 0 }, -0.05, 'disappear')
 
     // Other.
-    .to(about, 0.4, { autoAlpha: 0, onComplete: () => {
-      logoSetHome()
-    }}, '-= 0.2')
+    .to(about, 0.4, { autoAlpha: 0 }, '-= 0.2')
+    .call(() => { logoSetHome() })
     .staggerTo(homeBtnPath, 0.4, { strokeDashoffset: 0 }, 0.2, 'other')
-    .to(homeBtnText, 0.4, { autoAlpha: 1, onComplete: () => {
-      about.classList.remove('is-active')
-    }}, 'other')
+    .to(homeBtnText, 0.4, { autoAlpha: 1 }, 'other')
+    .call(() => { about.classList.remove('is-active') })
 }
 
-/**
- * Functions: Enter and Leave.
- */
 function aboutLinkEnter (link) {
   const timeline = new TimelineMax()
 
@@ -106,22 +109,22 @@ function aboutLinkLeave (link) {
 }
 
 /**
- * About.
+ * Setup.
  */
-export function aboutSet () {
+export function aboutSetup () {
   /**
-   * Functions: Utils.
+   * Utils.
    */
   setStrokeDash(aboutBtnClosePath)
 
   aboutTitle.innerHTML = wrapLettersWithElement(aboutTitle.textContent, 'span')
 
-  Array.from(aboutDesc).forEach((p) => {
-    p.innerHTML = wrapLettersWithElement(p.textContent, 'span')
+  Array.from(aboutDesc).forEach((aboutDescP) => {
+    aboutDescP.innerHTML = wrapLettersWithElement(aboutDescP.textContent, 'span')
   })
 
   /**
-   * Event Listeners: Open and Close.
+   * Open and Close.
    */
   aboutBtnOpen.addEventListener('click', (e) => {
     aboutOpen()
@@ -137,7 +140,7 @@ export function aboutSet () {
   })
 
   /**
-   * Event Listeners: Enter and Leave.
+   * Enter and Leave.
    */
   Array.from(aboutMenuLink).forEach((link) => {
     link.addEventListener('mouseenter', () => {
@@ -150,7 +153,7 @@ export function aboutSet () {
   })
 
   /**
-   * Event Listener: Window.
+   * Window.
    */
   window.addEventListener('resize', () => {
     if (about.classList.contains('is-active')) {

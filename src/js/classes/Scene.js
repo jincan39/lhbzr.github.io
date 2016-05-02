@@ -1,14 +1,21 @@
 /* global Power0, requestAnimationFrame, TweenLite */
 
+/**
+ * Library.
+ */
 import isMobile from 'ismobilejs'
+import randomInt from '../lib/randomInt'
 
-import randomInt from './lib/randomInt'
+/**
+ * Classes.
+ */
+const THREE = require('three')
+const EffectComposer = require('three-effectcomposer')(THREE)
+const RGBShiftShader = require('../shaders/RGBShift')
 
-import THREE from 'three'
-import THREEEffectComposer from 'three-effectcomposer'
-const EffectComposer = THREEEffectComposer(THREE)
-import RGBShiftShader from './shaders/RGBShift'
-
+/**
+ * Class.
+ */
 export default class Scene {
   constructor (music) {
     this.music = music

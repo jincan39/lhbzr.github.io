@@ -1,5 +1,8 @@
 /* global TimelineMax */
 
+/**
+ * Elements.
+ */
 const homeBtnPath = document.querySelectorAll('.home-menu-btn path')
 const homeBtnText = document.querySelectorAll('.home-menu-btn .btn-text')
 
@@ -9,7 +12,7 @@ const projectsBtnClose = document.querySelector('.home, .projects-link')
 const projectsLink = document.querySelectorAll('.projects-link')
 
 /**
- * Functions: Open and Close.
+ * Functions.
  */
 export function projectsOpen () {
   const timeline = new TimelineMax()
@@ -32,9 +35,6 @@ export function projectsClose () {
     .to(homeBtnText, 0.4, { autoAlpha: 1 }, 'other')
 }
 
-/**
- * Functions: Enter and Leave.
- */
 function projectsMouseEnter (link) {
   const timeline = new TimelineMax()
 
@@ -62,12 +62,9 @@ function projectsMouseLeave (link) {
 }
 
 /**
- * Function: Projects.
+ * Setup.
  */
-export function projectsSet () {
-  /**
-   * Event Listeners: Open and Close.
-   */
+export function projectsSetup () {
   projectsBtnOpen.addEventListener('click', (e) => {
     projectsOpen()
 
@@ -81,9 +78,6 @@ export function projectsSet () {
     e.preventDefault()
   })
 
-  /**
-   * Event Listeners: Enter and Leave.
-   */
   Array.from(projectsLink).forEach((link) => {
     link.addEventListener('mouseenter', () => {
       projectsMouseEnter(link)

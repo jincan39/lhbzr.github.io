@@ -1,9 +1,13 @@
 /* global getComputedStyle, SVGMorpheus, TweenMax */
 
-import setStrokeDash from './lib/setStrokeDash'
+/**
+ * Libraries.
+ */
+import getOffset from '../lib/getOffset'
 
-import getOffset from './lib/getOffset'
-
+/**
+ * Elements.
+ */
 const logo = new SVGMorpheus('.logo')
 const logoElement = document.querySelector('.logo')
 
@@ -12,9 +16,9 @@ const aboutLogo = document.querySelector('.about-logo')
 const projectLogo = document.querySelector('.project-logo')
 
 /**
- * Set: Default.
+ * Setup.
  */
-export function logoSet () {
+export function logoSetup () {
   const homeOffset = getOffset(homeLogo)
   const homeStyle = getComputedStyle(homeLogo)
 
@@ -26,9 +30,6 @@ export function logoSet () {
   })
 }
 
-/**
- * Animation: Home.
- */
 export function logoSetHome () {
   logo.to('logo-horizontal', {
     duration: 1000,
@@ -46,9 +47,6 @@ export function logoSetHome () {
   })
 }
 
-/**
- * Animation: About.
- */
 export function logoSetAbout () {
   logo.to('logo-vertical', {
     duration: 1000,
@@ -66,9 +64,6 @@ export function logoSetAbout () {
   })
 }
 
-/**
- * Animation: Project.
- */
 export function logoSetProject () {
   logo.to('logo-vertical', {
     duration: 1000,

@@ -1,14 +1,23 @@
 /* global */
 
-import randomInt from './lib/randomInt'
-import replaceChar from './lib/replaceChar'
+/**
+ * Libraries.
+ */
+import randomInt from '../lib/randomInt'
+import replaceChar from '../lib/replaceChar'
 
+/**
+ * Elements.
+ */
 const buttons = document.querySelectorAll('.btn')
 
-export function buttonsSet () {
+/**
+ * Setup.
+ */
+export function buttonsSetup () {
   Array.from(buttons).forEach((button) => {
     let buttonInterval
-    let buttonText = button.querySelector('.btn-text')
+    const buttonText = button.querySelector('.btn-text')
 
     button.setAttribute('data-text', buttonText.innerHTML.trim())
 
