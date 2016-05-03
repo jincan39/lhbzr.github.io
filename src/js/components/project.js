@@ -22,6 +22,8 @@ const project = document.querySelector('.project')
 const projectTitle = document.querySelectorAll('.project-title')
 const projectDesc = document.querySelectorAll('.project-desc')
 
+const projectLinkText = document.querySelectorAll('.project-link-text')
+
 const projectBtnOpen = document.querySelectorAll('.js-project-open')
 const projectBtnClose = document.querySelector('.js-project-close')
 const projectBtnCloseText = projectBtnClose.querySelector('.btn-text')
@@ -67,7 +69,8 @@ export function projectOpen (target) {
     .staggerFromTo(target.querySelectorAll('.project-desc span'), 0.05, { autoAlpha: 0 }, { autoAlpha: 1 }, 0.005, 'text')
 
     // Link.
-    .fromTo(target.querySelector('.project-link'), 0.4, { autoAlpha: 0 }, { autoAlpha: 1 }, 'nav')
+    .fromTo(target.querySelector('.project-link-dash'), 0.4, { autoAlpha: 0 }, { autoAlpha: 1 }, 'text')
+    .staggerFromTo(target.querySelectorAll('.project-link-text span'), 0.1, { autoAlpha: 0 }, { autoAlpha: 1 }, 0.05, 'text')
 
     // Navigation.
     .fromTo('.project-item.is-active .project-media-btn-prev', 0.4, { opacity: 0, y: 25 }, { opacity: 1, y: 0 }, 'nav')
@@ -93,7 +96,8 @@ export function projectClose (target) {
     .to('.project-item.is-active .project-media-btn-next', 0.4, { opacity: 0, y: -25 }, 'nav')
 
     // Link.
-    .to(target.querySelector('.project-link'), 0.4, { autoAlpha: 0 }, 'nav')
+    .to(target.querySelector('.project-link-dash'), 0.4, { autoAlpha: 0 }, 'text')
+    .staggerTo(target.querySelectorAll('.project-link-text span'), 0.1, { autoAlpha: 0 }, -0.05, 'text')
 
     // Content.
     .to(target.querySelector('.project-media-list'), 1, { autoAlpha: 0 }, 'text')
@@ -167,6 +171,10 @@ export function projectSetup () {
 
   Array.from(projectDesc).forEach((p) => {
     p.innerHTML = wrapLettersWithElement(p.textContent, 'span')
+  })
+
+  Array.from(projectLinkText).forEach((span) => {
+    span.innerHTML = wrapLettersWithElement(span.textContent, 'span')
   })
 
   /**
