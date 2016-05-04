@@ -71,8 +71,8 @@ export function aboutClose () {
 
     // Content.
     .staggerTo(aboutMenuLink, 0.4, { autoAlpha: 0, x: 50 }, -0.075, 'disappear')
-    .staggerTo('.about-desc span', 0.05, { autoAlpha: 0 }, -0.005, 'disappear')
-    .staggerTo('.about-title span', 0.1, { autoAlpha: 0 }, -0.05, 'disappear')
+    .staggerTo('.about-desc span', 0.05, { overwrite: 'all', autoAlpha: 0 }, -0.005, 'disappear')
+    .staggerTo('.about-title span', 0.1, { overwrite: 'all', autoAlpha: 0 }, -0.05, 'disappear')
 
     // Other.
     .to(about, 0.4, { autoAlpha: 0 }, '-= 0.2')

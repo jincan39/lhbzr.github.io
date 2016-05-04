@@ -22,7 +22,7 @@ export function projectsOpen () {
     .to(homeBtnText, 0.4, { autoAlpha: 0 }, 'other')
     .to(projectsBtnOpen, 0.2, { autoAlpha: 0 })
     .to(projects, 0.4, { x: '0%' })
-    .staggerFromTo(projectsLink, 0.4, { autoAlpha: 0, scale: 0.5, x: '-100%' }, { autoAlpha: 1, scale: 1, x: '0%' }, 0.075, '-= 0.2')
+    .staggerFromTo(projectsLink, 0.4, { autoAlpha: 0, x: '-100%' }, { autoAlpha: 1, x: '0%' }, 0.075, '-= 0.2')
 }
 
 export function projectsClose () {

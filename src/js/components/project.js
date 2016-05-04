@@ -58,19 +58,19 @@ export function projectOpen (target) {
     }})
 
     // Square.
-    .to(target.querySelector('.project-media-square-left'), 0.2, { y: '0%' }, 'squares')
-    .to(target.querySelector('.project-media-square-bottom'), 0.2, { x: '0%' }, 'squares')
-    .to(target.querySelector('.project-media-square-right'), 0.2, { y: '0%' }, 'squares')
-    .to(target.querySelector('.project-media-square-top'), 0.2, { x: '0%' }, 'squares')
+    .to(target.querySelector('.project-media-square-left'), 0.2, { y: '0%' }, 'content')
+    .to(target.querySelector('.project-media-square-bottom'), 0.2, { x: '0%' }, 'content')
+    .to(target.querySelector('.project-media-square-right'), 0.2, { y: '0%' }, 'content')
+    .to(target.querySelector('.project-media-square-top'), 0.2, { x: '0%' }, 'content')
 
     // Content.
-    .from(target.querySelector('.project-media-list'), 1, { autoAlpha: 0 }, 'text')
-    .staggerFromTo(target.querySelectorAll('.project-title span'), 0.1, { autoAlpha: 0 }, { autoAlpha: 1 }, 0.05, 'text')
-    .staggerFromTo(target.querySelectorAll('.project-desc span'), 0.05, { autoAlpha: 0 }, { autoAlpha: 1 }, 0.005, 'text')
+    .from(target.querySelector('.project-media-list'), 0.4, { autoAlpha: 0 }, 'content')
+    .staggerFromTo(target.querySelectorAll('.project-title span'), 0.1, { autoAlpha: 0 }, { autoAlpha: 1 }, 0.05, 'content')
+    .staggerFromTo(target.querySelectorAll('.project-desc span'), 0.05, { autoAlpha: 0 }, { autoAlpha: 1 }, 0.005, 'content')
 
     // Link.
-    .fromTo(target.querySelector('.project-link-dash'), 0.4, { autoAlpha: 0 }, { autoAlpha: 1 }, 'text')
-    .staggerFromTo(target.querySelectorAll('.project-link-text span'), 0.1, { autoAlpha: 0 }, { autoAlpha: 1 }, 0.05, 'text')
+    .fromTo(target.querySelector('.project-link-dash'), 0.4, { autoAlpha: 0 }, { autoAlpha: 1 }, 'content')
+    .staggerFromTo(target.querySelectorAll('.project-link-text span'), 0.1, { autoAlpha: 0 }, { autoAlpha: 1 }, 0.05, 'content')
 
     // Navigation.
     .fromTo('.project-item.is-active .project-media-btn-prev', 0.4, { opacity: 0, y: 25 }, { opacity: 1, y: 0 }, 'nav')
@@ -96,19 +96,19 @@ export function projectClose (target) {
     .to('.project-item.is-active .project-media-btn-next', 0.4, { opacity: 0, y: -25 }, 'nav')
 
     // Link.
-    .to(target.querySelector('.project-link-dash'), 0.4, { autoAlpha: 0 }, 'text')
-    .staggerTo(target.querySelectorAll('.project-link-text span'), 0.1, { autoAlpha: 0 }, -0.05, 'text')
+    .to(target.querySelector('.project-link-dash'), 0.4, { autoAlpha: 0 }, 'content')
+    .staggerTo(target.querySelectorAll('.project-link-text span'), 0.1, { autoAlpha: 0 }, -0.05, 'content')
 
     // Content.
-    .to(target.querySelector('.project-media-list'), 1, { autoAlpha: 0 }, 'text')
-    .staggerTo(target.querySelectorAll('.project-title span'), 0.1, { autoAlpha: 0 }, -0.05, 'text')
-    .staggerTo(target.querySelectorAll('.project-desc span'), 0.05, { autoAlpha: 0 }, -0.005, 'text')
+    .to(target.querySelector('.project-media-list'), 0.4, { autoAlpha: 0 }, 'content')
+    .staggerTo(target.querySelectorAll('.project-title span'), 0.1, { autoAlpha: 0 }, -0.05, 'content')
+    .staggerTo(target.querySelectorAll('.project-desc span'), 0.05, { autoAlpha: 0 }, -0.005, 'content')
 
     // Square.
-    .to(target.querySelector('.project-media-square-top'), 0.2, { x: '100%' }, 'squares')
-    .to(target.querySelector('.project-media-square-right'), 0.2, { y: '100%' }, 'squares')
-    .to(target.querySelector('.project-media-square-bottom'), 0.2, { x: '-100%' }, 'squares')
-    .to(target.querySelector('.project-media-square-left'), 0.2, { y: '-100%' }, 'squares')
+    .to(target.querySelector('.project-media-square-top'), 0.2, { x: '100%' }, 'content')
+    .to(target.querySelector('.project-media-square-right'), 0.2, { y: '100%' }, 'content')
+    .to(target.querySelector('.project-media-square-bottom'), 0.2, { x: '-100%' }, 'content')
+    .to(target.querySelector('.project-media-square-left'), 0.2, { y: '-100%' }, 'content')
 
     // Other.
     .set('.project-item.is-active .project-media-btn', { clearProps: 'all' })

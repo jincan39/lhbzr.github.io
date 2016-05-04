@@ -10,6 +10,7 @@ export const music = new Music()
 const musicToggle = document.querySelector('.music-toggle')
 const musicPrev = document.querySelector('.music-prev')
 const musicNext = document.querySelector('.music-next')
+let musicVolume
 
 /**
  * Setup.
@@ -50,10 +51,11 @@ export function musicSetup () {
    * Window.
    */
   window.addEventListener('blur', () => {
-    music.pause()
+    musicVolume = music.audio.volume
+    music.audio.volume = 0
   })
 
   window.addEventListener('focus', () => {
-    music.play()
+    music.audio.volume = musicVolume
   })
 }
