@@ -25,29 +25,11 @@ html
   body
     .content
       include ./pages/_logo
-
       include ./pages/_music
-
       include ./pages/_projects
-
-      section.home#home
-        include ./pages/home/_logo
-        include ./pages/home/_menu
-      
-      section.about#about
-        .about-wrapper
-          .about-content
-            include ./pages/about/_content
-            include ./pages/about/_menu
-            include ./pages/about/_credits
-            include ./pages/about/_close
-          
-      section.project#project
-        .project-wrapper
-          .project-content
-            include ./pages/project/_logo
-            include ./pages/project/_content
-            include ./pages/project/_close
+      include ./pages/_home
+      include ./pages/_about
+      include ./pages/_project
 
     script(src='//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TweenMax.min.js')
     script(src='//cdnjs.cloudflare.com/ajax/libs/SVG-Morpheus/0.1.8/svg-morpheus.js')
