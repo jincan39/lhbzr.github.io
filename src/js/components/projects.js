@@ -41,7 +41,6 @@ function projectsMouseEnter (link) {
   timeline
     .to(link.querySelector('.projects-title-hover'), 0.4, { right: '10px' }, 'hover')
     .to(link.querySelector('.projects-title-bg'), 0.4, { right: '4px' }, 'hover')
-    .to(link.querySelector('.projects-tag'), 0.4, { opacity: 1, maxHeight: '15px' }, 'hover')
     .to(link.querySelector('.projects-square-left'), 0.4, { y: '0%' }, 'hover')
     .to(link.querySelector('.projects-square-bottom'), 0.4, { x: '0%' }, 'hover')
     .to(link.querySelector('.projects-square-right'), 0.4, { y: '0%' }, 'hover')
@@ -54,7 +53,6 @@ function projectsMouseLeave (link) {
   timeline
     .to(link.querySelector('.projects-title-hover'), 0.4, { right: '100%' }, 'hover')
     .to(link.querySelector('.projects-title-bg'), 0.4, { right: '100%' }, 'hover')
-    .to(link.querySelector('.projects-tag'), 0.4, { opacity: 0, maxHeight: 0 }, 'hover')
     .to(link.querySelector('.projects-square-top'), 0.4, { x: '100%' }, 'hover')
     .to(link.querySelector('.projects-square-right'), 0.4, { y: '100%' }, 'hover')
     .to(link.querySelector('.projects-square-bottom'), 0.4, { x: '-100%' }, 'hover')
