@@ -51,3 +51,10 @@ window.addEventListener('resize', () => {
     logoSetup()
   }
 })
+
+/**
+ * Scrollbar.
+ */
+import Scrollbar from 'smooth-scrollbar'
+
+Scrollbar.initAll()

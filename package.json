@@ -36,6 +36,7 @@
     "gulp-util": "^3.0.7",
     "ismobilejs": "^0.4.0",
     "require-dir": "^0.3.0",
+    "smooth-scrollbar": "^7.1.1",
     "three": "^0.73.2",
     "three-effectcomposer": "0.0.1",
     "vinyl-buffer": "^1.0.0",
