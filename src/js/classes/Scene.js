@@ -141,11 +141,11 @@ export default class Scene {
     const _this = this
 
     if (window.innerWidth > 600) {
-      TweenLite.to(_this.effect.uniforms.amount, 1, {
+      TweenLite.to(_this.effect.uniforms.amount, 0.8, {
         value: (_this.clicked) ? 0.005 : (_this.x / window.innerWidth)
       })
     } else {
-      TweenLite.to(_this.effect.uniforms.amount, 1, {
+      TweenLite.to(_this.effect.uniforms.amount, 0.8, {
         value: 0.01
       })
     }

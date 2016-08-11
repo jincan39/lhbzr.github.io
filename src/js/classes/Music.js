@@ -17,7 +17,7 @@ export default class Music {
       this.context = new (window.AudioContext || window.webkitAudioContext)()
 
       this.analyser = this.context.createAnalyser()
-      this.analyser.fftSize = 2048
+      this.analyser.fftSize = 1024
       this.analyser.connect(this.context.destination)
 
       this.src = this.context.createMediaElementSource(this.audio)
@@ -28,14 +28,13 @@ export default class Music {
     }
 
     this.songs = [
-      'https://soundcloud.com/the-ting-tings/wrong-club',
-      'https://soundcloud.com/fueled_by_ramen/paramore-aint-it-fun',
-      'https://soundcloud.com/unablespain/the-hives-hate-to-say-i-told-you-so-unable-radio-edit',
-      'https://soundcloud.com/warnerbrosrecords/franz-ferdinand-right-action-3',
-      'https://soundcloud.com/warnerbrosrecords/the-black-keys-gold-on-the',
-      'https://soundcloud.com/plusonemusic/the-heavy-how-you-like-me-now',
-      'https://soundcloud.com/plusonemusic/the-kooks-naive',
-      'https://soundcloud.com/daftpunk-music/daft-punk-instant-crush-casablancas'
+      'https://soundcloud.com/coyotekisses/black-cat',
+      'https://soundcloud.com/coyotekisses/coyote-kisses-the-deep',
+      'https://soundcloud.com/coyotekisses/illusion',
+      'https://soundcloud.com/coyotekisses/revive-1',
+      'https://soundcloud.com/coyotekisses/sunny-day-1',
+      'https://soundcloud.com/coyotekisses/ferrari-1',
+      'https://soundcloud.com/coyotekisses/six-shooter'
     ]
 
     this.song = Math.floor(Math.random() * this.songs.length)
