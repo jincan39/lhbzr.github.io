@@ -1,3 +1,81 @@
+/**
+ * Project.
+ */
+.project
+  background rgba(0, 0, 0, .8)
+  display block
+  height 100%
+  left 0
+  opacity 0
+  overflow-x hidden
+  overflow-y auto
+  position absolute
+  top 0
+  visibility hidden
+  width 100%
+  z-index 2
+
+  @media (max-width 1080px)
+    background #000
+
+
+/**
+ * Wrapper.
+ */
+.project-wrapper
+  display table
+  height 100%
+  width 100%
+
+
+/**
+ * Content.
+ */
+.project-content
+  display table-cell
+  padding 50px 0
+  text-align center
+  vertical-align middle
+
+  @media (max-width 1080px)
+    vertical-align top
+
+
+/**
+ * Logo.
+ */
+.project-logo
+  height 130px
+  left 0
+  position absolute
+  stroke #fff
+  top 50%
+  transform translateY(-50%)
+  visibility hidden
+  width 10%
+
+  @media (max-width 1080px)
+    margin-bottom 50px
+    position static
+    transform translateY(0)
+    visibility visible
+    width 130px
+
+
+/**
+ * Close.
+ */
+.project-btn
+  @media (max-width 1080px)
+    position relative
+    left 0
+    display block
+    margin 50px auto 0
+
+
+/**
+ * Item.
+ */
 .project-item
   display table
   height 100vh
@@ -20,7 +98,9 @@
       position relative
 
 
-
+/**
+ * Columns.
+ */
 .project-item-left,
 .project-item-right
   display table-cell
@@ -48,7 +128,9 @@
     width 100%
 
 
-
+/**
+ * Media.
+ */
 .project-media
   position relative
 
@@ -63,15 +145,6 @@
   vertical-align middle
   width calc(100% - 2px)
   z-index 2
-
-  &::-webkit-scrollbar
-    width 3px
-
-  &::-webkit-scrollbar-track
-    background #000
-
-  &::-webkit-scrollbar-thumb
-    background #FFF
 
   &:after
     bottom 0
@@ -90,12 +163,18 @@
     height auto
 
 
-.project-img
+/**
+ * Image.
+ */
+.project-media-img
   display block
   height auto
   width 100%
 
 
+/**
+ * Navigation.
+ */
 .project-media-btn
   background none
   border none
@@ -104,6 +183,7 @@
   font-size 0
   height 50px
   left 50%
+  outline none
   position absolute
   transform translateX(-50%)
   width 50px
@@ -112,7 +192,7 @@
     transform translateX(0)
 
   &:after
-    border-color #FFF
+    border-color #fff
     border-style solid
     content ''
     display block
@@ -160,8 +240,9 @@
       top 24px
 
 
-
-
+/**
+ * Square.
+ */
 .project-media-square
   display block
   bottom 0
@@ -176,7 +257,7 @@
 .project-media-square-right,
 .project-media-square-bottom,
 .project-media-square-left
-  background #FFF
+  background #fff
   position absolute
 
 .project-media-square-top,
@@ -208,7 +289,9 @@
   transform translateY(-100%)
 
 
-
+/**
+ * Title.
+ */
 .project-title
   display block
   font-size 50px
@@ -225,6 +308,10 @@
     font-size 25px
     letter-spacing 5.5px
 
+
+/**
+ * Description.
+ */
 .project-desc
   display block
   font-size 14px
@@ -244,6 +331,10 @@
 .project-desc-highlight
   font-weight 600
 
+
+/**
+ * Link.
+ */
 .project-link
   display inline-block
   font-size 14px
@@ -259,7 +350,7 @@
     padding-top 50px
 
 .project-link-dash
-  background #FFF
+  background #fff
   content ''
   display block
   height 1px

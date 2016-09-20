@@ -75,7 +75,7 @@ export function projectOpen (target) {
       }
     })
 
-  const images = target.querySelectorAll('.project-img')
+  const images = target.querySelectorAll('.project-media-img')
 
   forEach(images, (index, image) => {
     if (!image.getAttribute('src')) {

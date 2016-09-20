@@ -47,24 +47,16 @@ function projectsMouseEnter (link) {
   const timeline = new TimelineMax()
 
   timeline
-    .fromTo(link.querySelector('.projects-hover'), 0.4, { x: '-100%' }, { x: '0%' }, 'hover')
-    .fromTo(link.querySelector('.projects-hover'), 0.4, { color: '#fff' }, { color: '#000' })
-    .to(link.querySelector('.projects-square-left'), 0.2, { y: '0%' }, 'hover')
-    .to(link.querySelector('.projects-square-bottom'), 0.2, { x: '0%' }, 'hover')
-    .to(link.querySelector('.projects-square-right'), 0.2, { y: '0%' }, 'hover')
-    .to(link.querySelector('.projects-square-top'), 0.2, { x: '0%' }, 'hover')
+    .staggerFromTo(link.querySelectorAll('.projects-bg'), 1, { x: '-100%' }, { x: '100%' }, 0.2, 'hover')
+    .set(link.querySelector('.projects-title'), { background: '#fff', color: '#000', delay: 0.5 }, 'hover')
 }
 
 function projectsMouseLeave (link) {
   const timeline = new TimelineMax()
 
   timeline
-    .to(link.querySelector('.projects-hover'), 0.4, { color: '#fff' })
-    .to(link.querySelector('.projects-hover'), 0.4, { x: '100%' }, 'hover')
-    .to(link.querySelector('.projects-square-top'), 0.2, { x: '100%' }, 'hover')
-    .to(link.querySelector('.projects-square-right'), 0.2, { y: '100%' }, 'hover')
-    .to(link.querySelector('.projects-square-bottom'), 0.2, { x: '-100%' }, 'hover')
-    .to(link.querySelector('.projects-square-left'), 0.2, { y: '-100%' }, 'hover')
+    .staggerTo(link.querySelectorAll('.projects-bg'), 1, { x: '-100%' }, 0.2, 'hover')
+    .set(link.querySelector('.projects-title'), { background: 'none', color: '#fff', delay: 0.5, overwrite: 'all' }, 'hover')
 }
 
 /**
