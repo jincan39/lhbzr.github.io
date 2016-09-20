@@ -1,6 +1,22 @@
 section.project#project
   .project-wrapper
     .project-content
-      include ./project/_logo
-      include ./project/_content
-      include ./project/_close
+      svg.project-logo(xmlns='http://www.w3.org/2000/svg' viewbox='0 0 40.606 80.212')
+        +logo-vertical
+
+      .project-list
+        include ./project/_fiap-undergraduate
+        include ./project/_doki
+        include ./project/_rio-2016-countdown
+        include ./project/_naturally-bizarre
+        include ./project/_fiap
+        include ./project/_particles
+        include ./project/_triangles
+        include ./project/_next
+        include ./project/_3m-digital-art-exhibition
+        include ./project/_app-marathon
+        include ./project/_call-to-innovation
+
+      a.project-btn.btn.btn-right.js-project-close(href='#home')
+        +btn-bg-right
+        span.btn-text Close

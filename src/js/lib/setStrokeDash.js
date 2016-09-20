@@ -1,5 +1,7 @@
+import forEach from './forEach'
+
 export default function setStrokeDash (logoPath) {
-  Array.from(logoPath).forEach((path) => {
+  forEach(logoPath, (index, path) => {
     let pathLength = path.getTotalLength()
 
     path.style.strokeDasharray = pathLength + ' ' + pathLength

@@ -1,4 +1,7 @@
-/* global TimelineMax */
+/**
+ * Plugins.
+ */
+import { TweenMax } from '../plugins/gsap'
 
 /**
  * Library.
@@ -10,23 +13,17 @@ import setStrokeDash from '../lib/setStrokeDash'
  */
 const logoPath = document.querySelectorAll('.logo path')
 
-const homeBtnPath = document.querySelectorAll('.home-menu-item path')
-const homeBtnText = document.querySelectorAll('.home-menu-item .btn-text')
+const homeButtonPath = document.querySelectorAll('.home-menu-item path')
+const homeButtonText = document.querySelectorAll('.home-menu-item .btn-text')
 
 /**
  * Setup.
  */
-export function loadingSetup () {
-  const timeline = new TimelineMax()
+setStrokeDash(logoPath)
+setStrokeDash(homeButtonPath)
 
-  timeline
-    .call(() => {
-      setStrokeDash(logoPath)
-      setStrokeDash(homeBtnPath)
+document.body.classList.add('is-loaded')
 
-      document.body.classList.add('is-loaded')
-    })
-    .to(logoPath, 2, { strokeDashoffset: 0 })
-    .to(homeBtnPath, 0.4, { strokeDashoffset: 0 }, 'btn')
-    .from(homeBtnText, 0.4, { autoAlpha: 0 }, 'btn')
-}
+TweenMax.to(logoPath, 2, { strokeDashoffset: 0 })
+TweenMax.to(homeButtonPath, 0.4, { strokeDashoffset: 0 })
+TweenMax.from(homeButtonText, 0.4, { autoAlpha: 0 })

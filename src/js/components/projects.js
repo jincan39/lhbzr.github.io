@@ -1,14 +1,22 @@
-/* global TimelineMax */
+/**
+ * Plugins.
+ */
+import { TimelineMax } from '../plugins/gsap'
+
+/**
+ * Library.
+ */
+import forEach from '../lib/forEach'
 
 /**
  * Elements.
  */
-const homeBtnPath = document.querySelectorAll('.home-menu-btn path')
-const homeBtnText = document.querySelectorAll('.home-menu-btn .btn-text')
+const homeButtonPath = document.querySelectorAll('.home-menu-btn path')
+const homeButtonText = document.querySelectorAll('.home-menu-btn .btn-text')
 
 const projects = document.querySelector('.projects')
-const projectsBtnOpen = document.querySelector('.js-projects-open')
-const projectsBtnClose = document.querySelector('.home, .projects-link')
+const projectsButtonOpen = document.querySelector('.js-projects-open')
+const projectsButtonClose = document.querySelectorAll('.home, .projects-link')
 const projectsLink = document.querySelectorAll('.projects-link')
 
 /**
@@ -18,9 +26,9 @@ export function projectsOpen () {
   const timeline = new TimelineMax()
 
   timeline
-    .staggerTo(homeBtnPath, 0.4, { strokeDashoffset: 135 }, 0.2, 'other')
-    .to(homeBtnText, 0.4, { autoAlpha: 0 }, 'other')
-    .to(projectsBtnOpen, 0.2, { autoAlpha: 0 })
+    .staggerTo(homeButtonPath, 0.4, { strokeDashoffset: 135 }, 0.2, 'other')
+    .to(homeButtonText, 0.4, { autoAlpha: 0 }, 'other')
+    .to(projectsButtonOpen, 0.2, { autoAlpha: 0 })
     .to(projects, 0.4, { x: '0%' })
     .staggerFromTo(projectsLink, 0.4, { autoAlpha: 0, x: '-100%' }, { autoAlpha: 1, x: '0%' }, 0.075, '-= 0.2')
 }
@@ -30,59 +38,60 @@ export function projectsClose () {
 
   timeline
     .to(projects, 0.4, { x: '-100%' })
-    .to(projectsBtnOpen, 0.2, { autoAlpha: 1 })
-    .staggerTo(homeBtnPath, 0.4, { strokeDashoffset: 0 }, 0.2, 'other')
-    .to(homeBtnText, 0.4, { autoAlpha: 1 }, 'other')
+    .to(projectsButtonOpen, 0.2, { autoAlpha: 1 })
+    .staggerTo(homeButtonPath, 0.4, { strokeDashoffset: 0 }, 0.2, 'other')
+    .to(homeButtonText, 0.4, { autoAlpha: 1 }, 'other')
 }
 
 function projectsMouseEnter (link) {
   const timeline = new TimelineMax()
 
   timeline
-    .to(link.querySelector('.projects-title-hover'), 0.4, { right: '10px' }, 'hover')
-    .to(link.querySelector('.projects-title-bg'), 0.4, { right: '4px' }, 'hover')
-    .to(link.querySelector('.projects-square-left'), 0.4, { y: '0%' }, 'hover')
-    .to(link.querySelector('.projects-square-bottom'), 0.4, { x: '0%' }, 'hover')
-    .to(link.querySelector('.projects-square-right'), 0.4, { y: '0%' }, 'hover')
-    .to(link.querySelector('.projects-square-top'), 0.4, { x: '0%' }, 'hover')
+    .fromTo(link.querySelector('.projects-hover'), 0.4, { x: '-100%' }, { x: '0%' }, 'hover')
+    .fromTo(link.querySelector('.projects-hover'), 0.4, { color: '#fff' }, { color: '#000' })
+    .to(link.querySelector('.projects-square-left'), 0.2, { y: '0%' }, 'hover')
+    .to(link.querySelector('.projects-square-bottom'), 0.2, { x: '0%' }, 'hover')
+    .to(link.querySelector('.projects-square-right'), 0.2, { y: '0%' }, 'hover')
+    .to(link.querySelector('.projects-square-top'), 0.2, { x: '0%' }, 'hover')
 }
 
 function projectsMouseLeave (link) {
   const timeline = new TimelineMax()
 
   timeline
-    .to(link.querySelector('.projects-title-hover'), 0.4, { right: '100%' }, 'hover')
-    .to(link.querySelector('.projects-title-bg'), 0.4, { right: '100%' }, 'hover')
-    .to(link.querySelector('.projects-square-top'), 0.4, { x: '100%' }, 'hover')
-    .to(link.querySelector('.projects-square-right'), 0.4, { y: '100%' }, 'hover')
-    .to(link.querySelector('.projects-square-bottom'), 0.4, { x: '-100%' }, 'hover')
-    .to(link.querySelector('.projects-square-left'), 0.4, { y: '-100%' }, 'hover')
+    .to(link.querySelector('.projects-hover'), 0.4, { color: '#fff' })
+    .to(link.querySelector('.projects-hover'), 0.4, { x: '100%' }, 'hover')
+    .to(link.querySelector('.projects-square-top'), 0.2, { x: '100%' }, 'hover')
+    .to(link.querySelector('.projects-square-right'), 0.2, { y: '100%' }, 'hover')
+    .to(link.querySelector('.projects-square-bottom'), 0.2, { x: '-100%' }, 'hover')
+    .to(link.querySelector('.projects-square-left'), 0.2, { y: '-100%' }, 'hover')
 }
 
 /**
- * Setup.
+ * Events.
  */
-export function projectsSetup () {
-  projectsBtnOpen.addEventListener('click', (e) => {
-    projectsOpen()
+projectsButtonOpen.addEventListener('click', (e) => {
+  e.preventDefault()
+  e.stopPropagation()
 
+  projectsOpen()
+})
+
+forEach(projectsButtonClose, (index, button) => {
+  button.addEventListener('click', (e) => {
     e.preventDefault()
     e.stopPropagation()
-  })
 
-  projectsBtnClose.addEventListener('click', (e) => {
     projectsClose()
+  })
+})
 
-    e.preventDefault()
+forEach(projectsLink, (index, link) => {
+  link.addEventListener('mouseenter', () => {
+    projectsMouseEnter(link)
   })
 
-  Array.from(projectsLink).forEach((link) => {
-    link.addEventListener('mouseenter', () => {
-      projectsMouseEnter(link)
-    })
-
-    link.addEventListener('mouseleave', () => {
-      projectsMouseLeave(link)
-    })
+  link.addEventListener('mouseleave', () => {
+    projectsMouseLeave(link)
   })
-}
+})

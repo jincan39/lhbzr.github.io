@@ -1,5 +1,17 @@
 section.home#home
   .home-wrapper
     .home-content
-      include ./home/_logo
-      include ./home/_menu
+      svg.home-logo(xmlns="http://www.w3.org/2000/svg" viewbox="0 0 80.2 40.6")
+        +logo-horizontal
+
+      nav.home-menu
+        ul.home-menu-list
+          li.home-menu-item
+            a.home-menu-btn.btn.btn-left.js-projects-open(href="#projects")
+              +btn-bg-left
+              span.btn-text Projects
+
+          li.home-menu-item
+            a.home-menu-btn.btn.btn-right.js-about-open(href="#about")
+              +btn-bg-right
+              span.btn-text About

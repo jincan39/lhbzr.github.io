@@ -1,32 +1,35 @@
-/* global TimelineMax */
-
 /**
- * Imports.
+ * Plugins.
  */
-import { logoSetHome, logoSetAbout } from './logo'
+import { TimelineMax } from '../plugins/gsap'
 
 /**
  * Library.
  */
+import forEach from '../lib/forEach'
 import setStrokeDash from '../lib/setStrokeDash'
 import wrapLettersWithElement from '../lib/wrapLettersWithElement'
 
 /**
+ * Components.
+ */
+import { logoSetHome, logoSetAbout } from './logo'
+
+/**
  * Elements.
  */
-const homeBtnPath = document.querySelectorAll('.home-menu-btn path')
-const homeBtnText = document.querySelectorAll('.home-menu-btn .btn-text')
+const homeButtonPath = document.querySelectorAll('.home-menu-btn path')
+const homeButtonText = document.querySelectorAll('.home-menu-btn .btn-text')
 
 const about = document.querySelector('.about')
 
 const aboutTitle = document.querySelector('.about-title')
-const aboutDesc = document.querySelectorAll('.about-desc')
-const aboutCredits = document.querySelector('.about-credits')
+const aboutDescription = document.querySelectorAll('.about-desc')
 
-const aboutBtnOpen = document.querySelector('.js-about-open')
-const aboutBtnClose = document.querySelector('.js-about-close')
-const aboutBtnCloseText = aboutBtnClose.querySelector('.btn-text')
-const aboutBtnClosePath = aboutBtnClose.querySelectorAll('path')
+const aboutButtonOpen = document.querySelector('.js-about-open')
+const aboutButtonClose = document.querySelector('.js-about-close')
+const aboutButtonCloseText = aboutButtonClose.querySelector('.btn-text')
+const aboutButtonClosePath = aboutButtonClose.querySelectorAll('path')
 
 const aboutMenuLink = document.querySelectorAll('.about-menu-link')
 
@@ -39,47 +42,42 @@ export function aboutOpen () {
   const timeline = new TimelineMax()
 
   timeline
-    // Other.
-    .staggerTo(homeBtnPath, 0.4, { strokeDashoffset: 135 }, 0.2, 'other')
-    .to(homeBtnText, 0.4, { autoAlpha: 0 }, 'other')
-    .to(about, 0.4, { autoAlpha: 1 }, 'other')
+    .staggerTo(homeButtonPath, 0.4, { strokeDashoffset: 135 }, 0.2, 'other')
+    .to(homeButtonText, 0.4, { autoAlpha: 0 }, 'other')
 
-    // Content.
+    .to(about, 0.4, { autoAlpha: 1 }, 'other')
+    .call(() => {
+      about.classList.add('is-active')
+    })
+
     .staggerFromTo('.about-title span', 0.1, { autoAlpha: 0 }, { autoAlpha: 1 }, 0.05, 'appear')
     .staggerFromTo('.about-desc span', 0.05, { autoAlpha: 0 }, { autoAlpha: 1 }, 0.005, 'appear')
     .staggerFromTo(aboutMenuLink, 0.4, { autoAlpha: 0, x: 50 }, { autoAlpha: 1, x: 0 }, 0.075, 'appear')
 
-    // Credits.
-    .fromTo(aboutCredits, 0.4, { autoAlpha: 0, x: 50 }, { autoAlpha: 1, x: 0 }, 'appear')
-
-    // Close.
-    .staggerTo(aboutBtnClosePath, 0.4, { strokeDashoffset: 0 }, 0.2, 'appear')
-    .fromTo(aboutBtnCloseText, 0.4, { autoAlpha: 0 }, { autoAlpha: 1 }, 'appear')
-    .call(() => { about.classList.add('is-active') })
+    .staggerTo(aboutButtonClosePath, 0.4, { strokeDashoffset: 0 }, 0.2, 'appear')
+    .fromTo(aboutButtonCloseText, 0.4, { autoAlpha: 0 }, { autoAlpha: 1 }, 'appear')
 }
 
 export function aboutClose () {
   const timeline = new TimelineMax()
 
   timeline
-    // Close.
-    .to(aboutBtnCloseText, 0.4, { autoAlpha: 0 }, 'disappear')
-    .staggerTo(aboutBtnClosePath, 0.4, { strokeDashoffset: 135 }, -0.2, 'disappear')
+    .to(aboutButtonCloseText, 0.4, { autoAlpha: 0 }, 'disappear')
+    .staggerTo(aboutButtonClosePath, 0.4, { strokeDashoffset: 135 }, -0.2, 'disappear')
 
-    // Credits.
-    .to(aboutCredits, 0.4, { autoAlpha: 0, x: 50 }, 'disappear')
-
-    // Content.
     .staggerTo(aboutMenuLink, 0.4, { autoAlpha: 0, x: 50 }, -0.075, 'disappear')
     .staggerTo('.about-desc span', 0.05, { overwrite: 'all', autoAlpha: 0 }, -0.005, 'disappear')
     .staggerTo('.about-title span', 0.1, { overwrite: 'all', autoAlpha: 0 }, -0.05, 'disappear')
 
-    // Other.
-    .to(about, 0.4, { autoAlpha: 0 }, '-= 0.2')
-    .call(() => { logoSetHome() })
-    .staggerTo(homeBtnPath, 0.4, { strokeDashoffset: 0 }, 0.2, 'other')
-    .to(homeBtnText, 0.4, { autoAlpha: 1 }, 'other')
-    .call(() => { about.classList.remove('is-active') })
+    .to(about, 0.4, { autoAlpha: 0 }, 'other')
+    .call(() => {
+      about.classList.remove('is-active')
+
+      logoSetHome()
+    })
+
+    .staggerTo(homeButtonPath, 0.4, { strokeDashoffset: 0 }, 0.2, 'other')
+    .to(homeButtonText, 0.4, { autoAlpha: 1 }, 'other')
 }
 
 function aboutLinkEnter (link) {
@@ -111,53 +109,43 @@ function aboutLinkLeave (link) {
 /**
  * Setup.
  */
-export function aboutSetup () {
-  /**
-   * Utils.
-   */
-  setStrokeDash(aboutBtnClosePath)
+setStrokeDash(aboutButtonClosePath)
 
-  aboutTitle.innerHTML = wrapLettersWithElement(aboutTitle.textContent, 'span')
+aboutTitle.innerHTML = wrapLettersWithElement(aboutTitle.textContent, 'span')
 
-  Array.from(aboutDesc).forEach((aboutDescP) => {
-    aboutDescP.innerHTML = wrapLettersWithElement(aboutDescP.textContent, 'span')
+forEach(aboutDescription, (index, description) => {
+  description.innerHTML = wrapLettersWithElement(description.textContent, 'span')
+})
+
+/**
+ * Events.
+ */
+aboutButtonOpen.addEventListener('click', (e) => {
+  e.preventDefault()
+  e.stopPropagation()
+
+  aboutOpen()
+})
+
+aboutButtonClose.addEventListener('click', (e) => {
+  e.preventDefault()
+  e.stopPropagation()
+
+  aboutClose()
+})
+
+forEach(aboutMenuLink, (index, link) => {
+  link.addEventListener('mouseenter', () => {
+    aboutLinkEnter(link)
   })
 
-  /**
-   * Open and Close.
-   */
-  aboutBtnOpen.addEventListener('click', (e) => {
-    aboutOpen()
-
-    e.preventDefault()
-    e.stopPropagation()
+  link.addEventListener('mouseleave', () => {
+    aboutLinkLeave(link)
   })
+})
 
-  aboutBtnClose.addEventListener('click', (e) => {
-    aboutClose()
-
-    e.preventDefault()
-  })
-
-  /**
-   * Enter and Leave.
-   */
-  Array.from(aboutMenuLink).forEach((link) => {
-    link.addEventListener('mouseenter', () => {
-      aboutLinkEnter(link)
-    })
-
-    link.addEventListener('mouseleave', () => {
-      aboutLinkLeave(link)
-    })
-  })
-
-  /**
-   * Window.
-   */
-  window.addEventListener('resize', () => {
-    if (about.classList.contains('is-active')) {
-      logoSetAbout()
-    }
-  })
-}
+window.addEventListener('resize', () => {
+  if (about.classList.contains('is-active')) {
+    logoSetAbout()
+  }
+})

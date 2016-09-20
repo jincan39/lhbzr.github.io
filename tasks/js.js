@@ -16,6 +16,7 @@ gulp.task('js', () => {
     fullPaths: false,
     packageCache: {}
   }).transform(babelify.configure({
+    compact: false,
     presets: ['es2015']
   }))
 

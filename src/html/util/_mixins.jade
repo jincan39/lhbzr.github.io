@@ -48,8 +48,7 @@ mixin projects-square
 mixin projects-info(title)
   .projects-info
     strong.projects-title=title
-      span.projects-title-hover=title
-      span.projects-title-bg
+    span.projects-hover=title
 
 
 mixin project-square
@@ -62,5 +61,5 @@ mixin project-square
 
 mixin project-arrows
   .project-media-arrows
-    a.project-media-btn.project-media-btn-prev(href="#") Prev
-    a.project-media-btn.project-media-btn-next(href="#") Next
+    button.project-media-btn.project-media-btn-prev Previous
+    button.project-media-btn.project-media-btn-next Next

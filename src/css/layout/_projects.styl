@@ -18,7 +18,7 @@
     background #000
 
   &::-webkit-scrollbar-thumb
-    background #FFF
+    background #fff
 
 
 
@@ -35,13 +35,11 @@
 .projects-link
   border 1px solid #313131
   display inline-block
-  position relative
-  transition -webkit-filter .4s, filter .4s
-  -webkit-filter grayscale(100%)
   filter grayscale(100%)
+  position relative
+  transition filter .4s
 
   &:hover
-    -webkit-filter grayscale(0%)
     filter grayscale(0%)
 
 
@@ -63,7 +61,7 @@
 .projects-square-right,
 .projects-square-bottom,
 .projects-square-left
-  background rgba(#FFF, .2)
+  background rgba(#fff, 0.2)
   position absolute
 
 .projects-square-top,
@@ -74,8 +72,8 @@
 
 .projects-square-right,
 .projects-square-left
-  top 1px
-  height calc(100% - 2px)
+  top 0
+  height 100%
   width 1px
 
 .projects-square-top
@@ -106,38 +104,29 @@
   white-space nowrap
 
 .projects-title
-  display inline-block
-  color #FFF
-  font-size 16px
+  display block
+  color #fff
+  font-size 15px
   font-weight 200
   letter-spacing 3px
-  margin-bottom 5px
   margin-right -3px
-  padding 4px 10px
+  padding 5px 10px
   position relative
   text-transform uppercase
 
-.projects-title-hover
-  color #000
-  display block
-  font-size 16px
-  font-weight 200
-  left 10px
-  letter-spacing 3px
-  overflow hidden
-  position absolute
-  padding 4px 0
-  right 100%
-  text-transform uppercase
-  top 0
-  z-index 2
-
-.projects-title-bg
-  background #FFF
+.projects-hover
+  background #fff
+  color #fff
   display block
   left 0
   height 100%
   position absolute
-  right 100%
+  font-size 15px
+  font-weight 200
+  letter-spacing 3px
+  padding 5px 10px
+  text-transform uppercase
   top 0
+  transform translateX(-100%)
+  width 100%
   z-index 1

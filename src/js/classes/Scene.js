@@ -1,21 +1,14 @@
-/* global Power0, requestAnimationFrame, TweenLite */
+/* global Power0, requestAnimationFrame */
 
-/**
- * Library.
- */
-import isMobile from 'ismobilejs'
+import { TweenLite } from '../plugins/gsap'
+
+import forEach from '../lib/forEach'
 import randomInt from '../lib/randomInt'
 
-/**
- * Classes.
- */
 const THREE = require('three')
 const EffectComposer = require('three-effectcomposer')(THREE)
 const RGBShiftShader = require('../shaders/RGBShift')
 
-/**
- * Class.
- */
 export default class Scene {
   constructor (music) {
     this.music = music
@@ -27,7 +20,7 @@ export default class Scene {
     this.circle = new THREE.Object3D()
     this.geometry = []
     this.geometrySleeve = []
-    this.geometryLength = !isMobile.phone ? 100 : 30
+    this.geometryLength = 100
     this.geometryType = [
       new THREE.TetrahedronGeometry(50, 0),
       new THREE.IcosahedronGeometry(40, 0),
@@ -67,13 +60,11 @@ export default class Scene {
   }
 
   createGeometry () {
-    const _this = this
+    const number = randomInt(0, this.geometryType.length - 1)
 
-    const number = randomInt(0, _this.geometryType.length - 1)
-
-    for (let i = 0; i < _this.geometryLength; i++) {
-      _this.geometry[i] = new THREE.Mesh(
-        _this.geometryType[number],
+    for (let i = 0; i < this.geometryLength; i++) {
+      this.geometry[i] = new THREE.Mesh(
+        this.geometryType[number],
         new THREE.MeshPhongMaterial({
           color: 0xFFFFFF,
           wireframe: true,
@@ -81,16 +72,16 @@ export default class Scene {
         })
       )
 
-      _this.geometry[i].position.y = 100
+      this.geometry[i].position.y = 100
 
-      _this.geometrySleeve[i] = new THREE.Object3D()
-      _this.geometrySleeve[i].rotation.z = i * (360 / _this.geometryLength) * Math.PI / 180
-      _this.geometrySleeve[i].add(_this.geometry[i])
+      this.geometrySleeve[i] = new THREE.Object3D()
+      this.geometrySleeve[i].rotation.z = i * (360 / this.geometryLength) * Math.PI / 180
+      this.geometrySleeve[i].add(this.geometry[i])
 
-      _this.circle.add(_this.geometrySleeve[i])
+      this.circle.add(this.geometrySleeve[i])
     }
 
-    _this.scene.add(_this.circle)
+    this.scene.add(this.circle)
   }
 
   createLight () {
@@ -118,48 +109,47 @@ export default class Scene {
   }
 
   createEvents () {
-    const _this = this
-
     const triggers = document.querySelectorAll('.home, .js-projects-open, .js-about-open, .js-about-close')
 
-    Array.from(triggers).forEach((trigger) => {
-      trigger.addEventListener('click', (e) => {
-        _this.click(e)
-      })
+    forEach(triggers, (index, trigger) => {
+      trigger.addEventListener('click', function (e) {
+        this.click(e)
+      }.bind(this))
     })
 
-    window.addEventListener('resize', (e) => {
-      _this.resize(e)
-    })
+    window.addEventListener('resize', function (e) {
+      this.resize(e)
+    }.bind(this))
 
-    window.addEventListener('mousemove', (e) => {
-      _this.mousemove(e)
-    })
+    window.addEventListener('mousemove', function (e) {
+      this.mousemove(e)
+    }.bind(this))
   }
 
   render () {
-    const _this = this
+    const frequency = this.music.getFrequency()
+    const isClicked = this.clicked
 
     if (window.innerWidth > 600) {
-      TweenLite.to(_this.effect.uniforms.amount, 0.8, {
-        value: (_this.clicked) ? 0.005 : (_this.x / window.innerWidth)
+      TweenLite.to(this.effect.uniforms.amount, 0.8, {
+        value: (this.clicked) ? 0.005 : (this.x / window.innerWidth)
       })
     } else {
-      TweenLite.to(_this.effect.uniforms.amount, 0.8, {
+      TweenLite.to(this.effect.uniforms.amount, 0.8, {
         value: 0.01
       })
     }
 
-    _this.geometry.forEach((geometry, index) => {
+    this.geometry.forEach((geometry, index) => {
       let value
 
       if (window.AudioContext || window.webkitAudioContext) {
-        value = (_this.music.getFrequency()[index] / 100) + 0.01
+        value = (frequency[index] / 100) + 0.01
       } else {
         value = 1
       }
 
-      if (_this.clicked) {
+      if (isClicked) {
         TweenLite.to(geometry.scale, 0.05, { ease: Power0.easeNone, x: value, y: value, z: value })
         TweenLite.to(geometry.rotation, 0.05, { ease: Power0.easeNone, z: (index % 2 === 0) ? '+= 0.05' : '-= 0.05' })
       } else {
@@ -167,12 +157,12 @@ export default class Scene {
       }
     })
 
-    _this.circle.rotation.z += 0.01
+    this.circle.rotation.z += 0.01
 
-    _this.renderer.render(_this.scene, _this.camera)
-    _this.composer.render()
+    this.renderer.render(this.scene, this.camera)
+    this.composer.render()
 
-    requestAnimationFrame(_this.render.bind(_this))
+    requestAnimationFrame(this.render.bind(this))
   }
 
   resize () {
