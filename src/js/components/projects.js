@@ -9,6 +9,11 @@ import { TimelineMax } from '../plugins/gsap'
 import forEach from '../lib/forEach'
 
 /**
+ * Classes.
+ */
+import Scrollbar from 'smooth-scrollbar'
+
+/**
  * Elements.
  */
 const homeButtonPath = document.querySelectorAll('.home-menu-btn path')
@@ -18,6 +23,11 @@ const projects = document.querySelector('.projects')
 const projectsButtonOpen = document.querySelector('.js-projects-open')
 const projectsButtonClose = document.querySelectorAll('.home, .projects-link')
 const projectsLink = document.querySelectorAll('.projects-link')
+
+/**
+ * Setup.
+ */
+const scrollbar = Scrollbar.init(projects)
 
 /**
  * Functions.

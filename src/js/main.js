@@ -1,4 +1,3 @@
-import './base/scrollbar'
 import './base/svg'
 
 import './components/about'
