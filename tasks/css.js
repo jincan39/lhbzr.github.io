@@ -3,6 +3,7 @@ const gulp = require('gulp')
 const stylus = require('gulp-stylus')
 const autoprefixer = require('gulp-autoprefixer')
 const cssnano = require('gulp-cssnano')
+const browser = require('browser-sync')
 
 gulp.task('css', () => {
   gulp
@@ -11,4 +12,5 @@ gulp.task('css', () => {
     .pipe(autoprefixer('last 10 versions'))
     .pipe(cssnano())
     .pipe(gulp.dest(`${pkg.folders.dist}/css`))
+    .pipe(browser.reload({ stream: true }))
 })
