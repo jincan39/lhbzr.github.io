@@ -8,6 +8,8 @@ import Gallery from '../classes/Gallery'
 
 import { logoSetHome, logoSetProject } from './logo'
 
+import Scrollbar from 'smooth-scrollbar'
+
 const home = document.querySelector('.home')
 
 const projects = document.querySelector('.projects')
@@ -24,6 +26,8 @@ const projectButtonCloseText = projectButtonClose.querySelector('.btn-text')
 const projectButtonClosePath = projectButtonClose.querySelectorAll('path')
 
 const projectList = document.querySelectorAll('.project-media-list')
+
+const scrollbar = Scrollbar.init(project)
 
 setStrokeDash(projectButtonClosePath)
 

@@ -6,6 +6,8 @@ import wrapLettersWithElement from '../lib/wrapLettersWithElement'
 
 import { logoSetHome, logoSetAbout } from './logo'
 
+import Scrollbar from 'smooth-scrollbar'
+
 const homeButtonPath = document.querySelectorAll('.home-menu-btn path')
 const homeButtonText = document.querySelectorAll('.home-menu-btn .btn-text')
 
@@ -20,6 +22,8 @@ const aboutButtonCloseText = aboutButtonClose.querySelector('.btn-text')
 const aboutButtonClosePath = aboutButtonClose.querySelectorAll('path')
 
 const aboutMenuLink = document.querySelectorAll('.about-menu-link')
+
+const scrollbar = Scrollbar.init(about)
 
 export function aboutOpen () {
   logoSetAbout()
