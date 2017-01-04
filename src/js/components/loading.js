@@ -1,24 +1,12 @@
-/**
- * Plugins.
- */
-import { TweenMax } from '../plugins/gsap'
+import { TweenMax } from 'gsap'
 
-/**
- * Library.
- */
 import setStrokeDash from '../lib/setStrokeDash'
 
-/**
- * Elements.
- */
 const logoPath = document.querySelectorAll('.logo path')
 
 const homeButtonPath = document.querySelectorAll('.home-menu-item path')
 const homeButtonText = document.querySelectorAll('.home-menu-item .btn-text')
 
-/**
- * Setup.
- */
 setStrokeDash(logoPath)
 setStrokeDash(homeButtonPath)
 

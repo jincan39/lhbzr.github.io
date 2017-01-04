@@ -1,6 +1,8 @@
 /* global Power0, requestAnimationFrame */
 
-import { TweenLite } from '../plugins/gsap'
+import { TweenLite } from 'gsap'
+
+import { music } from '../components/music'
 
 import forEach from '../lib/forEach'
 import randomInt from '../lib/randomInt'
@@ -10,9 +12,7 @@ const EffectComposer = require('three-effectcomposer')(THREE)
 const RGBShiftShader = require('../shaders/RGBShift')
 
 export default class Scene {
-  constructor (music) {
-    this.music = music
-
+  constructor () {
     this.renderer = null
     this.scene = null
     this.camera = null
@@ -127,7 +127,7 @@ export default class Scene {
   }
 
   render () {
-    const frequency = this.music.getFrequency()
+    const frequency = music.getFrequency()
     const isClicked = this.clicked
 
     if (window.innerWidth > 600) {

@@ -1,20 +1,10 @@
 /* global getComputedStyle */
 
-/**
- * Plugins.
- */
-import { TweenMax } from '../plugins/gsap'
-
+import { TweenMax } from 'gsap'
 import SVGMorpheus from '../plugins/svg-morpheus'
 
-/**
- * Library.
- */
 import getOffset from '../lib/getOffset'
 
-/**
- * Elements.
- */
 const logo = new SVGMorpheus('.logo')
 const logoElement = document.querySelector('.logo')
 
@@ -22,9 +12,6 @@ const homeLogo = document.querySelector('.home-logo')
 const aboutLogo = document.querySelector('.about-logo')
 const projectLogo = document.querySelector('.project-logo')
 
-/**
- * Functions.
- */
 export function logoSetup () {
   const homeOffset = getOffset(homeLogo)
   const homeStyle = getComputedStyle(homeLogo)
@@ -88,14 +75,8 @@ export function logoSetProject () {
   })
 }
 
-/**
- * Setup.
- */
 logoSetup()
 
-/**
- * Events.
- */
 window.addEventListener('resize', () => {
   const about = document.querySelector('.about')
   const project = document.querySelector('.project')

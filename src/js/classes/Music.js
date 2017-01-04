@@ -1,17 +1,13 @@
 /* global Audio */
 
-/**
- * Libraries.
- */
 import get from '../lib/get'
 
-/**
- * Class.
- */
 export default class Music {
   constructor () {
     this.audio = new Audio()
     this.audio.crossOrigin = 'anonymous'
+
+    this.client = 'd764995c8ec4e9f30f85b3bd8396312c'
 
     if (window.AudioContext || window.webkitAudioContext) {
       this.context = new (window.AudioContext || window.webkitAudioContext)()
@@ -66,7 +62,7 @@ export default class Music {
     this.songNext = (this.song !== this.songs.length - 1) ? this.song + 1 : 0
 
     get(
-      `//api.soundcloud.com/resolve.json?url=${this.songs[song]}&client_id=d764995c8ec4e9f30f85b3bd8396312c`,
+      `//api.soundcloud.com/resolve.json?url=${this.songs[song]}&client_id=${this.client}`,
       (request) => {
         const data = JSON.parse(request.responseText)
 
@@ -83,8 +79,7 @@ export default class Music {
         musicUser.textContent = data.user.username
 
         if (data.stream_url) {
-          _this.audio.src = `${data.stream_url}?client_id=78c6552c14b382e23be3bce2fc411a82`
-          _this.audio.play()
+          _this.audio.src = `${data.stream_url}?client_id=${this.client}`
         } else {
           _this.next()
         }

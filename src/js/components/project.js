@@ -1,28 +1,13 @@
-/**
- * Plugins.
- */
-import { TimelineMax } from '../plugins/gsap'
+import { TimelineMax } from 'gsap'
 
-/**
- * Library.
- */
 import forEach from '../lib/forEach'
 import setStrokeDash from '../lib/setStrokeDash'
 import wrapLettersWithElement from '../lib/wrapLettersWithElement'
 
-/**
- * Classes.
- */
 import Gallery from '../classes/Gallery'
 
-/**
- * Components.
- */
 import { logoSetHome, logoSetProject } from './logo'
 
-/**
- * Elements.
- */
 const home = document.querySelector('.home')
 
 const projects = document.querySelector('.projects')
@@ -40,9 +25,6 @@ const projectButtonClosePath = projectButtonClose.querySelectorAll('path')
 
 const projectList = document.querySelectorAll('.project-media-list')
 
-/**
- * Setup.
- */
 setStrokeDash(projectButtonClosePath)
 
 forEach(projectTitle, (index, title) => {
@@ -57,9 +39,6 @@ forEach(projectLinkText, (index, text) => {
   text.innerHTML = wrapLettersWithElement(text.textContent, 'span')
 })
 
-/**
- * Events.
- */
 forEach(projectButtonOpen, (index, link) => {
   const href = link.getAttribute('href').replace('#', '')
   const target = document.getElementById(href)

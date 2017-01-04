@@ -1,23 +1,11 @@
-/**
- * Plugins.
- */
-import { TimelineMax } from '../plugins/gsap'
+import { TimelineMax } from 'gsap'
 
-/**
- * Library.
- */
 import forEach from '../lib/forEach'
 import setStrokeDash from '../lib/setStrokeDash'
 import wrapLettersWithElement from '../lib/wrapLettersWithElement'
 
-/**
- * Components.
- */
 import { logoSetHome, logoSetAbout } from './logo'
 
-/**
- * Elements.
- */
 const homeButtonPath = document.querySelectorAll('.home-menu-btn path')
 const homeButtonText = document.querySelectorAll('.home-menu-btn .btn-text')
 
@@ -33,9 +21,6 @@ const aboutButtonClosePath = aboutButtonClose.querySelectorAll('path')
 
 const aboutMenuLink = document.querySelectorAll('.about-menu-link')
 
-/**
- * Functions.
- */
 export function aboutOpen () {
   logoSetAbout()
 
@@ -106,9 +91,6 @@ function aboutLinkLeave (link) {
     .to(link.querySelector('.about-menu-text'), 0.3, { autoAlpha: 0, x: 25 }, 'text')
 }
 
-/**
- * Setup.
- */
 setStrokeDash(aboutButtonClosePath)
 
 aboutTitle.innerHTML = wrapLettersWithElement(aboutTitle.textContent, 'span')
@@ -117,9 +99,6 @@ forEach(aboutDescription, (index, description) => {
   description.innerHTML = wrapLettersWithElement(description.textContent, 'span')
 })
 
-/**
- * Events.
- */
 aboutButtonOpen.addEventListener('click', (e) => {
   e.preventDefault()
   e.stopPropagation()

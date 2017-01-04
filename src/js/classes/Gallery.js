@@ -1,16 +1,7 @@
-/**
- * Library.
- */
-import forEach from '../lib/forEach'
-
-/**
- * Classes.
- */
 import Scrollbar from 'smooth-scrollbar'
 
-/**
- * Gallery.
- */
+import forEach from '../lib/forEach'
+
 export default class Gallery {
   constructor (wrapper) {
     this.wrapper = wrapper

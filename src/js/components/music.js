@@ -1,20 +1,13 @@
-/**
- * Classes.
- */
 import Music from '../classes/Music'
 
-/**
- * Elements.
- */
 export const music = new Music()
 
 const musicToggle = document.querySelector('.music-toggle')
 const musicPrev = document.querySelector('.music-prev')
 const musicNext = document.querySelector('.music-next')
 
-/**
- * Events.
- */
+musicToggle.classList.add('is-paused')
+
 music.audio.addEventListener('pause', () => {
   musicToggle.classList.add('is-paused')
 })

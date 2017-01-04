@@ -1,17 +1,8 @@
-/**
- * Components.
- */
 import { music } from './music'
 import { projectsClose } from './projects'
 
-/**
- * Elements.
- */
 const home = document.querySelector('.home')
 
-/**
- * Events.
- */
 home.addEventListener('click', (e) => {
   projectsClose()
 })

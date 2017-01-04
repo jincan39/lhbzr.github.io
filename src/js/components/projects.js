@@ -1,21 +1,9 @@
-/**
- * Plugins.
- */
-import { TimelineMax } from '../plugins/gsap'
+import { TimelineMax } from 'gsap'
 
-/**
- * Library.
- */
 import forEach from '../lib/forEach'
 
-/**
- * Classes.
- */
 import Scrollbar from 'smooth-scrollbar'
 
-/**
- * Elements.
- */
 const homeButtonPath = document.querySelectorAll('.home-menu-btn path')
 const homeButtonText = document.querySelectorAll('.home-menu-btn .btn-text')
 
@@ -24,14 +12,8 @@ const projectsButtonOpen = document.querySelector('.js-projects-open')
 const projectsButtonClose = document.querySelectorAll('.home, .projects-link')
 const projectsLink = document.querySelectorAll('.projects-link')
 
-/**
- * Setup.
- */
 const scrollbar = Scrollbar.init(projects)
 
-/**
- * Functions.
- */
 export function projectsOpen () {
   const timeline = new TimelineMax()
 
@@ -69,9 +51,6 @@ function projectsMouseLeave (link) {
     .set(link.querySelector('.projects-title'), { background: 'none', color: '#fff', delay: 0.5, overwrite: 'all' }, 'hover')
 }
 
-/**
- * Events.
- */
 projectsButtonOpen.addEventListener('click', (e) => {
   e.preventDefault()
   e.stopPropagation()

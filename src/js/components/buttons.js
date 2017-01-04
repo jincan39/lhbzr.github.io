@@ -1,18 +1,9 @@
-/**
- * Library.
- */
 import forEach from '../lib/forEach'
 import randomInt from '../lib/randomInt'
 import replaceChar from '../lib/replaceChar'
 
-/**
- * Elements.
- */
 const buttons = document.querySelectorAll('.btn')
 
-/**
- * Events.
- */
 forEach(buttons, (index, button) => {
   let buttonInterval
 
