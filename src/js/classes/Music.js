@@ -13,7 +13,7 @@ export default class Music {
       this.context = new (window.AudioContext || window.webkitAudioContext)()
 
       this.analyser = this.context.createAnalyser()
-      this.analyser.fftSize = 1024
+      this.analyser.fftSize = 512
       this.analyser.connect(this.context.destination)
 
       this.src = this.context.createMediaElementSource(this.audio)
@@ -24,13 +24,27 @@ export default class Music {
     }
 
     this.songs = [
-      'https://soundcloud.com/coyotekisses/black-cat',
-      'https://soundcloud.com/coyotekisses/coyote-kisses-the-deep',
-      'https://soundcloud.com/coyotekisses/illusion',
-      'https://soundcloud.com/coyotekisses/revive-1',
-      'https://soundcloud.com/coyotekisses/sunny-day-1',
-      'https://soundcloud.com/coyotekisses/ferrari-1',
-      'https://soundcloud.com/coyotekisses/six-shooter'
+      // 'https://soundcloud.com/coyotekisses/black-cat',
+      // 'https://soundcloud.com/coyotekisses/coyote-kisses-the-deep',
+      // 'https://soundcloud.com/coyotekisses/illusion',
+      // 'https://soundcloud.com/coyotekisses/revive-1',
+      // 'https://soundcloud.com/coyotekisses/sunny-day-1',
+      // 'https://soundcloud.com/coyotekisses/ferrari-1',
+      // 'https://soundcloud.com/coyotekisses/six-shooter'
+
+      // 'https://soundcloud.com/upcastmusic/echosmith-cool-kids',
+      // 'https://soundcloud.com/recordrecords/of-monsters-and-men-little-2',
+      // 'https://soundcloud.com/fueled_by_ramen/paramore-aint-it-fun',
+      // 'https://soundcloud.com/stalkinggia/secondnature',
+      // 'https://soundcloud.com/wearecafune/dyf',
+      // 'https://soundcloud.com/oh-land-official/renaissance-girls',
+
+      'https://soundcloud.com/deemo-musicstm/rabpit-saika',
+      'https://soundcloud.com/deemo-musicstm/xi-anima',
+      'https://soundcloud.com/deemo-musicstm/nelime-leviathan-1',
+      'https://soundcloud.com/deemo-musicstm/presti-veritas',
+      'https://soundcloud.com/deemo-musicstm/shinichi-kobayashi-sairai',
+      'https://soundcloud.com/deemo-musicstm/ice-entrance'
     ]
 
     this.song = Math.floor(Math.random() * this.songs.length)
@@ -54,7 +68,7 @@ export default class Music {
     return this.frequency
   }
 
-  load (song) {
+  load (song, callback = null) {
     const _this = this
 
     this.song = song
@@ -83,16 +97,24 @@ export default class Music {
         } else {
           _this.next()
         }
+
+        if (callback) {
+          callback()
+        }
       }
     )
   }
 
   next () {
-    this.load(this.songNext)
+    this.load(this.songNext, () => {
+      this.play()
+    })
   }
 
   prev () {
-    this.load(this.songPrev)
+    this.load(this.songPrev, () => {
+      this.play()
+    })
   }
 
   pause () {

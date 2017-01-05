@@ -150,10 +150,10 @@ export default class Scene {
       }
 
       if (isClicked) {
-        TweenLite.to(geometry.scale, 0.05, { ease: Power0.easeNone, x: value, y: value, z: value })
-        TweenLite.to(geometry.rotation, 0.05, { ease: Power0.easeNone, z: (index % 2 === 0) ? '+= 0.05' : '-= 0.05' })
+        TweenLite.to(geometry.scale, 0.01, { ease: Power0.easeNone, x: value, y: value, z: value })
+        TweenLite.to(geometry.rotation, 0.01, { ease: Power0.easeNone, z: (index % 2 === 0) ? '+= 0.05' : '-= 0.05' })
       } else {
-        TweenLite.to(geometry.scale, 0.05, { ease: Power0.easeNone, z: value })
+        TweenLite.to(geometry.scale, 0.01, { ease: Power0.easeNone, z: value })
       }
     })
 
