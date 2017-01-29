@@ -1,12 +1,12 @@
 const pkg = require('../package.json')
 const gulp = require('gulp')
-const jade = require('gulp-jade')
+const pug = require('gulp-pug')
 const htmlmin = require('gulp-htmlmin')
 
 gulp.task('html', () => {
   gulp
     .src(`${pkg.folders.src}/html/*.jade`)
-    .pipe(jade({ pretty: true }))
+    .pipe(pug({ pretty: true }))
     .pipe(htmlmin({ collapseWhitespace: true, minifyJS: true }))
     .pipe(gulp.dest(''))
 })
