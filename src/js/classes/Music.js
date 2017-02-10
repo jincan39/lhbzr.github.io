@@ -24,12 +24,11 @@ export default class Music {
     }
 
     this.songs = [
-      'https://soundcloud.com/anamanaguchi/wheelie',
-      'https://soundcloud.com/anamanaguchi/planet',
-      'https://soundcloud.com/anamanaguchi/endless-fantasy',
-      'https://soundcloud.com/anamanaguchi/meow-1',
-      'https://soundcloud.com/anamanaguchi/anamanaguchi-blackout-city',
-      'https://soundcloud.com/anamanaguchi/anamanaguchi-helix-nebula'
+      'https://soundcloud.com/upcastmusic/echosmith-cool-kids',
+      'https://soundcloud.com/recordrecords/of-monsters-and-men-little-2',
+      'https://soundcloud.com/fueled_by_ramen/paramore-aint-it-fun',
+      'https://soundcloud.com/stalkinggia/secondnature',
+      'https://soundcloud.com/wearecafune/dyf'
     ]
 
     this.song = Math.floor(Math.random() * this.songs.length)
