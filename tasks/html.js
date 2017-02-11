@@ -5,7 +5,7 @@ const htmlmin = require('gulp-htmlmin')
 
 gulp.task('html', () => {
   gulp
-    .src(`${pkg.folders.src}/html/*.jade`)
+    .src(`${pkg.folders.src}/html/*.pug`)
     .pipe(pug({ pretty: true }))
     .pipe(htmlmin({ collapseWhitespace: true, minifyJS: true }))
     .pipe(gulp.dest(''))
