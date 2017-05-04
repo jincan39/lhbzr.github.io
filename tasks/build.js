@@ -1,3 +1,3 @@
 const gulp = require('gulp')
 
-gulp.task('build', ['html', 'css', 'js', 'img', 'svg'])
+gulp.task('build', ['views', 'styles', 'scripts', 'images', 'sprites'])

@@ -1,0 +1,11 @@
+import './base/sprites'
+
+import './components/about'
+import './components/buttons'
+import './components/home'
+import './components/loading'
+import './components/logo'
+import './components/music'
+import './components/project'
+import './components/projects'
+import './components/scene'

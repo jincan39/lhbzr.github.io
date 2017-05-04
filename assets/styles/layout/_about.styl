@@ -1,0 +1,222 @@
+/**
+ * About.
+ */
+.about
+  background rgba(#000, .8)
+  display block
+  height 100%
+  left 0
+  opacity 0
+  overflow-x hidden
+  overflow-y auto
+  position absolute
+  top 0
+  visibility hidden
+  width 100%
+  z-index 2
+
+  @media (max-width 1080px)
+    background #000
+
+
+/**
+ * Wrapper.
+ */
+.about-wrapper
+  display table
+  height 100%
+  width 100%
+
+
+/**
+ * Content.
+ */
+.about-content
+  display table-cell
+  padding 50px 0
+  text-align center
+  vertical-align middle
+
+  @media (max-width 1080px)
+    padding 50px 5%
+
+
+/**
+ * Logo.
+ */
+.about-logo
+  height 130px
+  left 50%
+  position absolute
+  stroke #fff
+  transform translateX(-50%)
+  top 93px
+  width 130px
+  visibility hidden
+
+  @media (max-width 1080px)
+    margin-bottom 50px
+    position static
+    transform translateX(0)
+    visibility visible
+
+
+/**
+ * Close.
+ */
+.about-btn
+  @media (max-width 1080px)
+    position relative
+    left 0
+    display block
+    margin 50px auto 0
+
+
+/**
+ * Information.
+ */
+.about-info
+  display inline-block
+  max-width 755px
+  text-align left
+
+  @media (max-width 1080px)
+    max-width none
+    text-align center
+
+.about-title
+  font-weight 100
+  font-size 35px
+  letter-spacing 5.25px
+  line-height 35px
+
+  @media (max-width 1080px)
+    font-size 25px
+    letter-spacing 3.25px
+
+.about-desc
+  font-size 17px
+  letter-spacing 2.5px
+  line-height 30px
+  margin 20px 0
+
+  @media (max-width 1080px)
+    font-size 14px
+    line-height 27px
+
+
+/**
+ * Menu.
+ */
+.about-menu
+  position absolute
+  right 20px
+  top 50%
+  transform translateY(-50%)
+
+  @media (max-width 1080px)
+    position static
+    transform translateY(0)
+
+.about-menu-list
+  margin 0
+  padding 0
+  text-align center
+
+  @media (max-width 1080px)
+    margin 0 -10px
+
+.about-menu-item
+  display block
+  margin 10px 0
+
+  @media (max-width 1080px)
+    display inline-block
+
+.about-menu-link
+  display block
+  fill #fff
+  height 50px
+  line-height 50px
+  position relative
+  width 50px
+
+.about-menu-icon
+  display inline-block
+  margin-top -2px
+  vertical-align middle
+
+.about-menu-text
+  letter-spacing 1.5px
+  margin-right 60px
+  opacity 0
+  position absolute
+  right 100%
+  top 50%
+  transform translateY(-50%) translateX(25px)
+
+  @media (max-width 1080px)
+    display none
+
+
+/**
+ * Border.
+ */
+.about-menu-square
+  display block
+  bottom 0
+  left 0
+  overflow hidden
+  position absolute
+  right 0
+  top 0
+
+.about-menu-square-top,
+.about-menu-square-right,
+.about-menu-square-bottom,
+.about-menu-square-left
+  background #fff
+  position absolute
+
+.about-menu-square-top,
+.about-menu-square-bottom
+  left 0
+  height 1px
+  width 100%
+
+.about-menu-square-right,
+.about-menu-square-left
+  top 0
+  height 100%
+  width 1px
+
+.about-menu-square-top
+  top 0
+  transform translateX(100%)
+
+.about-menu-square-right
+  right 0
+  transform translateY(100%)
+
+.about-menu-square-bottom
+  bottom 0
+  transform translateX(-100%)
+
+.about-menu-square-left
+  left 0
+  transform translateY(-100%)
+
+
+/**
+ * Line.
+ */
+.about-menu-line
+  background #fff
+  height 1px
+  position absolute
+  right 100%
+  top 50%
+  width 0
+
+  @media (max-width 1080px)
+    display none
